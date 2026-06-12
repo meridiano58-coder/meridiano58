@@ -9,7 +9,7 @@
     
     <div class="grilla-noticias">
         {{ $articulos := where .Site.RegularPages "Section" "in" (slice "fronteras" "la-lupa" "archivo-58" "el-reporte") }}
-        {{ range first 4 $articulos }}
+        {{ range first 3 $articulos }}
         <article class="tarjeta-noticia" style="max-width: 350px; width: 100%; margin-bottom: 1.5rem; background: white; border: 1px solid var(--color-bordes); border-radius: 4px; overflow: hidden;">
             {{ if .Params.imagen }}
             <img src="{{ .Params.imagen }}" alt="{{ .Title }}" class="foto-miniatura" loading="lazy" style="width: 100%; height: 180px; object-fit: cover;">
@@ -18,7 +18,7 @@
             {{ end }}
             <div class="info-noticia" style="padding: 1rem;">
                 <div class="metadatos" style="display: flex; align-items: baseline; gap: 8px; font-family: var(--fuente-principal); font-size: 0.82rem; color: var(--color-secundario); margin-bottom: 0.6rem; white-space: nowrap;">
-                    <span class="etiqueta" style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.5px;">{{ .Section }}</span>
+                    <span class="etiqueta" style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.5px;">{{ replace .Section "-" " " | title }}</span>
                     <span style="width: 4px; height: 4px; background-color: var(--color-bordes); border-radius: 50%; flex-shrink: 0; align-self: center; transform: translateY(-1px);"></span>
                     <time datetime="{{ .Date.Format "2006-01-02" }}" class="fecha">{{ .Date.Format "02/01/2006" }}</time>
                 </div>
@@ -36,7 +36,7 @@
     <h2 style="font-family: var(--fuente-titulos); font-size: 2rem; color: var(--color-primario); text-align: center; border-bottom: 2px solid var(--color-bordes); padding-bottom: 0.5rem; margin: 0 auto 2rem auto; max-width: 600px;">Fronteras</h2>
     
     <div class="grilla-noticias">
-        {{ range first 4 (where .Site.RegularPages "Section" "fronteras") }}
+        {{ range first 3 (where .Site.RegularPages "Section" "fronteras") }}
         <article class="tarjeta-noticia" style="max-width: 350px; width: 100%; margin-bottom: 1.5rem; background: white; border: 1px solid var(--color-bordes); border-radius: 4px; overflow: hidden;">
             {{ if .Params.imagen }}
             <img src="{{ .Params.imagen }}" alt="{{ .Title }}" class="foto-miniatura" loading="lazy" style="width: 100%; height: 180px; object-fit: cover;">
@@ -69,7 +69,7 @@
     <h2 style="font-family: var(--fuente-titulos); font-size: 2rem; color: var(--color-primario); text-align: center; border-bottom: 2px solid var(--color-bordes); padding-bottom: 0.5rem; margin: 0 auto 2rem auto; max-width: 600px;">La Lupa</h2>
     
     <div class="grilla-noticias">
-        {{ range first 4 (where .Site.RegularPages "Section" "la-lupa") }}
+        {{ range first 3 (where .Site.RegularPages "Section" "la-lupa") }}
         <article class="tarjeta-noticia" style="max-width: 350px; width: 100%; margin-bottom: 1.5rem; background: white; border: 1px solid var(--color-bordes); border-radius: 4px; overflow: hidden;">
             {{ if .Params.imagen }}
             <img src="{{ .Params.imagen }}" alt="{{ .Title }}" class="foto-miniatura" loading="lazy" style="width: 100%; height: 180px; object-fit: cover;">
@@ -102,7 +102,7 @@
     <h2 style="font-family: var(--fuente-titulos); font-size: 2rem; color: var(--color-primario); text-align: center; border-bottom: 2px solid var(--color-bordes); padding-bottom: 0.5rem; margin: 0 auto 2rem auto; max-width: 600px;">Archivo 58</h2>
     
     <div class="grilla-noticias">
-        {{ range first 4 (where .Site.RegularPages "Section" "archivo-58") }}
+        {{ range first 3 (where .Site.RegularPages "Section" "archivo-58") }}
         <article class="tarjeta-noticia" style="max-width: 350px; width: 100%; margin-bottom: 1.5rem; background: white; border: 1px solid var(--color-bordes); border-radius: 4px; overflow: hidden;">
             {{ if .Params.imagen }}
             <img src="{{ .Params.imagen }}" alt="{{ .Title }}" class="foto-miniatura" loading="lazy" style="width: 100%; height: 180px; object-fit: cover;">
@@ -135,7 +135,7 @@
     <h2 style="font-family: var(--fuente-titulos); font-size: 2rem; color: var(--color-primario); text-align: center; border-bottom: 2px solid var(--color-bordes); padding-bottom: 0.5rem; margin: 0 auto 2rem auto; max-width: 600px;">El Reporte</h2>
     
     <div class="grilla-noticias">
-        {{ range first 4 (where .Site.RegularPages "Section" "el-reporte") }}
+        {{ range first 3 (where .Site.RegularPages "Section" "el-reporte") }}
         <article class="tarjeta-noticia" style="max-width: 350px; width: 100%; margin-bottom: 1.5rem; background: white; border: 1px solid var(--color-bordes); border-radius: 4px; overflow: hidden;">
             {{ if .Params.imagen }}
             <img src="{{ .Params.imagen }}" alt="{{ .Title }}" class="foto-miniatura" loading="lazy" style="width: 100%; height: 180px; object-fit: cover;">

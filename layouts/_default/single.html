@@ -6,7 +6,7 @@
     </h1>
 
     <div class="linea-editorial" style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; font-family: var(--fuente-principal); font-size: 0.9rem; color: var(--color-secundario); margin-bottom: 2rem; border-bottom: 1px solid var(--color-bordes); padding-bottom: 1rem;">
-        <span style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.8px;">{{ .Section }}</span>
+        <span style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.8px;">{{ replace .Section "-" " " | title }}</span>
         <span style="color: var(--color-bordes); font-weight: 300;">|</span>
         <span style="color: var(--color-texto);">Por <strong style="color: var(--color-primario); font-weight: 600;">{{ .Params.author }}</strong></span>
         <span style="color: var(--color-bordes); font-weight: 300;">|</span>
