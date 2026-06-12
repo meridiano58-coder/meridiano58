@@ -45,7 +45,9 @@
             {{ end }}
             <div class="info-noticia" style="padding: 1rem;">
                 <div class="metadatos" style="display: flex; align-items: baseline; gap: 8px; font-family: var(--fuente-principal); font-size: 0.82rem; color: var(--color-secundario); margin-bottom: 0.6rem; white-space: nowrap;">
-                    <span class="etiqueta" style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.5px;">{{ .Section }}</span>
+                    <span class="autor" style="color: var(--color-secundario); font-weight: 400;">
+                        Por <strong style="color: var(--color-primario); font-weight: 600;">{{ .Params.author }}</strong>
+                    </span>
                     <span style="width: 4px; height: 4px; background-color: var(--color-bordes); border-radius: 50%; flex-shrink: 0; align-self: center; transform: translateY(-1px);"></span>
                     <time datetime="{{ .Date.Format "2006-01-02" }}" class="fecha">{{ .Date.Format "02/01/2006" }}</time>
                 </div>
@@ -76,7 +78,9 @@
             {{ end }}
             <div class="info-noticia" style="padding: 1rem;">
                 <div class="metadatos" style="display: flex; align-items: baseline; gap: 8px; font-family: var(--fuente-principal); font-size: 0.82rem; color: var(--color-secundario); margin-bottom: 0.6rem; white-space: nowrap;">
-                    <span class="etiqueta" style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.5px;">{{ .Section }}</span>
+                    <span class="autor" style="color: var(--color-secundario); font-weight: 400;">
+                        Por <strong style="color: var(--color-primario); font-weight: 600;">{{ .Params.author }}</strong>
+                    </span>
                     <span style="width: 4px; height: 4px; background-color: var(--color-bordes); border-radius: 50%; flex-shrink: 0; align-self: center; transform: translateY(-1px);"></span>
                     <time datetime="{{ .Date.Format "2006-01-02" }}" class="fecha">{{ .Date.Format "02/01/2006" }}</time>
                 </div>
@@ -107,7 +111,9 @@
             {{ end }}
             <div class="info-noticia" style="padding: 1rem;">
                 <div class="metadatos" style="display: flex; align-items: baseline; gap: 8px; font-family: var(--fuente-principal); font-size: 0.82rem; color: var(--color-secundario); margin-bottom: 0.6rem; white-space: nowrap;">
-                    <span class="etiqueta" style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.5px;">{{ .Section }}</span>
+                    <span class="autor" style="color: var(--color-secundario); font-weight: 400;">
+                        Por <strong style="color: var(--color-primario); font-weight: 600;">{{ .Params.author }}</strong>
+                    </span>
                     <span style="width: 4px; height: 4px; background-color: var(--color-bordes); border-radius: 50%; flex-shrink: 0; align-self: center; transform: translateY(-1px);"></span>
                     <time datetime="{{ .Date.Format "2006-01-02" }}" class="fecha">{{ .Date.Format "02/01/2006" }}</time>
                 </div>
@@ -138,7 +144,9 @@
             {{ end }}
             <div class="info-noticia" style="padding: 1rem;">
                 <div class="metadatos" style="display: flex; align-items: baseline; gap: 8px; font-family: var(--fuente-principal); font-size: 0.82rem; color: var(--color-secundario); margin-bottom: 0.6rem; white-space: nowrap;">
-                    <span class="etiqueta" style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.5px;">{{ .Section }}</span>
+                    <span class="autor" style="color: var(--color-secundario); font-weight: 400;">
+                        Por <strong style="color: var(--color-primario); font-weight: 600;">{{ .Params.author }}</strong>
+                    </span>
                     <span style="width: 4px; height: 4px; background-color: var(--color-bordes); border-radius: 50%; flex-shrink: 0; align-self: center; transform: translateY(-1px);"></span>
                     <time datetime="{{ .Date.Format "2006-01-02" }}" class="fecha">{{ .Date.Format "02/01/2006" }}</time>
                 </div>
