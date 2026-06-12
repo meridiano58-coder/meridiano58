@@ -311,3 +311,42 @@ footer {
     justify-content: center !important;
     justify-items: center !important; /* Esto asegura que el contenido interno también se centre */
 }
+
+/* --- DISEÑO EDITORIAL UNIFICADO --- */
+
+/* Asegura que los contenedores de artículos sean profesionales */
+.post-content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: left; /* Alineado a la izquierda para mejor lectura */
+}
+
+/* Imágenes dentro de la nota */
+.post-content img {
+    width: 100%;
+    max-width: 900px; /* Un poco más ancho que el texto */
+    margin: 2rem auto;
+    display: block;
+}
+
+/* Ajuste de la grilla */
+.grilla-noticias {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+    gap: 2rem !important;
+    justify-content: center !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+.post-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: left; /* Esto alinea el texto, no los metadatos */
+}
