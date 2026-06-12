@@ -222,23 +222,6 @@ footer {
     padding: 3rem 2rem;
 }
 
-.redes {
-    margin-top: 1rem;
-}
-
-.redes a {
-    color: var(--color-blanco);
-    text-decoration: none;
-    margin: 0 0.8rem;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.redes a:hover {
-    text-decoration: underline;
-}
-
 /* Sección Podcast */
 .seccion-podcast-principal {
     padding: 1.5rem 5%;
@@ -386,4 +369,41 @@ body {
     font-weight: 500;
     margin-bottom: 2rem;
     font-style: italic;
+}
 
+/* --- PIE DE PÁGINA DEFINITIVO (Iconos minimalistas y Correo limpio) --- */
+
+.redes {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.8rem; /* Aire ideal entre iconos */
+}
+
+/* Color y animación de los iconos */
+.icono-red svg {
+    fill: #a8b8c8; /* Gris claro elegante para que contrasten */
+    transition: all 0.3s ease;
+}
+
+.icono-red:hover svg {
+    fill: #ffffff; /* Se iluminan a blanco puro al pasar el mouse */
+    transform: scale(1.15); /* Crecen un poquito */
+}
+
+/* Blindaje contra el azul y subrayado predeterminado del navegador */
+.correo-footer {
+    display: block;
+    margin-top: 2rem;
+    margin-bottom: -0.5rem;
+    color: #a8b8c8 !important; /* Fuerza el gris clarito */
+    text-decoration: none !important; /* Destruye el subrayado default */
+    font-size: 1rem;
+    font-family: var(--fuente-principal);
+    transition: color 0.3s ease;
+}
+
+.correo-footer:hover {
+    color: #ffffff !important;
+}
