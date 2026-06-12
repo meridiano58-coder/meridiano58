@@ -96,6 +96,10 @@ h2 {
 /* Adaptabilidad (Responsive) para Celulares           */
 /* --------------------------------------------------- */
 @media (max-width: 768px) {
+    body {
+        padding-top: 140px; 
+    }
+
     header {
         flex-direction: column;
         gap: 0.8rem;
