@@ -326,7 +326,7 @@ footer {
 /* Imágenes dentro de la nota */
 .post-content img {
     width: 100%;
-    max-width: 900px; /* Un poco más ancho que el texto */
+    max-width: 950px; /* Un poco más ancho que el texto */
     margin: 2rem auto;
     display: block;
 }
