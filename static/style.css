@@ -316,11 +316,11 @@ footer {
 
 /* Asegura que los contenedores de artículos sean profesionales */
 .post-content {
-    max-width: 800px;
+    max-width: 900px;    /* Lo ensanchamos a 900px para que ocupe casi todo el contenedor principal */
     margin: 0 auto;
     font-size: 1.2rem;
-    line-height: 1.8;
-    text-align: left; /* Alineado a la izquierda para mejor lectura */
+    line-height: 1.5;    /* Bajamos de 1.8 a 1.5 para arrimar los renglones y compactar la lectura */
+    text-align: left; 
 }
 
 /* Imágenes dentro de la nota */
