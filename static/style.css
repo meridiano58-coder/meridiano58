@@ -367,4 +367,23 @@ header {
 /* Como el header ahora flota, le damos un margen al body para que el texto no quede tapado al cargar la página */
 body {
     padding-top: 75px; /* Si ves que el título queda muy pegado o separado arriba, ajustá este número */
+
+/* --- ESTILOS PARA EL ENCABEZADO DE LAS NOTAS --- */
+
+.volanta {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: var(--color-secundario);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
 }
+
+.bajada {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--color-primario);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    font-style: italic;
+
