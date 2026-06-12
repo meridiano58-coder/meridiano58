@@ -9,7 +9,13 @@
     <meta property="og:description" content="Análisis de Política y Sociedad.">
     <meta name="twitter:card" content="summary_large_image">
 
-    <title>{{ .Title }} | Meridiano 58</title>
+    <title>
+    {{ if .IsHome }}
+        {{ .Site.Title }}
+    {{ else }}
+        {{ .Title }} | {{ .Site.Title }}
+    {{ end }}
+</title>
     
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/png" href="/favicon.png">
