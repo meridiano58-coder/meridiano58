@@ -96,8 +96,9 @@ h2 {
 /* Adaptabilidad (Responsive) para Celulares           */
 /* --------------------------------------------------- */
 @media (max-width: 768px) {
+
     body {
-        padding-top: 140px; 
+        padding-top: 140px !important; 
     }
 
     header {
