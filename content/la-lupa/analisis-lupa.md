@@ -2,7 +2,7 @@
 title: "Título de la Nota: Aquí va el Impacto Principal de la Investigación"
 date: 2026-06-12T16:40:00-03:00
 author: "Lorenzo Castelli"
-imagen: "/foto-portada.jpg"
+imagen: "https://placehold.co/800x500/e2e8f0/64748b?text=ESPACIO+PARA+FOTO"
 ---
 
 <!-- VOLANTA: Contexto previo, ubicación o temática general -->
