@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta property="og:title" content="{{ .Title }} | Meridiano 58">
+    <meta property="og:site_name" content="Meridiano 58">
+    <meta property="og:description" content="Análisis de Política y Sociedad.">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>{{ .Title }} | Meridiano 58</title>
+    
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <div class="logo">Meridiano 58</div>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/fronteras/">Fronteras</a></li>
+                <li><a href="/la-lupa/">La Lupa</a></li>
+                <li><a href="/archivo-58/">Archivo 58</a></li>
+                <li><a href="/el-reporte/">El Reporte</a></li>
+                <li><a href="/acerca-de/">Acerca de</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main style="min-height: 70vh;">
+        {{ block "main" . }}
+        {{ end }}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Meridiano 58. Todos los derechos reservados.</p>
+        <div class="redes">
+            <a href="https://www.x.com/meridiano58arg" target="_blank" rel="noopener noreferrer">X (Twitter)</a> | 
+            <a href="https://www.instagram.com/meridiano58arg" target="_blank" rel="noopener noreferrer">Instagram</a> | 
+            <a href="https://www.tiktok.com/@meridiano58arg" target="_blank" rel="noopener noreferrer">TikTok</a> | 
+            <a href="mailto:redaccion@meridiano58.com.ar">Contacto Editorial</a>
+        </div>
+    </footer>
+</body>
+</html>

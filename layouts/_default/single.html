@@ -1,0 +1,30 @@
+{{ define "main" }}
+<article style="max-width: 750px; margin: 0 auto; padding: 3rem 5%;">
+    
+    <h1 style="font-family: var(--fuente-titulos); font-size: 2.8rem; color: var(--color-primario); text-align: center; margin-bottom: 1.5rem; line-height: 1.2; font-weight: bold;">
+        {{ .Title }}
+    </h1>
+
+    <div class="linea-editorial" style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; font-family: var(--fuente-principal); font-size: 0.9rem; color: var(--color-secundario); margin-bottom: 2rem; border-bottom: 1px solid var(--color-bordes); padding-bottom: 1rem;">
+        <span style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.8px;">{{ .Section }}</span>
+        <span style="color: var(--color-bordes); font-weight: 300;">|</span>
+        <span style="color: var(--color-texto);">Por <strong style="color: var(--color-primario); font-weight: 600;">{{ .Params.author }}</strong></span>
+        <span style="color: var(--color-bordes); font-weight: 300;">|</span>
+        
+        {{ $meses := slice "enero" "febrero" "marzo" "abril" "mayo" "junio" "julio" "agosto" "septiembre" "octubre" "noviembre" "diciembre" }}
+        {{ $mes := index $meses (sub .Date.Month 1) }}
+        
+        <time datetime="{{ .Date.Format "2006-01-02" }}" style="font-variant-numeric: tabular-nums;">
+            {{ .Date.Day }} de {{ $mes }} de {{ .Date.Year }}
+        </time>
+    </div>
+    {{ if .Params.imagen }}
+    <img src="{{ .Params.imagen }}" alt="{{ .Title }}" style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 4px; border: 1px solid var(--color-bordes); margin-bottom: 2.5rem;" loading="lazy">
+    {{ end }}
+
+    <div class="contenido-nota" style="font-size: 1.2rem; color: var(--color-texto); line-height: 1.8; text-align: justify;">
+        {{ .Content }}
+    </div>
+
+</article>
+{{ end }}

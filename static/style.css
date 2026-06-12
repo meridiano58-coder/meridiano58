@@ -1,0 +1,304 @@
+/* Variables de color: Estilo académico, sobrio y de alto contraste */
+:root {
+    --color-fondo: #f4f6f8;
+    --color-texto: #2b2b2b;
+    --color-primario: #1a2b3c;
+    --color-secundario: #4a5d73;
+    --color-blanco: #ffffff;
+    --color-bordes: #d1d9e0;
+    --fuente-principal: 'Georgia', 'Times New Roman', serif;
+    --fuente-titulos: 'Playfair Display', 'Georgia', serif;
+}
+
+/* Reseteo básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.7;
+}
+
+/* Cabecera y Menú */
+header {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    padding: 0.8rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid var(--color-secundario);
+}
+
+.logo {
+    font-family: var(--fuente-titulos);
+    font-size: 2.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    color: var(--color-blanco);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #a8b8c8;
+}
+
+/* Sección Principal (Hero) */
+.hero {
+    text-align: center;
+    padding: 0.35rem 2rem;
+    background-color: var(--color-blanco);
+    border-bottom: 2px solid var(--color-bordes);
+}
+
+.hero h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.5rem;
+    color: var(--color-primario);
+    margin-bottom: 0rem;
+}
+
+/* Estilos de Secciones */
+section {
+    padding: 5rem 2%;
+}
+
+h2 {
+    font-family: var(--fuente-titulos);
+    font-size: 2.5rem;
+    color: var(--color-primario);
+    margin-bottom: 1rem;
+    text-align: center;
+    border-bottom: 2px solid var(--color-bordes);
+    padding-bottom: 1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --------------------------------------------------- */
+/* Adaptabilidad (Responsive) para Celulares           */
+/* --------------------------------------------------- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 1rem 5%;
+    }
+    
+    .logo {
+        text-align: center;
+        white-space: nowrap;
+        width: 100%;
+        font-size: 2rem;
+    }
+    
+    nav {
+        width: 100%;
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.5rem;
+    }
+
+    nav ul {
+        flex-direction: row; 
+        justify-content: flex-start;
+        gap: 1.5rem;
+        width: max-content;
+    }
+
+    nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+} 
+
+/* Etiqueta de categoría para las notas */
+.etiqueta {
+    display: inline-block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-secundario);
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-secundario);
+    padding-bottom: 2px;
+}
+
+/* Grilla de Noticias */
+.seccion-noticias {
+    padding: 0.5rem 5%;
+}
+
+.grilla-noticias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    /* Esto obliga a las tarjetas a alinearse a la izquierda sin estirarse */
+    justify-content: start; 
+}
+
+.tarjeta-noticia {
+    background: white;
+    /* Agregale este límite estricto para que nunca pase de este ancho */
+    max-width: 350px; 
+    width: 100%;
+}
+
+.tarjeta-noticia:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Estilo para las fotografías y relleno gris */
+.foto-miniatura {
+    width: 100%;
+    height: 220px;
+    object-fit: cover; 
+    border-bottom: 1px solid var(--color-bordes); 
+    display: block; 
+}
+
+.info-noticia {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+
+.metadatos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+.tarjeta-noticia h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin-bottom: 0;
+}
+
+.tarjeta-noticia h3 a {
+    color: var(--color-texto);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.tarjeta-noticia h3 a:hover {
+    color: var(--color-secundario);
+    text-decoration: underline;
+}
+
+/* Pie de página (Footer) */
+footer {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.redes {
+    margin-top: 1rem;
+}
+
+.redes a {
+    color: var(--color-blanco);
+    text-decoration: none;
+    margin: 0 0.8rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.redes a:hover {
+    text-decoration: underline;
+}
+
+/* Sección Podcast */
+.seccion-podcast-principal {
+    padding: 1.5rem 5%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.subtitulo-podcast {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--color-secundario);
+    font-size: 1.1rem;
+}
+
+.plataformas-podcast {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.boton-plataforma {
+    background-color: transparent;
+    border: 1px solid var(--color-primario);
+    color: var(--color-primario);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.boton-plataforma:hover {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.episodio-destacado {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-bordes);
+    border-radius: 8px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-destacado h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 2rem;
+    color: var(--color-primario);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.info-destacado p {
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.reproductor-embebido {
+    width: 100%;
+    margin-top: 1rem;
+}
