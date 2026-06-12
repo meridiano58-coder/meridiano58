@@ -341,12 +341,3 @@ footer {
     margin: 0 auto !important;
     padding: 0 20px !important;
 }
-
-.post-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    text-align: left; /* Esto alinea el texto, no los metadatos */
-}
