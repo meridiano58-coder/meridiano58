@@ -302,3 +302,12 @@ footer {
     width: 100%;
     margin-top: 1rem;
 }
+
+/* Centrar las tarjetas en cualquier tamaño de pantalla */
+.grilla-noticias {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+    gap: 1.5rem !important;
+    justify-content: center !important;
+    justify-items: center !important; /* Esto asegura que el contenido interno también se centre */
+}
