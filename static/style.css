@@ -341,3 +341,25 @@ footer {
     margin: 0 auto !important;
     padding: 0 20px !important;
 }
+
+/* --- SMART HEADER (Aparece al subir) --- */
+
+/* Hace que el header flote sobre todo lo demás */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out; /* Animación suave */
+}
+
+/* Esta es la clase que el JavaScript le va a poner para esconderlo */
+.header-oculto {
+    transform: translateY(-100%); /* Lo empuja hacia arriba fuera de la pantalla */
+}
+
+/* Como el header ahora flota, le damos un margen al body para que el texto no quede tapado al cargar la página */
+body {
+    padding-top: 75px; /* Si ves que el título queda muy pegado o separado arriba, ajustá este número */
+}

@@ -49,5 +49,30 @@
             <a href="mailto:redaccion@meridiano58.com.ar">Contacto Editorial</a>
         </div>
     </footer>
+
+<script>
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Si el usuario bajó más de 50px (para que no titile por micro-movimientos)
+        if (scrollTop > 50) {
+            if (scrollTop > lastScrollTop) {
+                // Scrolleando hacia abajo: ocultar
+                header.classList.add('header-oculto');
+            } else {
+                // Scrolleando hacia arriba: mostrar
+                header.classList.remove('header-oculto');
+            }
+        } else {
+            // Si está arriba de todo, asegurate de que se vea
+            header.classList.remove('header-oculto');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+</script>
 </body>
 </html>
