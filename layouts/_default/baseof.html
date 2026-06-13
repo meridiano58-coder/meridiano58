@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icono-app.png">
+    <meta name="theme-color" content="#1a2b3c">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -113,6 +117,16 @@
         
         lastScrollTop = scrollTop;
     });
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('Service Worker activo'))
+        .catch(err => console.error('Error en Service Worker', err));
+    });
+  }
 </script>
 </body>
 </html>

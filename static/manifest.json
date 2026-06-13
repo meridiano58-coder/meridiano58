@@ -1,0 +1,16 @@
+{
+  "name": "Meridiano 58",
+  "short_name": "Meridiano 58",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a2b3c",
+  "theme_color": "#1a2b3c",
+  "description": "Análisis político, geopolítico y social.",
+  "icons": [
+    {
+      "src": "/icono-app.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
