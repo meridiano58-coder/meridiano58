@@ -373,6 +373,88 @@ body {
 
 /* --- PIE DE PÁGINA DEFINITIVO (Iconos minimalistas y Correo limpio) --- */
 
+/* --- NEWSLETTER FOOTER --- */
+.newsletter-footer {
+    max-width: 550px;
+    margin: 0 auto 3rem auto; /* Le da 3rem de espacio abajo para separarlo de las redes */
+    text-align: center;
+}
+
+.newsletter-footer h4 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-blanco);
+    letter-spacing: 0.5px;
+}
+
+.newsletter-footer p {
+    font-size: 0.95rem;
+    color: #a8b8c8;
+    margin-bottom: 1.5rem;
+}
+
+.formulario-newsletter {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario-newsletter input {
+    flex-grow: 1;
+    padding: 0.8rem 1.2rem;
+    background-color: rgba(255, 255, 255, 0.05); /* Fondo apenas visible */
+    border: 1px solid #4a5d73; /* Borde sutil */
+    border-radius: 4px;
+    color: var(--color-blanco);
+    font-family: var(--fuente-principal);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.formulario-newsletter input::placeholder {
+    color: #8a9ba8;
+}
+
+.formulario-newsletter input:focus {
+    border-color: var(--color-blanco);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.formulario-newsletter button {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--color-blanco);
+    color: var(--color-primario);
+    border: none;
+    border-radius: 4px;
+    font-family: var(--fuente-titulos);
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.formulario-newsletter button:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-blanco);
+    transform: translateY(-2px);
+}
+
+/* Que en el celular el botón quede abajo de la cajita de mail */
+@media (max-width: 480px) {
+    .formulario-newsletter {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .formulario-newsletter input,
+    .formulario-newsletter button {
+        width: 100%;
+    }
+}
+
 .redes {
     margin-top: 1.5rem;
     display: flex;
