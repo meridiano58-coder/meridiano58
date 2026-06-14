@@ -1,7 +1,8 @@
 ---
 title: "¡Falta solo un paso!"
-date: 2026-06-12T22:00:00-03:00
-layout: "page"
+url: "/casi-listo/"
+type: "page"
+draft: false
 ---
 
 Te enviamos un correo electrónico a tu bandeja de entrada. 

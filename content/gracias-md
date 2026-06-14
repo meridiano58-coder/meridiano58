@@ -1,7 +1,8 @@
 ---
 title: "¡Suscripción Confirmada!"
-date: 2026-06-12T22:05:00-03:00
-layout: "page"
+url: "/gracias/"
+type: "page"
+draft: false
 ---
 
 ¡Gracias por sumarte a **Meridiano 58**! Ya formás parte de nuestra lista de lectores.
