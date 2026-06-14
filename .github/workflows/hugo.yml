@@ -9,9 +9,9 @@ on:
   # Te permite usar el botón manual en la web de GitHub
   workflow_dispatch:
 
-  # EL TRUCO: Se activa solo todos los días a las 6:00 AM UTC (3:00 AM de Argentina)
+  # EL TRUCO: Se activa solo todos los días a las 4:00 AM UTC (1:00 AM de Argentina)
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 4 * * *'
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
