@@ -42,6 +42,17 @@ header {
     letter-spacing: 1px;
 }
 
+/* Convierte el texto del logo en un enlace sin deformar el header */
+.enlace-logo {
+    text-decoration: none !important; /* Destruye el subrayado default */
+    color: var(--color-blanco) !important; /* Fuerza el color blanco original */
+    transition: color 0.3s ease; /* Transición suave */
+}
+
+.enlace-logo:hover {
+    color: #a8b8c8 !important; /* El mismo tono gris azulado que usa tu menú al pasar el mouse */
+}
+
 nav ul {
     list-style: none;
     display: flex;
