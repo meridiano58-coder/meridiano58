@@ -5,6 +5,7 @@
         {{ .Title }}
     </h1>
 
+    {{ if ne .Type "page" }}
     <div class="linea-editorial" style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; font-family: var(--fuente-principal); font-size: 0.9rem; color: var(--color-secundario); margin-bottom: 2rem; border-bottom: 1px solid var(--color-bordes); padding-bottom: 1rem;">
         <span style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.8px;">{{ replace .Section "-" " " | title }}</span>
         <span style="color: var(--color-bordes); font-weight: 300;">|</span>
@@ -17,6 +18,9 @@
         <time datetime="{{ .Date.Format "2006-01-02" }}" style="font-variant-numeric: tabular-nums;">
             {{ .Date.Day }} de {{ $mes }} de {{ .Date.Year }}
         </time>
+    </div>
+    {{ end }}
+    
     </div>
     
     {{ if .Params.imagen }}
