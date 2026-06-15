@@ -21,7 +21,7 @@
     {{ end }}
 </title>
     
-    <link rel="stylesheet" href="/style.css?v=123">
+    <link rel="stylesheet" href="/style.css?v=21">
     <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 <body>
@@ -49,7 +49,7 @@
     <h4>Suscribite a Meridiano 58</h4>
     <p>Recibí nuestros análisis de política y sociedad directamente en tu correo.</p>
     
-    <form action="https://assets.mailerlite.com/jsonp/2429846/forms/190119993889785730/subscribe" method="POST" class="formulario-newsletter">
+    <form action="https://assets.mailerlite.com/jsonp/2429846/forms/190119993889785730/subscribe" method="POST" onsubmit="enviarNewsletter(event, this)" class="formulario-newsletter">
         
         <input type="email" name="fields[email]" placeholder="Tu correo electrónico..." required>
         
@@ -130,29 +130,22 @@
 </script>
 
 <script>
-    // Buscamos TODOS los formularios que tengan esta clase
-    const formsNewsletter = document.querySelectorAll('.formulario-newsletter');
-    
-    formsNewsletter.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Frena la pantalla en blanco
-            
-            const formData = new FormData(this);
-            
-            // Envía el correo a las bases de MailerLite en las sombras
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors'
-            }).then(() => {
-                // Automáticamente te transporta a tu página de aviso
-                window.location.href = "/gracias/";
-            }).catch(err => {
-                console.error("Error al enviar", err);
-                window.location.href = "/gracias/";
-            });
+    function enviarNewsletter(event, formulario) {
+        event.preventDefault(); // Esto es lo que frena en seco la pantalla blanca
+        
+        const datos = new FormData(formulario);
+        
+        fetch(formulario.action, {
+            method: 'POST',
+            body: datos,
+            mode: 'no-cors' // Truco para saltarse los bloqueos estrictos del navegador
+        }).then(() => {
+            window.location.href = "/gracias/";
+        }).catch(err => {
+            console.error("Error interno:", err);
+            window.location.href = "/gracias/"; // Te lleva a la página igual aunque haya micro-cortes
         });
-    });
+    }
 </script>
 </body>
 </html>
