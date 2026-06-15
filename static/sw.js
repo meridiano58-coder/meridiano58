@@ -1,4 +1,4 @@
-const CACHE_NAME = 'meridiano58-v2';
+const CACHE_NAME = 'meridiano58-v3';
 const ASSETS = [
   '/',
   '/manifest.json',
