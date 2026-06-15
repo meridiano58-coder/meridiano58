@@ -1,6 +1,6 @@
 ---
-title: "**VOLANTA y Título.** {{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
+title: "**Atlántico sur**. Preocupación por el acercamiento de Brasil al Reino Unido"
+date: 2026-06-15T16:11:38-03:00
 author: "Lorenzo Castelli"
 imagen: "https://placehold.co/800x500/e2e8f0/64748b?text=ESPACIO+PARA+FOTO"
 draft: false
@@ -8,7 +8,6 @@ draft: false
 
 Escribí acá tu Bajada o Copete. Este primer párrafo de dos o tres líneas es el que la página web va a agarrar automáticamente, lo va a poner con tipografía itálica elegante arriba de la foto de portada, y lo va a usar como resumen en las tarjetitas de la página principal.
 <!--more-->
-
 ## Primer Subtítulo
 
 Acá arranca el cuerpo principal de tu texto. Al usar los dos numerales (`##`) creás un subtítulo principal que rompe la monotonía visual del texto largo y organiza la lectura.

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta property="og:title" content="{{ .Title }} | Meridiano 58">
+    <meta property="og:title" content="{{ .Title | markdownify | plainify }} | Meridiano 58">
     <meta property="og:site_name" content="Meridiano 58">
     <meta property="og:description" content="Análisis de Política y Sociedad.">
     <meta name="twitter:card" content="summary_large_image">
@@ -19,19 +19,19 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ .Permalink }}">
-    <meta name="twitter:title" content="{{ .Title }}">
+    <meta name="twitter:title" content="{{ .Title | markdownify | plainify }}">
     <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
     <meta name="twitter:image" content="{{ if .Params.imagen }}{{ .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}">
 
     <title>
-    {{ if .IsHome }}
-        {{ .Site.Title }}
-    {{ else }}
-        {{ .Title }} | {{ .Site.Title }}
-    {{ end }}
+{{ if .IsHome }}
+    {{ .Site.Title }}
+{{ else }}
+    {{ .Title | markdownify | plainify }} | {{ .Site.Title }}
+{{ end }}
 </title>
     
-    <link rel="stylesheet" href="/style.css?v=1234">
+    <link rel="stylesheet" href="/style.css?v=54">
     <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 <body>
