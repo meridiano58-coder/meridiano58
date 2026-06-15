@@ -9,4 +9,6 @@ draft: false
 
 A partir de ahora, cada vez que publiquemos un nuevo análisis político, geopolítico o editorial, te llegará un aviso directo a tu correo electrónico.
 
-[→ Volver a la página principal](/)
+<div style="text-align: center; margin-top: 3rem;">
+    <a href="/" class="boton-paginacion">Volver a la página principal</a>
+</div>
