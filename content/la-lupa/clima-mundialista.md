@@ -1,6 +1,6 @@
 ---
-title: "**VOLANTA** {{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
+title: "**Mundial 2026** Clima Mundialista en vísperas a Argentina vs Algeria"
+date: 2026-06-16T06:00:00-03:00
 author: "Lorenzo Castelli"
 imagen: "https://placehold.co/800x500/e2e8f0/64748b?text=ESPACIO+PARA+FOTO"
 draft: false
