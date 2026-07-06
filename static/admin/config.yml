@@ -1,0 +1,23 @@
+backend:
+  name: github
+  repo: meridiano58-coder/meridiano58
+  branch: main # O master, dependiendo de cómo se llame tu rama principal
+
+# ESTA ES LA MAGIA: Activa el tablero de revisión donde vos tenés la última palabra
+publish_mode: editorial_workflow
+
+media_folder: "static/img" # Dónde se guardan las fotos que suban los autores
+public_folder: "/img" # Cómo se llama esa carpeta en la web
+
+collections:
+  - name: "notas"
+    label: "Artículos"
+    folder: "content/posts" # La carpeta de Hugo donde van los archivos .md
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Imagen de Portada", name: "imagen", widget: "image", required: false}
+      - {label: "Cuerpo de la nota", name: "body", widget: "markdown"}
