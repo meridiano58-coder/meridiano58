@@ -541,3 +541,19 @@ body {
         flex-direction: column;
         gap: 1rem;
     }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Acá invertimos los colores */
+        --color-fondo: #1a1a1a; /* Un gris muy oscuro, más elegante que el negro puro */
+        --color-texto: #e8e8e8; /* Un blanco ligeramente apagado para no encandilar */
+        --color-bordes: #333333; /* Bordes más sutiles */
+        
+        /* Podés sumar cualquier otra variable que necesites oscurecer */
+    }
+    
+    /* Pequeño truco para que las fotos no brillen tanto de noche */
+    img {
+        filter: brightness(.8) contrast(1.2);
+    }
+}
