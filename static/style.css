@@ -542,18 +542,22 @@ body {
         gap: 1rem;
     }
 
+/* --------------------------------------------------- */
+/* Modo Oscuro Automático                              */
+/* --------------------------------------------------- */
 @media (prefers-color-scheme: dark) {
     :root {
-        /* Acá invertimos los colores */
-        --color-fondo: #1a1a1a; /* Un gris muy oscuro, más elegante que el negro puro */
-        --color-texto: #e8e8e8; /* Un blanco ligeramente apagado para no encandilar */
-        --color-bordes: #333333; /* Bordes más sutiles */
-        
-        /* Podés sumar cualquier otra variable que necesites oscurecer */
+        /* Invertimos todas las variables originales para la noche */
+        --color-fondo: #161616;
+        --color-texto: #e0e0e0;
+        --color-primario: #0b131a; /* Un azul casi negro para la cabecera */
+        --color-secundario: #6c88a8;
+        --color-blanco: #222222; /* Las tarjetas ahora son gris oscuro en vez de blancas */
+        --color-bordes: #333333;
     }
-    
-    /* Pequeño truco para que las fotos no brillen tanto de noche */
-    img {
-        filter: brightness(.8) contrast(1.2);
+
+    /* Le bajamos el brillo a las miniaturas para no encandilar */
+    .foto-miniatura, img {
+        filter: brightness(0.85) contrast(1.15);
     }
 }
