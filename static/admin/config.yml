@@ -1,6 +1,7 @@
 backend:
   name: github
   repo: meridiano58-coder/meridiano58
+  base_url: https://api.netlify.com
   site_domain: meridiano58.netlify.app
 # ESTA ES LA MAGIA: Activa el tablero de revisión donde vos tenés la última palabra
 publish_mode: editorial_workflow
