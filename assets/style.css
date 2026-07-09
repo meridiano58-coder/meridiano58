@@ -544,6 +544,21 @@ body {
     }
 } /* <--- ESTA ES LA LLAVE QUE FALTABA */
 
+/* --- TRUCO PARA CELULARES: TARJETA 100% CLICKEABLE --- */
+.tarjeta-noticia {
+    position: relative;
+}
+
+.tarjeta-noticia h3 a::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10; /* Esta capa invisible cubre toda la tarjeta y recibe el toque */
+}
+
 /* --------------------------------------------------- */
 /* Modo Oscuro Automático                              */
 /* --------------------------------------------------- */
