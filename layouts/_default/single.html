@@ -17,17 +17,17 @@
         
         <time datetime="{{ .Date.Format "2006-01-02" }}" style="font-variant-numeric: tabular-nums;">
             {{ .Date.Day }} de {{ $mes }} de {{ .Date.Year }}
+        </time>
+        
         <span style="color: var(--color-bordes); font-weight: 300;">|</span>
         
-        <span title="Tiempo estimado de lectura" style="display: inline-flex; align-items: center; gap: 4px; color: var(--color-texto); font-variant-numeric: tabular-nums;">
-            <!-- Ícono de reloj en SVG (súper liviano) -->
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.8;">
+        <span title="Tiempo estimado de lectura" style="display: flex; align-items: center; justify-content: center; gap: 5px; color: var(--color-texto); font-variant-numeric: tabular-nums;">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.8; margin-top: -1px;">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 15 15"></polyline>
             </svg>
-            {{ .ReadingTime }}'
+            <span>{{ .ReadingTime }}'</span>
         </span>
-        </time>
     </div>
     {{ end }}
 
@@ -73,5 +73,5 @@
         </p>
     </div>
     {{ end }}
-    </article>
+</article>
 {{ end }}
