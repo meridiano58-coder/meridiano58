@@ -49,5 +49,29 @@
         {{ end }}
     </div>
 
-</article>
+    {{ if ne .Type "page" }}
+    <div style="margin-top: 4rem; padding: 2.5rem 2rem; background-color: var(--color-fondo); border-top: 3px solid var(--color-secundario); border-bottom: 1px solid var(--color-bordes); border-left: 1px solid var(--color-bordes); border-right: 1px solid var(--color-bordes); border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+        
+        <h3 style="font-family: var(--fuente-titulos); color: var(--color-primario); margin-bottom: 0.8rem; font-size: 1.6rem;">¿Apoyás nuestra visión?</h3>
+        
+        <p style="font-family: var(--fuente-principal); color: var(--color-texto); font-size: 1.05rem; margin-bottom: 1.8rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Sostenemos este espacio periodístico gracias al aporte de los lectores. Ayudanos a seguir produciendo contenido independiente.
+        </p>
+        
+        <a href="https://cafecito.app/meridiano58" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; background-color: #8b1c24; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 1.15rem; font-weight: bold; padding: 14px 32px; border-radius: 100px; text-decoration: none; box-shadow: 0 4px 12px rgba(139,28,36,0.15); border: 1px solid rgba(0,0,0,0.05);">
+            <span style="font-size: 1.4rem; line-height: 1;">☕</span>
+            <span>Invitame un Cafecito</span>
+        </a>
+        
+        <p style="font-size: 0.9rem; color: var(--color-secundario); margin-top: 1.5rem; border-top: 1px dashed var(--color-bordes); padding-top: 1rem; max-width: 450px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            También aceptamos aportes descentralizados en criptomonedas:<br>
+            <span style="display: block; margin-top: 0.5rem; padding: 10px; background-color: rgba(0,0,0,0.02); border-radius: 6px;">
+                <strong>Binance ID (UID):</strong> <span style="color: var(--color-primario); font-weight: bold; letter-spacing: 0.5px;">1248952860</span><br>
+                <strong style="display: inline-block; margin-top: 8px;">USDT (Red TRC20):</strong><br>
+                <span style="font-family: monospace; font-size: 0.85rem; color: var(--color-primario); word-break: break-all; display: block; margin-top: 2px;">TM68WQP4oYmVFwffGWJUrvrvZtCcfBax69</span>
+            </span>
+        </p>
+    </div>
+    {{ end }}
+    </article>
 {{ end }}
