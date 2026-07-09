@@ -23,6 +23,8 @@
     <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
     <meta name="twitter:image" content="{{ if .Params.imagen }}{{ .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}">
 
+    <meta name="format-detection" content="telephone=no">
+
     <title>
 {{ if .IsHome }}
     {{ .Site.Title }}
