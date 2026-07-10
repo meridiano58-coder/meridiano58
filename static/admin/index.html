@@ -6,16 +6,18 @@
     <title>Panel Editorial | Meridiano 58</title>
   </head>
   <body>
-    <!-- 1. Carga el motor base de Identity -->
+    <!-- 1. LA CLAVE: El marcador que Identity y Decap leen automáticamente -->
+    <div data-netlify-identity-url="https://meridiano58.netlify.app"></div>
+
+    <!-- 2. El motor de Netlify Identity -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
-    <!-- 2. Inicialización de la URL forzada, AHORA SÍ adentro del body -->
+    <!-- 3. Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
+    <!-- 4. Redirección de login -->
     <script>
       if (window.netlifyIdentity) {
-        window.netlifyIdentity.init({
-          APIUrl: "https://meridiano58.netlify.app/.netlify/identity"
-        });
-        
         window.netlifyIdentity.on("init", user => {
           if (!user) {
             window.netlifyIdentity.on("login", () => {
@@ -25,8 +27,5 @@
         });
       }
     </script>
-
-    <!-- 3. Decap CMS arranca al final -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
 </html>
