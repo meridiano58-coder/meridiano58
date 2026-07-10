@@ -1,8 +1,7 @@
 backend:
-  name: github
-  repo: meridiano58-coder/meridiano58
-  base_url: https://api.netlify.com
-  site_domain: meridiano58.netlify.app
+  name: git-gateway
+  branch: main # Cambiá "main" por "master" si tu rama principal en GitHub se llama así
+
 # ESTA ES LA MAGIA: Activa el tablero de revisión donde vos tenés la última palabra
 publish_mode: editorial_workflow
 
@@ -19,5 +18,7 @@ collections:
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Sección", name: "section", widget: "select", options: ["Fronteras", "La Lupa", "Archivo 58", "El Reporte"]}
+      - {label: "Bajada o Copete", name: "summary", widget: "text", required: false}
       - {label: "Imagen de Portada", name: "imagen", widget: "image", required: false}
       - {label: "Cuerpo de la nota", name: "body", widget: "markdown"}
