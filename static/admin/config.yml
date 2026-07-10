@@ -9,23 +9,35 @@ media_folder: "static/img" # Dónde se guardan las fotos que suban los autores
 public_folder: "/img" # Cómo se llama esa carpeta en la web
 
 collections:
-  - name: "notas"
-    label: "Artículos"
-    folder: "content/posts" # La carpeta de Hugo donde van los archivos .md
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    collections:
-  - name: "posts" # (o el nombre que le hayas puesto a tu carpeta)
-    label: "Artículos"
-    folder: "content/posts"
+  - name: "fronteras"
+    label: "Fronteras"
+    folder: "content/fronteras"
     create: true
     fields:
       - {label: "Título", name: "title", widget: "string"}
+      - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
-      
-      # Este es el campo nuevo que tenés que agregar:
-      - {label: "Sección", name: "section", widget: "select", options: ["Fronteras", "La Lupa", "Archivo 58"]}
-      
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
-      - {label: "Bajada o Copete", name: "summary", widget: "text", required: false}
+      - {label: "Cuerpo", name: "body", widget: "markdown"}
+
+  - name: "la_lupa"
+    label: "La Lupa"
+    folder: "content/la-lupa"
+    create: true
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Bajada / Copete", name: "description", widget: "text"}
+      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Imagen Portada", name: "image", widget: "image", required: false}
+      - {label: "Cuerpo", name: "body", widget: "markdown"}
+
+  - name: "archivo_58"
+    label: "Archivo 58"
+    folder: "content/archivo-58"
+    create: true
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Bajada / Copete", name: "description", widget: "text"}
+      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Imagen Portada", name: "image", widget: "image", required: false}
       - {label: "Cuerpo", name: "body", widget: "markdown"}
