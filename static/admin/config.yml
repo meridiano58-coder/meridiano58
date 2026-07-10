@@ -2,8 +2,11 @@ backend:
   name: git-gateway
   branch: main
 
-# 1. ACÁ VUELVE EL REPORTE Y EL TABLERO DE BORRADORES
 publish_mode: editorial_workflow
+
+
+media_folder: "static/images" 
+public_folder: "/images"
 
 collections:
   - name: "fronteras"
