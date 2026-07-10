@@ -1,6 +1,7 @@
 backend:
   name: git-gateway
-  branch: main # Cambiá "main" por "master" si tu rama principal en GitHub se llama así
+  branch: main # o master
+  site_domain: meridiano58.netlify.app # ¡Esta es la brújula que le faltaba!
 
 # ESTA ES LA MAGIA: Activa el tablero de revisión donde vos tenés la última palabra
 publish_mode: editorial_workflow
