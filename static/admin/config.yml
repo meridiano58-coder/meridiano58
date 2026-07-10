@@ -2,18 +2,20 @@ backend:
   name: git-gateway
   branch: main
 
-# ESTA ES LA MAGIA: Activa el tablero de revisión donde vos tenés la última palabra
+# 1. ACÁ VUELVE EL REPORTE Y EL TABLERO DE BORRADORES
 publish_mode: editorial_workflow
-
-media_folder: "static/img" # Dónde se guardan las fotos que suban los autores
-public_folder: "/img" # Cómo se llama esa carpeta en la web
 
 collections:
   - name: "fronteras"
     label: "Fronteras"
     folder: "content/fronteras"
     create: true
+    delete: false # 2. ESTO BLOQUEA LA ELIMINACIÓN DE NOTAS YA CREADAS
+    filter:
+      field: "tipo"
+      value: "articulo" # 3. FILTRO: Solo muestra archivos que sean artículos, ocultando el index de Hugo
     fields:
+      - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"} # Etiqueta invisible automática
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
@@ -24,7 +26,12 @@ collections:
     label: "La Lupa"
     folder: "content/la-lupa"
     create: true
+    delete: false
+    filter:
+      field: "tipo"
+      value: "articulo"
     fields:
+      - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
@@ -35,7 +42,28 @@ collections:
     label: "Archivo 58"
     folder: "content/archivo-58"
     create: true
+    delete: false
+    filter:
+      field: "tipo"
+      value: "articulo"
     fields:
+      - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Bajada / Copete", name: "description", widget: "text"}
+      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Imagen Portada", name: "image", widget: "image", required: false}
+      - {label: "Cuerpo", name: "body", widget: "markdown"}
+
+   - name: "el_reporte"
+    label: "El Reporte"
+    folder: "content/el-reporte"
+    create: true
+    delete: false
+    filter:
+      field: "tipo"
+      value: "articulo"
+    fields:
+      - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
