@@ -4,17 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel Editorial | Meridiano 58</title>
-    
-    <!-- 1. LA INYECCIÓN FORZADA: Le clava la ruta a Decap CMS en la memoria base -->
-    <script>
-      localStorage.setItem("netlifySiteURL", "https://meridiano58.netlify.app");
-    </script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <!-- 2. El widget de Identity -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    
-    <!-- 3. Configuración forzada del widget -->
     <script>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.init({
@@ -30,8 +22,6 @@
         });
       }
     </script>
-
-    <!-- 4. Decap CMS arranca al final, sin escapatoria -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
 </html>

@@ -1,6 +1,8 @@
 backend:
   name: git-gateway
   branch: main
+  identity_url: "https://meridiano58.netlify.app/.netlify/identity"
+  gateway_url: "https://meridiano58.netlify.app/.netlify/git"
 
 # ESTA ES LA MAGIA: Activa el tablero de revisión donde vos tenés la última palabra
 publish_mode: editorial_workflow
