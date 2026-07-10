@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel Editorial | Meridiano 58</title>
     
-    <!-- El portero: Script de Netlify Identity -->
+    <!-- Script de Netlify Identity -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <!-- Inyecta el panel visual de Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     
-    <!-- Script para redirigir al panel tras el login exitoso -->
+    <!-- Script de inicialización y redirección -->
     <script>
       if (window.netlifyIdentity) {
+        // Fuerza al widget a buscar el acceso en el servidor de Netlify
+        window.netlifyIdentity.init({
+          APIUrl: "https://meridiano58.netlify.app/.netlify/identity"
+        });
+
         window.netlifyIdentity.on("init", user => {
           if (!user) {
             window.netlifyIdentity.on("login", () => {
