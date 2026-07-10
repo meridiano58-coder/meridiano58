@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
   branch: main # o master
-  site_domain: meridiano58.netlify.app # ¡Esta es la brújula que le faltaba!
+  base_url: https://meridiano58.netlify.app # ¡Esta es la brújula que le faltaba!
 
 # ESTA ES LA MAGIA: Activa el tablero de revisión donde vos tenés la última palabra
 publish_mode: editorial_workflow
