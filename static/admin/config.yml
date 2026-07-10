@@ -14,11 +14,18 @@ collections:
     folder: "content/posts" # La carpeta de Hugo donde van los archivos .md
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    collections:
+  - name: "posts" # (o el nombre que le hayas puesto a tu carpeta)
+    label: "Artículos"
+    folder: "content/posts"
+    create: true
     fields:
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Fecha", name: "date", widget: "datetime"}
-      - {label: "Autor", name: "author", widget: "string"}
-      - {label: "Sección", name: "section", widget: "select", options: ["Fronteras", "La Lupa", "Archivo 58", "El Reporte"]}
+      
+      # Este es el campo nuevo que tenés que agregar:
+      - {label: "Sección", name: "section", widget: "select", options: ["Fronteras", "La Lupa", "Archivo 58"]}
+      
+      - {label: "Imagen Portada", name: "image", widget: "image", required: false}
       - {label: "Bajada o Copete", name: "summary", widget: "text", required: false}
-      - {label: "Imagen de Portada", name: "imagen", widget: "image", required: false}
-      - {label: "Cuerpo de la nota", name: "body", widget: "markdown"}
+      - {label: "Cuerpo", name: "body", widget: "markdown"}
