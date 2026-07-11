@@ -8,6 +8,7 @@ description: "Bajada o copete: Lorem ipsum dolor sit amet, consectetur
   aliquam ac lorem. Interdum et malesuada fames ac ante ipsum primis in
   faucibus."
 date: 2026-07-11T12:51:00.000-03:00
+author: "Lorenzo Castelli"
 image: https://placehold.co/800x500/e2e8f0/64748b?text=ESPACIO+PARA+FOTO
 ---
 ### Primer subtítulo
