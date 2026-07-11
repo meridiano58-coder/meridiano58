@@ -7,7 +7,7 @@ El debate sobre nuestra geopolítica, la historia y la coyuntura social no termi
 <br><br>
 Si tenés algún comentario sobre nuestras investigaciones, una propuesta de colaboración periodística, o información que creés que deberíamos analizar en **Meridiano 58**, nos interesa escucharte.
 <br><br>
-Podés escribirnos directamente a nuestra mesa de redacción: **redaccion@meridiano58.com.ar**
+Podés escribirnos directamente a nuestra mesa de redacción: **redaccion<span>@</span>meridiano58.com.ar**
 <br><br>
 Además, te invitamos a sumarte a nuestra comunidad para seguir el análisis del día a día y enterarte de los nuevos episodios de nuestro podcast y coberturas en video. Encontranos en nuestras redes sociales oficiales:
 <br><br>

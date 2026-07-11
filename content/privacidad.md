@@ -18,7 +18,7 @@ Nuestro sitio utiliza cookies esenciales para su correcto funcionamiento. Ademá
 *   **Enlaces a sponsors:** Los enlaces a proyectos aliados, como DatosHoy u otros patrocinadores independientes, dirigen el tráfico fuera de nuestra plataforma. Meridiano 58 no se responsabiliza por las prácticas de privacidad de sitios de terceros.
 <br></br>
 **4. Derechos del usuario**
-Como titular de los datos, tenés derecho a solicitar el acceso, rectificación, actualización o eliminación de cualquier información personal que nos hayas brindado, escribiendo a [redaccion@meridiano58.com.ar].
+Como titular de los datos, tenés derecho a solicitar el acceso, rectificación, actualización o eliminación de cualquier información personal que nos hayas brindado, escribiendo a **redaccion<span>@</span>meridiano58.com.ar**.
 <br></br>
 **5. Cambios en la política**
 Nos reservamos el derecho de actualizar esta política en cualquier momento para adaptarla a novedades legislativas o nuevas prácticas del sitio.
