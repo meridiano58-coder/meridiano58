@@ -1,24 +1,19 @@
-const CACHE_NAME = 'meridiano58-v3';
-const ASSETS = [
-  '/',
-  '/manifest.json',
-  '/icono-app.png'
-];
-
-// Instalar el Service Worker y guardar recursos básicos en caché
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(ASSETS);
-    })
-  );
+// Forzar la actualización inmediata
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
 });
 
-// Responder desde la caché si no hay internet
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+// Borrar el caché viejo y desinstalar el Service Worker
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          return caches.delete(cacheName);
+        })
+      );
+    }).then(() => {
+      self.registration.unregister();
     })
   );
 });
