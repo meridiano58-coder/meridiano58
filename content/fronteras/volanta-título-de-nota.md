@@ -14,7 +14,7 @@ image: https://placehold.co/800x500/e2e8f0/64748b?text=ESPACIO+PARA+FOTO
 ### Primer subtítulo
 
 Integer faucibus mattis leo, sed iaculis justo. Praesent non nisl sed dui viverra fermentum eget id urna. Quisque pellentesque, ipsum vitae tristique tincidunt, nisi metus aliquet elit, iaculis tempor urna ligula eget orci. Vestibulum tincidunt tincidunt velit, luctus ultricies augue ultrices et. Etiam eget erat felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut consectetur sapien et ipsum venenatis volutpat. Cras id nisl commodo, facilisis purus nec, aliquet magna. Donec a est urna. Praesent luctus, mauris ut placerat auctor, augue mauris ullamcorper purus, vel venenatis magna leo vel mauris. Suspendisse ultricies porttitor augue, vel volutpat diam tincidunt at. Phasellus egestas iaculis elit. Fusce sed consequat augue, id imperdiet quam.
-
+<br></br>
 Cras id interdum mi. Quisque maximus ac nibh quis tincidunt. Mauris ullamcorper sollicitudin eros, vel sollicitudin metus ornare sed. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin id nibh eget velit fringilla fermentum ut eu neque. Nam pharetra, ipsum non eleifend posuere, turpis ex aliquet magna, sit amet hendrerit dolor arcu et nisi. Donec pellentesque eu magna quis dapibus. Donec sed tempus quam.
 
 ![Texto alternativo imagen](https://placehold.co/800x500/e2e8f0/64748b?text=ESPACIO+PARA+FOTO "Título imagen.")
