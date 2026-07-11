@@ -11,6 +11,7 @@ date: 2026-07-11T12:51:00.000-03:00
 author: "Lorenzo Castelli"
 image: https://placehold.co/800x500/e2e8f0/64748b?text=ESPACIO+PARA+FOTO
 epigrafe: "Explicación detallada de lo que muestra la foto de portada."
+mostrar_sponsor: true
 ---
 ### Primer subtítulo
 
@@ -26,7 +27,9 @@ Cras id interdum mi. Quisque maximus ac nibh quis tincidunt. Mauris ullamcorper 
 ### Segundo subtítulo
 
 Sed sodales tortor non lobortis fringilla. Donec molestie placerat elit venenatis elementum. Vivamus sagittis consequat molestie. Cras tempus sem at leo rutrum, eu suscipit augue finibus. Cras a tristique nibh, et gravida ligula. Quisque a mauris nisi. Integer sed vehicula felis, tristique rutrum nisl. Nullam pellentesque, eros vitae ullamcorper auctor, augue augue tincidunt augue, ut consectetur ante libero eu magna. Sed tincidunt ut magna sit amet cursus. Donec finibus sodales rhoncus. Vivamus pharetra mollis enim eleifend pharetra. Cras eleifend dui vitae suscipit consequat. Cras at odio dui. Donec fringilla luctus diam id dictum.
-<br></br>
+
+{{< sponsor marca="DatosHoy" link="https://www.datoshoy.com" >}}
+
 Fusce pellentesque lacinia dolor quis mollis. Etiam eu laoreet lectus. Donec mollis suscipit ultrices. Integer id ultrices lacus, et fermentum arcu. Nulla lectus enim, semper vel tincidunt sed, elementum nec felis. Suspendisse interdum, sapien eu bibendum consequat, leo sapien imperdiet est, nec finibus massa libero ac ante. Mauris ut semper ipsum. Nunc efficitur metus et velit pulvinar, feugiat viverra nunc finibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam lectus nisl, dictum id neque sed, gravida ullamcorper justo. Nunc in ex ac arcu vulputate hendrerit a ac nisl.
 
 ![Texto alternativo imagen](https://placehold.co/800x500/e2e8f0/64748b?text=ESPACIO+PARA+FOTO "Título imagen.")
