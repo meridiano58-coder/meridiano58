@@ -616,4 +616,10 @@ body {
     .formulario-newsletter button:hover {
         background-color: #ffffff !important; /* Se ilumina al pasar el mouse */
     }
+
+    /* Corrección para que se lea el texto del email al escribir */
+    .formulario-newsletter input {
+        color: #ffffff !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
 }
