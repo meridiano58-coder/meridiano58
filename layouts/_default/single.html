@@ -31,10 +31,18 @@
     </div>
     {{ end }}
 
-    <!-- 1. IMAGEN DE PORTADA (Detecta tanto "image" del CMS como "imagen" de notas viejas) -->
+    <!-- 1. IMAGEN DE PORTADA CON EPÍGRAFE -->
     {{ $urlFoto := or .Params.image .Params.imagen }}
     {{ if $urlFoto }}
-    <img src="{{ $urlFoto }}" alt="{{ .Title | plainify }}" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 4px; border: 1px solid var(--color-bordes); margin-bottom: 2.5rem;" loading="lazy">
+    <div style="margin-bottom: 2.5rem;">
+        <img src="{{ $urlFoto }}" alt="{{ .Title | plainify }}" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 4px; border: 1px solid var(--color-bordes); margin-bottom: 0.8rem;" loading="lazy">
+        
+        {{ if .Params.epigrafe }}
+        <em style="display: block; text-align: center; font-size: 0.9rem; color: var(--color-secundario);">
+            {{ .Params.epigrafe }}
+        </em>
+        {{ end }}
+    </div>
     {{ end }}
 
     <!-- 2. BAJADA/COPETE (Usando el campo exclusivo del Panel Editorial) -->

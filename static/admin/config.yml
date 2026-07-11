@@ -25,6 +25,7 @@ collections:
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
+      - {label: "Epígrafe de Portada", name: "epigrafe", widget: "string", required: false}
       - {label: "Cuerpo", name: "body", widget: "markdown"}
 
   - name: "la_lupa"
@@ -43,6 +44,7 @@ collections:
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
+      - {label: "Epígrafe de Portada", name: "epigrafe", widget: "string", required: false}
       - {label: "Cuerpo", name: "body", widget: "markdown"}
 
   - name: "archivo_58"
@@ -61,6 +63,7 @@ collections:
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
+      - {label: "Epígrafe de Portada", name: "epigrafe", widget: "string", required: false}
       - {label: "Cuerpo", name: "body", widget: "markdown"}
 
   - name: "el_reporte"
@@ -79,4 +82,5 @@ collections:
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
+      - {label: "Epígrafe de Portada", name: "epigrafe", widget: "string", required: false}
       - {label: "Cuerpo", name: "body", widget: "markdown"}
