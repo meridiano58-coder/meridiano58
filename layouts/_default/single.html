@@ -31,23 +31,36 @@
     </div>
     {{ end }}
 
-    {{ if and (ne .Type "page") (strings.Contains .RawContent "") }}
+    <!-- 1. IMAGEN DE PORTADA (Detecta tanto "image" del CMS como "imagen" de notas viejas) -->
+    {{ $urlFoto := or .Params.image .Params.imagen }}
+    {{ if $urlFoto }}
+    <img src="{{ $urlFoto }}" alt="{{ .Title | plainify }}" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 4px; border: 1px solid var(--color-bordes); margin-bottom: 2.5rem;" loading="lazy">
+    {{ end }}
+
+    <!-- 2. BAJADA/COPETE (Usando el campo exclusivo del Panel Editorial) -->
+    {{ if .Params.description }}
+    <div class="bajada-copete" style="font-family: var(--fuente-principal); font-size: 1.35rem; color: #3a4a5a; line-height: 1.6; text-align: center; max-width: 800px; margin: 0 auto 2.5rem auto; font-style: italic; opacity: 0.95;">
+        {{ .Params.description }}
+    </div>
+    {{ else if and (ne .Type "page") .Summary }}
     <div class="bajada-copete" style="font-family: var(--fuente-principal); font-size: 1.35rem; color: #3a4a5a; line-height: 1.6; text-align: center; max-width: 800px; margin: 0 auto 2.5rem auto; font-style: italic; opacity: 0.95;">
         {{ .Summary }}
     </div>
     {{ end }}
-    
-    {{ if .Params.imagen }}
-    <img src="{{ .Params.imagen }}" alt="{{ .Title | plainify }}" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 4px; border: 1px solid var(--color-bordes); margin-bottom: 2.5rem;" loading="lazy">
-    {{ end }}
 
+    <!-- 3. CUERPO DE LA NOTA LÍMPIO -->
     <div class="post-content">
-        {{ if and (ne .Type "page") (strings.Contains .RawContent "") }}
-            {{ replace .Content .Summary "" | safeHTML }}
-        {{ else }}
-            {{ .Content }}
-        {{ end }}
+        {{ .Content }}
     </div>
+
+    <!-- 3. ACÁ VA EL BANNER DEL SPONSOR (Solo se muestra si lo activás en el panel) -->
+    {{ if eq .Params.mostrar_sponsor true }}
+    <div style="background-color: #1a1a1a; border-left: 4px solid #d32f2f; padding: 20px; margin: 3rem 0 1rem 0; border-radius: 4px;">
+        <p style="color: #f5f5f5; font-family: inherit; margin: 0; font-size: 0.95rem;">
+            <strong style="color: #d32f2f;">Apoyo Independiente |</strong> El análisis de Meridiano 58 es posible gracias al acompañamiento de <strong>[Nombre de la Marca]</strong>. Conocé su trabajo <a href="#" style="color: #f5f5f5; text-decoration: underline;">haciendo clic acá</a>.
+        </p>
+    </div>
+    {{ end }}
 
     {{ if ne .Type "page" }}
     <div style="margin-top: 4rem; padding: 2.5rem 2rem; background-color: var(--color-fondo); border-top: 3px solid var(--color-secundario); border-bottom: 1px solid var(--color-bordes); border-left: 1px solid var(--color-bordes); border-right: 1px solid var(--color-bordes); border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">

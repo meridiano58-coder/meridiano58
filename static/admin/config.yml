@@ -21,6 +21,7 @@ collections:
       - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"} # Etiqueta invisible automática
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Mostrar Sponsor", name: "mostrar_sponsor", widget: "boolean", default: false} # <--- EL INTERRUPTOR
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
@@ -38,6 +39,7 @@ collections:
       - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Mostrar Sponsor", name: "mostrar_sponsor", widget: "boolean", default: false} # <--- EL INTERRUPTOR
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
@@ -55,6 +57,7 @@ collections:
       - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Mostrar Sponsor", name: "mostrar_sponsor", widget: "boolean", default: false} # <--- EL INTERRUPTOR
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
@@ -72,6 +75,7 @@ collections:
       - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Mostrar Sponsor", name: "mostrar_sponsor", widget: "boolean", default: false} # <--- EL INTERRUPTOR
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
