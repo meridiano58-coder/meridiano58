@@ -5,7 +5,3 @@ title = 'Meridiano 58'
   unsafe = true
 [outputs]
   home = ["HTML", "RSS", "JSON"]
-[taxonomies]
-  category = "categories"
-  tag = "tags"
-  perfil = "perfiles"

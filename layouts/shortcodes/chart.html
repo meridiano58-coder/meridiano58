@@ -1,0 +1,8 @@
+{{ $id := delimit (shuffle (seq 1 9)) "" }}
+{{ $type := .Get "type" | default "line" }}
+{{ $dataJSON := .Get "data" }}
+{{ $title := .Get "title" }}
+
+<div class="chart-container" style="position: relative; height: 40vh; width: 100%; max-width: 800px; margin: 2rem auto; border: 1px solid var(--color-bordes); border-radius: 8px; padding: 1rem; background-color: rgba(255, 255, 255, 0.05); z-index: 1;">
+  <canvas id="chart-{{ $id }}" class="data-chart" data-chart-type="{{ $type }}" data-chart-title="{{ $title }}" data-chart-data="{{ $dataJSON }}"></canvas>
+</div>

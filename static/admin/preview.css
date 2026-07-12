@@ -1,0 +1,6 @@
+/* Forzar fondo oscuro y texto claro en la previsualización de Decap */
+body {
+    background-color: #121212; /* El color exacto de fondo de tu web */
+    color: #e0e0e0;            /* El color exacto de tu texto */
+    padding: 20px;
+}
