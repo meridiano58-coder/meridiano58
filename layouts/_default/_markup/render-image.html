@@ -1,0 +1,18 @@
+{{- $url := .Destination | safeURL -}}
+{{- $alt := .Text -}}
+{{- $title := .Title -}}
+
+{{- /* Intenta buscar la imagen en la misma carpeta de la nota o en assets */ -}}
+{{- $imagen := .Page.Resources.GetMatch .Destination -}}
+{{- if not $imagen -}}
+    {{- $imagen = resources.Get .Destination -}}
+{{- end -}}
+
+{{- if $imagen -}}
+    {{- /* Magia: Achica a 900px máximo, la pasa a formato WebP hiper liviano y calidad 85% */ -}}
+    {{- $optimizada := $imagen.Resize "900x webp q85" -}}
+    <img src="{{ $optimizada.RelPermalink }}" alt="{{ $alt }}" {{ with $title }}title="{{ . }}"{{ end }} loading="lazy" style="width: 100%; height: auto; border-radius: 4px; margin: 2rem 0;">
+{{- else -}}
+    {{- /* Si la imagen es un link externo (ej: de Wikipedia), la muestra normal */ -}}
+    <img src="{{ $url }}" alt="{{ $alt }}" {{ with $title }}title="{{ . }}"{{ end }} loading="lazy" style="width: 100%; height: auto; border-radius: 4px; margin: 2rem 0;">
+{{- end -}}
