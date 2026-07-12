@@ -186,5 +186,93 @@
 
 <script data-goatcounter="https://meridiano58.goatcounter.com/count"
         async src="https://gc.zgo.at/count.js"></script>
+
+<!-- ESTILOS DE LA BURBUJA FLOTANTE -->
+<style>
+    .tooltip-nota {
+        position: absolute;
+        background-color: #1a1a1a; /* Fondo oscuro */
+        color: #f5f5f5;
+        border: 1px solid var(--color-bordes);
+        padding: 0.8rem 1.2rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-family: var(--fuente-principal);
+        line-height: 1.4;
+        max-width: 300px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+        transform: translateY(10px);
+        z-index: 9999;
+        pointer-events: none; /* Evita que el mouse interfiera con la burbuja */
+    }
+    .tooltip-nota.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    /* Pequeño ajuste para que los enlaces a las notas (los numeritos) resalten un poco más */
+    sup a.footnote-ref {
+        color: var(--color-primario);
+        text-decoration: none;
+        padding: 0.1rem 0.3rem;
+        font-weight: bold;
+    }
+</style>
+
+<!-- LÓGICA AUTOMÁTICA -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const referencias = document.querySelectorAll('.footnote-ref');
+        
+        // Creamos la burbuja vacía y la agregamos al cuerpo de la página
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip-nota';
+        document.body.appendChild(tooltip);
+
+        referencias.forEach(ref => {
+            ref.addEventListener('mouseenter', function(e) {
+                // Buscamos a qué nota apunta este número
+                const idNota = this.getAttribute('href').substring(1);
+                const notaFisica = document.getElementById(idNota);
+                
+                if(notaFisica) {
+                    // Copiamos el texto de la nota original
+                    const contenido = notaFisica.cloneNode(true);
+                    
+                    // Le borramos la flechita "volver arriba" que pone Hugo por defecto
+                    const flecha = contenido.querySelector('.footnote-backref');
+                    if(flecha) flecha.remove();
+                    
+                    // Metemos el texto limpio en la burbuja
+                    tooltip.innerHTML = contenido.innerHTML;
+                    
+                    // Calculamos dónde está el mouse para mostrarla en el lugar correcto
+                    const rect = this.getBoundingClientRect();
+                    let posLeft = rect.left + window.scrollX;
+                    
+                    // Evitamos que la burbuja se salga de la pantalla por la derecha en monitores chicos
+                    if (posLeft + 320 > window.innerWidth) {
+                        posLeft = window.innerWidth - 340;
+                    }
+                    
+                    tooltip.style.left = posLeft + 'px';
+                    tooltip.style.top = (rect.bottom + window.scrollY + 10) + 'px';
+                    
+                    // La hacemos aparecer
+                    tooltip.classList.add('visible');
+                }
+            });
+
+            // Cuando sacamos el mouse, la burbuja se esconde sola
+            ref.addEventListener('mouseleave', function() {
+                tooltip.classList.remove('visible');
+            });
+        });
+    });
+</script>
 </body>
 </html>
