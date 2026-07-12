@@ -29,5 +29,109 @@
     CMS.registerPreviewStyle("assets/style.css");
     CMS.registerPreviewStyle("/admin/preview.css");
   </script>
+
+  <script>
+  // 1. MAPA GEOPOLÍTICO[cite: 1]
+  CMS.registerEditorComponent({
+    id: "mapa",
+    label: "📍 Insertar Mapa",
+    fields: [
+      {name: "lat", label: "Latitud", widget: "string", default: "-34.6037"},
+      {name: "lon", label: "Longitud", widget: "string", default: "-58.3816"},
+      {name: "zoom", label: "Nivel de Zoom", widget: "number", default: 5, valueType: "int"},
+      {name: "texto", label: "Etiqueta", widget: "string"}
+    ],
+    pattern: /^{{< mapa lat="(.*?)" lon="(.*?)" zoom="(.*?)" texto="(.*?)" >}}$/,
+    fromBlock: function(match) {
+      return { lat: match[1], lon: match[2], zoom: match[3], texto: match[4] };
+    },
+    toBlock: function(obj) {
+      return `{{< mapa lat="${obj.lat || '-34.6037'}" lon="${obj.lon || '-58.3816'}" zoom="${obj.zoom || 5}" texto="${obj.texto || ''}" >}}`;
+    },
+    toPreview: function(obj) {
+      return `<div style="padding: 1rem; border: 1px solid #ccc; text-align: center;">📍 Mapa: ${obj.texto} (${obj.lat}, ${obj.lon})</div>`;
+    }
+  });
+
+  // 2. GRÁFICO ESTADÍSTICO (Chart.js)[cite: 2]
+  CMS.registerEditorComponent({
+    id: "chart",
+    label: "📊 Insertar Gráfico",
+    fields: [
+      {name: "type", label: "Tipo (line, bar, pie)", widget: "string", default: "line"},
+      {name: "title", label: "Título del gráfico", widget: "string"},
+      {name: "data", label: "Datos (Formato JSON)", widget: "text"}
+    ],
+    pattern: /^{{< chart type="(.*?)" title="(.*?)" data='(.*?)' >}}$/,
+    fromBlock: function(match) {
+      return { type: match[1], title: match[2], data: match[3] };
+    },
+    toBlock: function(obj) {
+      return `{{< chart type="${obj.type || 'line'}" title="${obj.title || ''}" data='${obj.data || ''}' >}}`;
+    },
+    toPreview: function(obj) {
+      return `<div style="padding: 1rem; border: 1px solid #ccc; text-align: center;">📊 Gráfico: ${obj.title}</div>`;
+    }
+  });
+
+  // 3. CONTENEDOR INTERACTIVO (Ej: KnightLab)[cite: 3]
+  CMS.registerEditorComponent({
+    id: "interactivo",
+    label: "⏱️ Contenedor Iframe",
+    fields: [
+      {name: "url", label: "URL del recurso", widget: "string"},
+      {name: "alto", label: "Alto en píxeles", widget: "string", default: "650"}
+    ],
+    pattern: /^{{< interactivo "(.*?)" "(.*?)" >}}$/,
+    fromBlock: function(match) {
+      return { url: match[1], alto: match[2] };
+    },
+    toBlock: function(obj) {
+      return `{{< interactivo "${obj.url || ''}" "${obj.alto || '650'}" >}}`;
+    },
+    toPreview: function(obj) {
+      return `<div style="padding: 1rem; border: 1px solid #ccc; text-align: center;">⏱️ Iframe interactivo cargado</div>`;
+    }
+  });
+
+  // 4. REPRODUCTOR DE SPOTIFY[cite: 4]
+  CMS.registerEditorComponent({
+    id: "spotify",
+    label: "🎧 Episodio de Spotify",
+    fields: [
+      {name: "id", label: "ID del Episodio (Ej: 4d28x...)", widget: "string"}
+    ],
+    pattern: /^{{< spotify "(.*?)" >}}$/,
+    fromBlock: function(match) {
+      return { id: match[1] };
+    },
+    toBlock: function(obj) {
+      return `{{< spotify "${obj.id || ''}" >}}`;
+    },
+    toPreview: function(obj) {
+      return `<div style="padding: 1rem; border: 1px solid #1DB954; background: #000; color: #1DB954; text-align: center;">🎧 Spotify Embed: ${obj.id}</div>`;
+    }
+  });
+
+  // 5. CAJA DE APOYO INDEPENDIENTE / SPONSOR
+  CMS.registerEditorComponent({
+    id: "sponsor",
+    label: "🤝 Caja de Apoyo / Sponsor",
+    fields: [
+      {name: "marca", label: "Nombre de la Marca", widget: "string"},
+      {name: "link", label: "Link del sponsor", widget: "string"}
+    ],
+    pattern: /^{{< sponsor marca="(.*?)" link="(.*?)" >}}$/,
+    fromBlock: function(match) {
+      return { marca: match[1], link: match[2] };
+    },
+    toBlock: function(obj) {
+      return `{{< sponsor marca="${obj.marca || ''}" link="${obj.link || ''}" >}}`;
+    },
+    toPreview: function(obj) {
+      return `<div style="padding: 1rem; border-left: 4px solid #d32f2f; background: #f9f9f9; text-align: center;">🤝 Apoyo Independiente: ${obj.marca}</div>`;
+    }
+  });
+</script>
   </body>
 </html>
