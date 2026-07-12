@@ -57,14 +57,14 @@ collections:
       value: "articulo"
     fields:
       - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
-      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Título del episodio", name: "title", widget: "string"}
       - {label: "Autor", name: "author", widget: "string"}
       - {label: "Mostrar Sponsor", name: "mostrar_sponsor", widget: "boolean", default: false} # <--- EL INTERRUPTOR
       - {label: "Bajada / Copete", name: "description", widget: "text"}
       - {label: "Fecha", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
       - {label: "Epígrafe de Portada", name: "epigrafe", widget: "string", required: false}
-      - {label: "Cuerpo", name: "body", widget: "markdown"}
+      - {label: "Contenido", name: "body", widget: "markdown", default: "### Escuchá el episodio\n\n{{< spotify \"PEGA_ACA_EL_ID_DE_SPOTIFY\" >}}\n\n---\n\n### Línea de tiempo interactiva\n\n{{< interactivo \"PEGA_ACA_EL_LINK_DE_KNIGHTLAB\" >}}\n\n---\n\n### Transcripción de Argentinos que hicieron historia\n\nPegá el texto completo de tu guion o transcripción a partir de acá..."}
 
   - name: "el_reporte"
     label: "El Reporte"
