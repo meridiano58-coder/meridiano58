@@ -13,6 +13,7 @@ collections:
     label: "Fronteras"
     folder: "content/fronteras"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     delete: false # 2. ESTO BLOQUEA LA ELIMINACIÓN DE NOTAS YA CREADAS
     filter:
       field: "tipo"
@@ -32,6 +33,7 @@ collections:
     label: "La Lupa"
     folder: "content/la-lupa"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     delete: false
     filter:
       field: "tipo"
@@ -51,6 +53,7 @@ collections:
     label: "Archivo 58"
     folder: "content/archivo-58"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     delete: false
     filter:
       field: "tipo"
@@ -70,6 +73,7 @@ collections:
     label: "El Reporte"
     folder: "content/el-reporte"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     delete: false
     filter:
       field: "tipo"
