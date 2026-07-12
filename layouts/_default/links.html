@@ -1,0 +1,107 @@
+{{ define "main" }}
+<div style="max-width: 400px; margin: 2rem auto 4rem auto; padding: 0 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 70vh;">
+    
+    <!-- Avatar / Logo -->
+    <div style="width: 100px; height: 100px; background-color: var(--color-primario); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <span style="color: var(--color-fondo); font-family: var(--fuente-titulos); font-size: 2.5rem; font-weight: bold;">M58</span>
+    </div>
+    
+    <h1 style="font-family: var(--fuente-titulos); font-size: 1.8rem; margin-bottom: 0.2rem; color: var(--color-texto);">Meridiano 58</h1>
+    <p style="color: var(--color-secundario); margin-bottom: 2rem; font-size: 0.95rem;">Análisis de política y sociedad.</p>
+
+    <!-- Estilos de los botones -->
+    <style>
+        .boton-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 1.2rem 1rem;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            color: var(--color-texto);
+            text-decoration: none;
+            border: 2px solid var(--color-bordes);
+            border-radius: 12px;
+            font-family: var(--fuente-principal);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+        .boton-link:hover {
+            border-color: var(--color-primario);
+            background-color: rgba(255, 255, 255, 0.05); /* Un brillo sutil al tocar */
+            transform: translateY(-2px);
+        }
+        .boton-destacado {
+            background-color: var(--color-primario);
+            color: #ffffff !important;
+            border-color: var(--color-primario);
+        }
+        .boton-destacado:hover {
+            background-color: #a32222; /* Un rojo un poco más oscuro */
+        }
+    </style>
+
+  <!-- Botones estratégicos -->
+    <a href="/" class="boton-link">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        Leer últimos análisis
+    </a>
+    
+    <a href="/archivo-58/" class="boton-link">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+        </svg>
+        Podcast: Archivo 58
+    </a>
+
+    <div style="margin: 2rem 0 1rem 0; width: 100%; height: 1px; background-color: var(--color-bordes);"></div>
+    <p style="color: var(--color-secundario); font-size: 0.8rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">Nuestras Redes</p>
+
+    <a href="https://x.com/meridiano58arg" target="_blank" rel="noopener noreferrer" class="boton-link">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+            <path d="M4 4l11.73 16h4.27l-11.73 -16z"></path>
+            <path d="M4 20l6.77 -6.77"></path>
+            <path d="M20 4l-6.77 6.77"></path>
+        </svg>
+        Twitter / X
+    </a>
+    
+    <a href="https://www.instagram.com/meridiano58arg" target="_blank" rel="noopener noreferrer" class="boton-link">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        Instagram
+    </a>
+    
+    <a href="https://www.tiktok.com/@meridiano58arg" target="_blank" rel="noopener noreferrer" class="boton-link">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+            <path d="M9 12a4 4 0 1 0 4 4v-12a5 5 0 0 0 5 5"></path>
+        </svg>
+        TikTok
+    </a>
+    <a href="https://www.youtube.com/@Meridiano58" target="_blank" rel="noopener noreferrer" class="boton-link">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+        </svg>
+        YouTube
+    </a>
+
+    <a href="https://www.twitch.tv/meridiano58" target="_blank" rel="noopener noreferrer" class="boton-link">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+            <path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7"></path>
+        </svg>
+        Twitch
+    </a>
+
+</div>
+{{ end }}
