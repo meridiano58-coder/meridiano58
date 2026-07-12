@@ -9,6 +9,27 @@ media_folder: "static/images"
 public_folder: "/images"
 
 collections:
+  # --- NUEVA BASE DE DATOS DE AUTORES ---
+  - name: "autores"
+    label: "👥 Autores"
+    folder: "content/autores"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nombre completo", name: "title", widget: "string"}
+      - {label: "Biografía corta", name: "bio", widget: "text"}
+      - {label: "Link a redes o web (opcional)", name: "redes", widget: "string", required: false}
+
+  # --- 2. BASE DE DATOS DE TEMÁTICAS (ETIQUETAS) ---
+  - name: "tematicas"
+    label: "🏷️ Temáticas"
+    folder: "content/tematicas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nombre de la temática", name: "title", widget: "string", hint: "Ej: Soberanía, Geopolítica, Atlántico Sur"}
+
+  # --- SECCIONES DE NOTAS ---
   - name: "fronteras"
     label: "Fronteras"
     folder: "content/fronteras"
@@ -21,10 +42,13 @@ collections:
     fields:
       - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"} # Etiqueta invisible automática
       - {label: "Título", name: "title", widget: "string"}
-      - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Serie de Investigación (Opcional)", name: "series", widget: "string", required: false, hint: "Escribí el nombre exacto de la serie para encadenar notas."}
+      - {label: "Autor", name: "author", widget: "relation", collection: "autores", search_fields: ["title"], value_field: "title", display_fields: ["title"]}
+      - {label: "Temáticas", name: "tags", widget: "relation", collection: "tematicas", search_fields: ["title"], value_field: "title", display_fields: ["title"], multiple: true, required: false}
+      - {label: "Fecha de Publicación Programada", name: "publishDate", widget: "datetime", required: false, hint: "Dejá vacío para publicar hoy. Poné una fecha futura para programar la nota."}
       - {label: "Mostrar Sponsor", name: "mostrar_sponsor", widget: "boolean", default: false} # <--- EL INTERRUPTOR
       - {label: "Bajada / Copete", name: "description", widget: "text"}
-      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Fecha de Creación", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
       - {label: "Epígrafe de Portada", name: "epigrafe", widget: "string", required: false}
       - {label: "Cuerpo", name: "body", widget: "markdown"}
@@ -41,10 +65,13 @@ collections:
     fields:
       - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
       - {label: "Título", name: "title", widget: "string"}
-      - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Serie de Investigación (Opcional)", name: "series", widget: "string", required: false, hint: "Escribí el nombre exacto de la serie para encadenar notas."}
+      - {label: "Autor", name: "author", widget: "relation", collection: "autores", search_fields: ["title"], value_field: "title", display_fields: ["title"]}
+      - {label: "Temáticas", name: "tags", widget: "relation", collection: "tematicas", search_fields: ["title"], value_field: "title", display_fields: ["title"], multiple: true, required: false}
+      - {label: "Fecha de Publicación Programada", name: "publishDate", widget: "datetime", required: false, hint: "Dejá vacío para publicar hoy. Poné una fecha futura para programar la nota."}
       - {label: "Mostrar Sponsor", name: "mostrar_sponsor", widget: "boolean", default: false} # <--- EL INTERRUPTOR
       - {label: "Bajada / Copete", name: "description", widget: "text"}
-      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Fecha de Creación", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
       - {label: "Epígrafe de Portada", name: "epigrafe", widget: "string", required: false}
       - {label: "Cuerpo", name: "body", widget: "markdown"}
@@ -61,10 +88,13 @@ collections:
     fields:
       - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
       - {label: "Título del episodio", name: "title", widget: "string"}
-      - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Serie de Investigación (Opcional)", name: "series", widget: "string", required: false, hint: "Escribí el nombre exacto de la serie para encadenar notas."}
+      - {label: "Autor", name: "author", widget: "relation", collection: "autores", search_fields: ["title"], value_field: "title", display_fields: ["title"]}
+      - {label: "Temáticas", name: "tags", widget: "relation", collection: "tematicas", search_fields: ["title"], value_field: "title", display_fields: ["title"], multiple: true, required: false}
+      - {label: "Fecha de Publicación Programada", name: "publishDate", widget: "datetime", required: false, hint: "Dejá vacío para publicar hoy. Poné una fecha futura para programar la nota."}
       - {label: "Mostrar Sponsor", name: "mostrar_sponsor", widget: "boolean", default: false} # <--- EL INTERRUPTOR
       - {label: "Bajada / Copete", name: "description", widget: "text"}
-      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Fecha de Creación", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
       - {label: "Epígrafe de Portada", name: "epigrafe", widget: "string", required: false}
       - {label: "Contenido", name: "body", widget: "markdown", default: "### Escuchá el episodio\n\n{{< spotify \"PEGA_ACA_EL_ID_DE_SPOTIFY\" >}}\n\n---\n\n### Línea de tiempo interactiva\n\n{{< interactivo \"PEGA_ACA_EL_LINK_DE_KNIGHTLAB\" >}}\n\n---\n\n### Transcripción de Argentinos que hicieron historia\n\nPegá el texto completo de tu guion o transcripción a partir de acá..."}
@@ -81,10 +111,13 @@ collections:
     fields:
       - {label: "Tipo", name: "tipo", widget: "hidden", default: "articulo"}
       - {label: "Título", name: "title", widget: "string"}
-      - {label: "Autor", name: "author", widget: "string"}
+      - {label: "Serie de Investigación (Opcional)", name: "series", widget: "string", required: false, hint: "Escribí el nombre exacto de la serie para encadenar notas."}
+      - {label: "Autor", name: "author", widget: "relation", collection: "autores", search_fields: ["title"], value_field: "title", display_fields: ["title"]}
+      - {label: "Temáticas", name: "tags", widget: "relation", collection: "tematicas", search_fields: ["title"], value_field: "title", display_fields: ["title"], multiple: true, required: false}
+      - {label: "Fecha de Publicación Programada", name: "publishDate", widget: "datetime", required: false, hint: "Dejá vacío para publicar hoy. Poné una fecha futura para programar la nota."}
       - {label: "Mostrar Sponsor", name: "mostrar_sponsor", widget: "boolean", default: false} # <--- EL INTERRUPTOR
       - {label: "Bajada / Copete", name: "description", widget: "text"}
-      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Fecha de Creación", name: "date", widget: "datetime"}
       - {label: "Imagen Portada", name: "image", widget: "image", required: false}
       - {label: "Epígrafe de Portada", name: "epigrafe", widget: "string", required: false}
       - {label: "Cuerpo", name: "body", widget: "markdown"}
