@@ -1,0 +1,5 @@
+{{- $diccionario := slice -}}
+{{- range where .Site.RegularPages "Type" "!=" "page" -}}
+    {{- $diccionario = $diccionario | append (dict "titulo" (.Title | markdownify | plainify) "url" .Permalink "seccion" .Section "contenido" .Plain) -}}
+{{- end -}}
+{{- $diccionario | jsonify -}}

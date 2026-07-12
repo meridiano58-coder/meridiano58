@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div style="max-width: 800px; margin: 4rem auto; padding: 0 2rem; min-height: 60vh;">
+    <h1 style="font-family: var(--fuente-titulos); font-size: 2.5rem; color: var(--color-primario); margin-bottom: 1.5rem; border-bottom: 2px solid var(--color-bordes); padding-bottom: 0.5rem;">Archivo de Búsqueda</h1>
+    
+    <input type="text" id="input-busqueda" placeholder="Buscá geopolítica, soberanía, personajes..." style="width: 100%; padding: 1rem; font-size: 1.2rem; margin-bottom: 2rem; border: 1px solid var(--color-bordes); border-radius: 6px; outline: none; font-family: var(--fuente-principal); background-color: var(--color-blanco); color: var(--color-texto);">
+    
+    <div id="resultados-busqueda">
+        <p style="color: var(--color-secundario); font-style: italic;">Ingresá al menos 3 letras para comenzar a buscar.</p>
+    </div>
+</div>
+
+<script>
+    fetch('/index.json')
+        .then(response => response.json())
+        .then(data => {
+            const input = document.getElementById('input-busqueda');
+            const resultados = document.getElementById('resultados-busqueda');
+            
+            input.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                
+                if (query.length < 3) {
+                    resultados.innerHTML = '<p style="color: var(--color-secundario); font-style: italic;">Ingresá al menos 3 letras para comenzar a buscar.</p>';
+                    return;
+                }
+                
+                resultados.innerHTML = '';
+                
+                const filtrados = data.filter(articulo => 
+                    articulo.titulo.toLowerCase().includes(query) || 
+                    articulo.contenido.toLowerCase().includes(query)
+                );
+                
+                if (filtrados.length === 0) {
+                    resultados.innerHTML = '<p style="color: #d32f2f; font-weight: bold;">No encontramos artículos con esa palabra. Probá con otra.</p>';
+                    return;
+                }
+                
+                filtrados.forEach(articulo => {
+                    resultados.innerHTML += `
+                        <div style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-bordes); padding-bottom: 1rem;">
+                            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-secundario); font-weight: bold;">${articulo.seccion}</span>
+                            <a href="${articulo.url}" style="color: var(--color-texto); text-decoration: none; font-family: var(--fuente-titulos); font-size: 1.5rem; display: block; margin-top: 0.2rem; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#d32f2f'" onmouseout="this.style.color='var(--color-texto)'">${articulo.titulo}</a>
+                        </div>
+                    `;
+                });
+            });
+        });
+</script>
+{{ end }}

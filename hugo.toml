@@ -3,3 +3,5 @@ languageCode = 'es-ar'
 title = 'Meridiano 58'
 [markup.goldmark.renderer]
   unsafe = true
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
