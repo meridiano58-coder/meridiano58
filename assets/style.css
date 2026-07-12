@@ -623,3 +623,11 @@ body {
         background-color: rgba(255, 255, 255, 0.1) !important;
     }
 }
+
+/* Prevención de trampas táctiles en elementos interactivos */
+.chart-container canvas,
+.contenedor-interactivo iframe {
+    /* Le dice al celular que solo procese el gesto táctil si es para hacer scroll vertical por la página (pan-y). 
+       Si el usuario intenta hacer swipe horizontal, ahí sí interactúa con el gráfico/línea de tiempo. */
+    touch-action: pan-y !important; 
+}

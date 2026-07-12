@@ -14,7 +14,11 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Inicializa el mapa
-        var map = L.map('mapa-{{ $id }}').setView([{{ $lat }}, {{ $lon }}], {{ $zoom }});
+        var map = L.map('mapa-{{ $id }}', {
+    scrollWheelZoom: false,      // Evita el zoom accidental con la ruedita en PC
+    dragging: !L.Browser.mobile, // Bloquea el arrastre en celulares (permite hacer scroll en la nota)
+    tap: !L.Browser.mobile       // Previene toques fantasma en pantallas táctiles
+}).setView([{{ $lat }}, {{ $lon }}], {{ $zoom }});
         
         // Usamos un diseño de mapa muy limpio y analítico (CartoDB)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
