@@ -690,3 +690,16 @@ body {
 .zen-mode .bajada-copete {
     max-width: 950px !important;
 }
+
+/* Estilo para los enlaces dentro de los artículos */
+a {
+    color: var(--color-secundario); 
+    text-decoration: underline;
+    text-decoration-style: dotted; /* Subrayado con puntitos */
+    text-underline-offset: 4px; /* Lo separa un poco de la palabra para que sea más legible */
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--color-primario);
+}
