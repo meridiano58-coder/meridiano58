@@ -5,3 +5,6 @@ title = 'Meridiano 58'
   unsafe = true
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+# --- SISTEMA DE TAXONOMÍAS ---
+[taxonomies]
+  tematica = "tematicas"

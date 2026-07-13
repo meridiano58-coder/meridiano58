@@ -9,7 +9,11 @@
     <div class="linea-editorial" style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; font-family: var(--fuente-principal); font-size: 0.9rem; color: var(--color-secundario); margin-bottom: 2rem; border-bottom: 1px solid var(--color-bordes); padding-bottom: 1rem;">
         <span style="text-transform: uppercase; font-weight: 700; color: var(--color-primario); letter-spacing: 0.8px;">{{ replace .Section "-" " " | title }}</span>
         <span style="color: var(--color-bordes); font-weight: 300;">|</span>
-        <span style="color: var(--color-texto);">Por <strong style="color: var(--color-primario); font-weight: 600;">{{ .Params.author }}</strong></span>
+        <span style="color: var(--color-texto);">Por 
+    <a href="/autores/{{ .Params.author | urlize }}/" style="color: var(--color-primario); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primario)'" onmouseout="this.style.borderColor='transparent'">
+        {{ .Params.author }}
+    </a>
+</span>
         <span style="color: var(--color-bordes); font-weight: 300;">|</span>
         
         {{ $meses := slice "enero" "febrero" "marzo" "abril" "mayo" "junio" "julio" "agosto" "septiembre" "octubre" "noviembre" "diciembre" }}
@@ -86,6 +90,20 @@
         <p style="color: var(--color-texto); font-family: inherit; margin: 0; font-size: 0.95rem;">
             <strong style="color: #d32f2f;">Apoyo Independiente |</strong> El análisis de Meridiano 58 es posible gracias al acompañamiento de <strong style="color: var(--color-primario);">DatosHoy</strong>. Conocé su trabajo <a href="https://www.datoshoy.com" target="_blank" rel="noopener noreferrer" style="color: var(--color-texto); text-decoration: underline; font-weight: 500;">haciendo clic acá</a>.
         </p>
+    </div>
+    {{ end }}
+
+<!-- CAJA DE TEMÁTICAS (ETIQUETAS CORREGIDAS) -->
+    {{ with .Params.tematicas }}
+    <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-bordes); display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
+        <span style="font-family: var(--fuente-titulos); font-style: italic; color: var(--color-secundario); margin-right: 0.5rem; font-size: 1.1rem;">Temáticas:</span>
+        
+        {{ range . }}
+        <!-- Fijate que acá cambiamos "/tags/" por "/tematicas/" -->
+        <a href="/tematicas/{{ . | urlize }}/" style="background-color: rgba(26, 43, 60, 0.05); color: var(--color-primario); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; border: 1px solid var(--color-bordes); transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='var(--color-primario)'; this.style.color='var(--color-blanco)'" onmouseout="this.style.backgroundColor='rgba(26, 43, 60, 0.05)'; this.style.color='var(--color-primario)'">
+            {{ . }}
+        </a>
+        {{ end }}
     </div>
     {{ end }}
 

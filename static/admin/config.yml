@@ -17,8 +17,11 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "Nombre completo", name: "title", widget: "string"}
+      - {label: "Foto de perfil (Opcional)", name: "image", widget: "image", required: false}
       - {label: "Biografía corta", name: "bio", widget: "text"}
-      - {label: "Link a redes o web (opcional)", name: "redes", widget: "string", required: false}
+      - {label: "Link a X / Twitter (Opcional)", name: "twitter", widget: "string", required: false}
+      - {label: "Link a Instagram (Opcional)", name: "instagram", widget: "string", required: false}
+      - {label: "Link a LinkedIn (Opcional)", name: "linkedin", widget: "string", required: false}
 
   # --- 2. BASE DE DATOS DE TEMÁTICAS (ETIQUETAS) ---
   - name: "tematicas"
