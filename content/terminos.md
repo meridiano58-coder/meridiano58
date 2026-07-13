@@ -1,6 +1,7 @@
 ---
 title: "Términos y Condiciones"
 type: "page"
+no_toolbar: true
 ---
 
 Al acceder y utilizar **Meridiano 58**, aceptás cumplir con los siguientes Términos y Condiciones. Si no estás de acuerdo con alguna de estas reglas, te pedimos que no utilices el sitio.

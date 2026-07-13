@@ -3,6 +3,7 @@ title: "¡Suscripción Confirmada!"
 url: "/gracias/"
 type: "page"
 draft: false
+no_toolbar: true
 ---
 
 ¡Gracias por sumarte a **Meridiano 58**! Ya formás parte de nuestra lista de lectores.

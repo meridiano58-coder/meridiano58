@@ -1,6 +1,7 @@
 ---
 title: "Política de Privacidad"
 type: "page"
+no_toolbar: true
 ---
 
 En **Meridiano 58** respetamos el derecho a la privacidad y la protección de los datos personales de nuestros lectores. Esta política explica cómo recopilamos, utilizamos y cuidamos la información cuando visitás nuestro sitio web (meridiano58.com.ar).

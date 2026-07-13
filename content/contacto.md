@@ -1,6 +1,7 @@
 ---
 title: "Contacto"
 type: "page"
+no_toolbar: true
 ---
 
 El debate sobre nuestra geopolítica, la historia y la coyuntura social no termina en nuestros artículos; recién empieza.
