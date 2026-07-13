@@ -631,3 +631,62 @@ body {
        Si el usuario intenta hacer swipe horizontal, ahí sí interactúa con el gráfico/línea de tiempo. */
     touch-action: pan-y !important; 
 }
+
+/* --- BARRA DE COMPARTIR INLINE Y ESTÉTICA --- */
+.toolbar-nota {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem; /* Le da aire antes de la foto */
+}
+
+/* Botones huecos tipo esquema (outline) */
+.toolbar-nota button, .toolbar-nota a {
+    background: transparent;
+    border: 1px solid var(--color-bordes);
+    color: var(--color-secundario);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+/* Al pasar el mouse, se pintan del color principal de Meridiano 58 */
+.toolbar-nota button:hover, .toolbar-nota a:hover {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border-color: var(--color-primario);
+    transform: translateY(-2px); /* Un levante muy leve y fino */
+}
+
+/* --- MODO ZEN --- */
+.zen-mode header, 
+.zen-mode footer {
+    display: none !important; 
+}
+
+/* En modo Zen ocultamos todo menos el botón de salir (que ahora es una cruz SVG) */
+.zen-mode .toolbar-nota a,
+.zen-mode #btn-copy {
+    display: none !important;
+}
+
+/* El contenedor principal en modo lectura */
+.zen-mode .post-content {
+    max-width: 950px !important; /* Ensancha la columna hasta tus líneas rojas */
+    margin: 4rem auto;
+    font-size: 1.4rem !important; /* Mantiene la letra grande */
+    line-height: 1.6 !important; /* Le da el aire necesario entre renglones */
+}
+
+/* Opcional: Si querés que la bajada/copete también se ensanche a la par del texto */
+.zen-mode .bajada-copete {
+    max-width: 950px !important;
+}
