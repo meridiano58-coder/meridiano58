@@ -15,13 +15,13 @@
 
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:image" content="{{ if .Params.imagen }}{{ .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}">
+    <meta property="og:image" content="{{ if or .Params.image .Params.imagen }}{{ or .Params.image .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ .Permalink }}">
     <meta name="twitter:title" content="{{ .Title | markdownify | plainify }}">
     <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
-    <meta name="twitter:image" content="{{ if .Params.imagen }}{{ .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}">
+    <meta name="twitter:image" content="{{ if or .Params.image .Params.imagen }}{{ or .Params.image .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}">
 
     <meta name="format-detection" content="telephone=no">
     
