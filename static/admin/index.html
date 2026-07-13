@@ -94,6 +94,45 @@
     }
   });
 
+  // Burbuja Wikipedia
+  CMS.registerEditorComponent({
+    // Nombre interno del componente
+    id: "burbuja-wiki",
+    // Nombre que vas a ver en el botón del CMS
+    label: "Burbuja Wiki",
+    // Los campos que te va a pedir el formulario cuando toques el botón
+    fields: [
+      {
+        name: "palabra",
+        label: "Palabra a destacar (La que se ve en el texto)",
+        widget: "string"
+      },
+      {
+        name: "definicion",
+        label: "Definición (La que aparece al pasar el mouse)",
+        widget: "string"
+      }
+    ],
+    // Cómo hace el CMS para reconocer si ya escribiste esto en el código
+    pattern: /{{< wiki "([^"]+)" "([^"]+)" >}}/,
+    
+    // Cómo lee los datos
+    fromBlock: function(match) {
+      return {
+        palabra: match[1],
+        definicion: match[2]
+      };
+    },
+    // Cómo lo escribe en tu archivo .md al guardar
+    toBlock: function(obj) {
+      return `{{< wiki "${obj.palabra}" "${obj.definicion}" >}}`;
+    },
+    // Cómo te lo muestra en la vista previa del CMS (algo simple para guiarte)
+    toPreview: function(obj) {
+      return `<span style="border-bottom: 2px dashed #1a2b3c; cursor: help;" title="${obj.definicion}">${obj.palabra}</span>`;
+    }
+  });
+
   // 4. REPRODUCTOR DE SPOTIFY[cite: 4]
   CMS.registerEditorComponent({
     id: "spotify",
