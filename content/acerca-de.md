@@ -7,6 +7,6 @@ Nacido como un proyecto de un estudiante de la Universidad de Buenos Aires, **Me
 <br></br>
 El debate sobre nuestro rumbo como país no termina en los artículos de texto. A través del proyecto audiovisual *Archivo 58*, nuestro formato podcast busca rescatar y examinar las decisiones, los personajes y los puntos de inflexión que forjaron la matriz de la Nación.
 <br></br>
-Entendemos que el pensamiento crítico no se construye mediante monólogos, sino a través del intercambio. Nuestra mesa de redacción está siempre abierta a la crítica constructiva, el debate de fuentes y la propuesta de nuevos enfoques. Si tenés información, investigaciones o ideas que sumen a la soberanía del país, escribinos. El canal está abierto.
+Entendemos que el pensamiento crítico no se construye mediante monólogos, sino a través del intercambio. Nuestra mesa de redacción está siempre abierta a la crítica constructiva, el debate de fuentes y la propuesta de nuevos enfoques. Si tenés información, investigaciones o ideas que sumen a **Meridiano 58**, escribinos. El canal está abierto.
 <br></br>
-Nuestra única brújula es el rigor histórico y la libertad editorial. **Meridiano 58** es un espacio autogestivo que no responde a bajadas de línea corporativas ni a agendas externas. Esta autonomía es la que nos garantiza poder llamar a las cosas por su nombre y ofrecer una lectura de la realidad nacional sin filtros ni condicionamientos.
+Nuestra única brújula es el rigor histórico y la libertad editorial. **Meridiano 58** es un espacio que no responde a bajadas de línea corporativas ni a agendas externas. Esta autonomía es la que nos garantiza poder llamar a las cosas por su nombre y ofrecer una lectura de la realidad nacional sin filtros ni condicionamientos.
