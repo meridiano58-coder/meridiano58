@@ -28,7 +28,7 @@ Cras id interdum mi. Quisque maximus ac nibh quis tincidunt. Mauris ullamcorper 
 
 Sed sodales tortor non lobortis fringilla. Donec molestie placerat elit venenatis elementum. Vivamus sagittis consequat molestie. Cras tempus sem at leo rutrum, eu suscipit augue finibus. Cras a tristique nibh, et gravida ligula. Quisque a mauris nisi. Integer sed vehicula felis, tristique rutrum nisl. Nullam pellentesque, eros vitae ullamcorper auctor, augue augue tincidunt augue, ut consectetur ante libero eu magna. Sed tincidunt ut magna sit amet cursus. Donec finibus sodales rhoncus. Vivamus pharetra mollis enim eleifend pharetra. Cras eleifend dui vitae suscipit consequat. Cras at odio dui. Donec fringilla luctus diam id dictum.
 <br></br>
-[Lorem ipsum](https://https://es.wikipedia.org/wiki/Lorem_ipsum "Lorem ipsum es un texto de relleno estándar utilizado en diseño gráfico, editorial y web para previsualizar maquetas (layouts) y tipografías antes de insertar el contenido definitivo. Se comenzó a utilizar en 1966, creado por diseñadores de Letraset y James Mosely, un bibliotecario en Londres, para crear las hojas de tipografía de Letraset.") dolor sit amet, consectetur
+[Lorem ipsum](https://https://es.wikipedia.org/wiki/Lorem_ipsum) dolor sit amet, consectetur
 adipiscing elit. Cras ut commodo orci. Mauris blandit eu mauris ac feugiat. Nam at posuere elit, quis fermentum nisl. Duis scelerisque ornare nisi, sit amet ullamcorper lacus mollis et. Nam metus velit, pretium nec varius et, aliquam ac lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus.
 
 ![Texto alternativo imagen](https://placehold.co/800x500/e2e8f0/64748b?text=ESPACIO+PARA+FOTO "Título imagen.")
