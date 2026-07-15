@@ -1,6 +1,6 @@
 ---
 title: "Sobre Nosotros"
-layout: "acerca"
+layout: "nosotros"
 ---
 
 Nacido como un proyecto de un estudiante de la Universidad de Buenos Aires, **Meridiano 58** representa una nueva forma de analizar la realidad desde la geopolítica, historia y coyuntura social. Con una mesa de redacción conformada por estudiantes y graduados de diversas universidades, apuntamos a entregar un análisis realista que muchos medios tradicionales deciden pasar por alto, no como un mero transmisor de noticias, sino como una herramienta analítica para pensar la sociedad en la que vivimos.
