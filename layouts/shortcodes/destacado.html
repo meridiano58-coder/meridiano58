@@ -1,0 +1,10 @@
+<div style="margin: 3rem auto; padding: 1.5rem 2rem; border-left: 4px solid var(--color-secundario); background-color: rgba(26, 43, 60, 0.03); max-width: 85%;">
+    <p style="font-family: var(--fuente-titulos); font-size: 1.5rem; color: var(--color-primario); font-style: italic; line-height: 1.4; margin: 0;">
+        "{{ .Inner | markdownify }}"
+    </p>
+    {{ if .Get "autor" }}
+    <p style="font-family: var(--fuente-principal); font-size: 0.9rem; font-weight: bold; color: var(--color-secundario); text-transform: uppercase; letter-spacing: 1px; margin: 1rem 0 0 0;">
+        — {{ .Get "autor" }}
+    </p>
+    {{ end }}
+</div>

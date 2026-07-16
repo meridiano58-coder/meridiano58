@@ -1,4 +1,7 @@
 {{ define "main" }}
+<!-- BARRA DE PROGRESO -->
+<div id="barra-progreso" style="position: fixed; top: 0; left: 0; height: 4px; background-color: var(--color-secundario); width: 0%; z-index: 99999; transition: width 0.1s ease-out;"></div>
+
 <article style="max-width: 1000px; margin: 0 auto; padding: 3rem 5%;">
     
     <h1 style="font-family: var(--fuente-titulos); font-size: 2.8rem; color: var(--color-primario); text-align: center; margin-bottom: 1.5rem; line-height: 1.2; font-weight: normal;">
@@ -207,6 +210,25 @@
             boton.style.borderColor = "";
         }, 2000);
     }
+</script>
+
+<!-- SCRIPT DE LA BARRA DE PROGRESO -->
+<script>
+    window.addEventListener('scroll', function() {
+        // Calcula cuánto scrolleó el usuario
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        // Calcula el alto total de la página menos lo que ya se ve en pantalla
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
+        // Saca el porcentaje
+        const scrolled = (scrollTop / docHeight) * 100;
+        
+        // Se lo aplica al ancho de la barra
+        const barra = document.getElementById('barra-progreso');
+        if (barra) {
+            barra.style.width = scrolled + '%';
+        }
+    });
 </script>
 </article>
 {{ end }}
