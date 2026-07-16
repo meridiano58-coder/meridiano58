@@ -852,7 +852,7 @@ a:hover {
     #toast-suscripcion {
         bottom: 15px;
         left: 15px;
-        right: 15px; /* Se estira ocupando el ancho pero dejando margen */
+        right: 85px; /* Cortamos la pastilla antes de que choque con el botón */
         max-width: none;
         width: auto;
         padding: 0.8rem;
@@ -860,12 +860,12 @@ a:hover {
     }
     
     .toast-contenido {
-        flex-direction: row; /* Pone el texto y el botón uno al lado del otro */
+        flex-direction: row; 
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        gap: 1rem;
-        padding-right: 1rem; /* Para que no pise la cruz */
+        gap: 0.8rem; /* Ajustamos un poquito el aire interno */
+        padding-right: 1.5rem; /* Le damos margen para que la cruz no pise al botón */
     }
     
     .toast-titulo {
