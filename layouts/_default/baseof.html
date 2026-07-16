@@ -367,6 +367,10 @@
         let timeoutId;
 
         linksWiki.forEach(link => {
+            // Forzamos a que el enlace original del texto abra en una pestaña nueva de forma segura
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+
             link.addEventListener('mouseenter', async function(e) {
                 clearTimeout(timeoutId);
                 
