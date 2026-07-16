@@ -23,6 +23,33 @@
     color: var(--color-blanco);
 }
 
+/* --- BARRA DE DESPLAZAMIENTO (SCROLLBAR) ESTÉTICA --- */
+
+/* 1. Para navegadores basados en WebKit (Chrome, Safari, Edge, Opera) */
+::-webkit-scrollbar {
+    width: 10px; /* Hace la barra un poco más fina que la estándar */
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-fondo); /* El carril hereda el color de fondo de la web */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-secundario); /* El "agarrador" usa el gris azulado de tu marca */
+    border-radius: 10px; /* Bordes redondeados elegantes */
+    border: 2px solid var(--color-fondo); /* Le da un "aire" alrededor para que no toque los bordes */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primario); /* Se oscurece al pasar el mouse */
+}
+
+/* 2. Para Firefox (Usa el estándar web más moderno) */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-secundario) var(--color-fondo);
+}
+
 body {
     font-family: var(--fuente-principal);
     background-color: var(--color-fondo);
