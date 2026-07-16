@@ -88,8 +88,8 @@
     <li><a href="/la-lupa/" class="{{ if in .RelPermalink "/la-lupa/" }}activo{{ end }}">La Lupa</a></li>
     <li><a href="/archivo-58/" class="{{ if in .RelPermalink "/archivo-58/" }}activo{{ end }}">Archivo 58</a></li>
     <li><a href="/el-reporte/" class="{{ if in .RelPermalink "/el-reporte/" }}activo{{ end }}">El Reporte</a></li>
-    <li><a href="/sobre-nosotros/" class="{{ if in .RelPermalink "/sobre-nosotros/" }}activo{{ end }}">Nosotros</a></li>
     <li><a href="/autores/" class="{{ if in .RelPermalink "/autores/" }}activo{{ end }}">Autores</a></li>
+    <li><a href="/sobre-nosotros/" class="{{ if in .RelPermalink "/sobre-nosotros/" }}activo{{ end }}">Nosotros</a></li>
                 <li style="display: flex; align-items: center;">
                     <a href="/buscar/" title="Buscar en Meridiano 58" aria-label="Buscar" style="display: flex; align-items: center;">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
@@ -794,6 +794,7 @@
     </script>
 {{ end }}
 
+{{ if and .IsPage (in (slice "fronteras" "la-lupa" "archivo-58" "el-reporte") .Section) }}
 <!-- ESTILOS DEL BOTÓN VOLVER ARRIBA -->
 <style>
     #btn-volver-arriba {
@@ -888,5 +889,6 @@
         });
     });
 </script>
+{{ end }}
 </body>
 </html>
