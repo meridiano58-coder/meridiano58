@@ -17,6 +17,12 @@
     box-sizing: border-box;
 }
 
+/* Resaltado de texto con identidad de marca */
+::selection {
+    background-color: var(--color-secundario);
+    color: var(--color-blanco);
+}
+
 body {
     font-family: var(--fuente-principal);
     background-color: var(--color-fondo);
@@ -68,6 +74,17 @@ nav a {
 
 nav a:hover {
     color: #a8b8c8;
+}
+
+/* Indicador de página activa en el menú */
+nav a.activo {
+    color: #a8b8c8 !important; 
+    border-bottom: 2px solid #a8b8c8;
+    padding-bottom: 4px;
+}
+[data-theme="dark"] nav a.activo {
+    color: #ffffff !important;
+    border-bottom-color: #ffffff;
 }
 
 /* Sección Principal (Hero) */

@@ -82,13 +82,14 @@
         <a href="/" class="logo enlace-logo">Meridiano 58</a>
         <nav>
             <ul>
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/fronteras/">Fronteras</a></li>
-                <li><a href="/la-lupa/">La Lupa</a></li>
-                <li><a href="/archivo-58/">Archivo 58</a></li>
-                <li><a href="/el-reporte/">El Reporte</a></li>
-                <li><a href="/sobre-nosotros/">Nosotros</a></li>
-                <li><a href="/autores/">Autores</a></li>
+                <ul>
+    <li><a href="/" class="{{ if .IsHome }}activo{{ end }}">Inicio</a></li>
+    <li><a href="/fronteras/" class="{{ if in .RelPermalink "/fronteras/" }}activo{{ end }}">Fronteras</a></li>
+    <li><a href="/la-lupa/" class="{{ if in .RelPermalink "/la-lupa/" }}activo{{ end }}">La Lupa</a></li>
+    <li><a href="/archivo-58/" class="{{ if in .RelPermalink "/archivo-58/" }}activo{{ end }}">Archivo 58</a></li>
+    <li><a href="/el-reporte/" class="{{ if in .RelPermalink "/el-reporte/" }}activo{{ end }}">El Reporte</a></li>
+    <li><a href="/sobre-nosotros/" class="{{ if in .RelPermalink "/sobre-nosotros/" }}activo{{ end }}">Nosotros</a></li>
+    <li><a href="/autores/" class="{{ if in .RelPermalink "/autores/" }}activo{{ end }}">Autores</a></li>
                 <li style="display: flex; align-items: center;">
                     <a href="/buscar/" title="Buscar en Meridiano 58" aria-label="Buscar" style="display: flex; align-items: center;">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
@@ -732,6 +733,68 @@
             // Al frenar el link, el celular procesa el toque como un "hover" 
             // y la burbuja se va a abrir sola gracias al código original que ya tenés.
         }
+    });
+</script>
+
+<!-- ESTILOS DEL BOTÓN VOLVER ARRIBA -->
+<style>
+    #btn-volver-arriba {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: var(--color-primario);
+        color: var(--color-blanco);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        z-index: 999999;
+    }
+    
+    #btn-volver-arriba:hover {
+        transform: translateY(-3px);
+        background-color: var(--color-secundario);
+    }
+    
+    /* Esta es la clase que el script le va a inyectar al scrollear */
+    #btn-volver-arriba.mostrar {
+        opacity: 1;
+        visibility: visible;
+    }
+</style>
+
+<!-- ESTRUCTURA DEL BOTÓN -->
+<button id="btn-volver-arriba" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+</button>
+
+<!-- MOTOR DEL BOTÓN -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnVolverArriba = document.getElementById('btn-volver-arriba');
+        
+        window.addEventListener('scroll', function() {
+            // Bajamos la exigencia a 300px para que aparezca un poquito antes
+            if (window.scrollY > 300) {
+                btnVolverArriba.classList.add('mostrar');
+            } else {
+                btnVolverArriba.classList.remove('mostrar');
+            }
+        });
+
+        btnVolverArriba.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     });
 </script>
 
