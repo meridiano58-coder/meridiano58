@@ -31,6 +31,48 @@
   </script>
 
   <script>
+    CMS.registerEditorComponent({
+    id: "frase-destacada",
+    label: "Frase Destacada",
+    fields: [
+      {
+        name: "texto",
+        label: "Cita o frase a destacar",
+        widget: "text" // Usamos "text" para que te deje apretar Enter y hacer varios renglones si la frase es larga
+      },
+      {
+        name: "autor",
+        label: "Autor de la frase (Dejar en blanco si no tiene)",
+        widget: "string",
+        required: false
+      }
+    ],
+    // Cómo lee el CMS el código si ya está escrito
+    pattern: /^{{< destacado(?: autor="(.*?)")? >}}\n([\s\S]*?)\n{{< \/destacado >}}$/m,
+    
+    fromBlock: function(match) {
+      return {
+        autor: match[1] || '',
+        texto: match[2] || ''
+      };
+    },
+    // Cómo lo inyecta en el archivo .md
+    toBlock: function(obj) {
+      if (obj.autor) {
+        return `{{< destacado autor="${obj.autor}" >}}\n${obj.texto}\n{{< /destacado >}}`;
+      } else {
+        return `{{< destacado >}}\n${obj.texto}\n{{< /destacado >}}`;
+      }
+    },
+    // Cómo te lo muestra en la previsualización del CMS
+    toPreview: function(obj) {
+      return `<blockquote style="border-left: 4px solid #a8b8c8; padding-left: 1rem; font-style: italic;">
+        ${obj.texto}<br>
+        <small style="font-weight:bold; text-transform: uppercase;">— ${obj.autor || ''}</small>
+      </blockquote>`;
+    }
+  });
+
   // 1. MAPA GEOPOLÍTICO[cite: 1]
   CMS.registerEditorComponent({
     id: "mapa",
@@ -130,6 +172,34 @@
     // Cómo te lo muestra en la vista previa del CMS (algo simple para guiarte)
     toPreview: function(obj) {
       return `<span style="border-bottom: 2px dashed #1a2b3c; cursor: help;" title="${obj.definicion}">${obj.palabra}</span>`;
+    }
+  });
+
+  CMS.registerEditorComponent({
+    id: "pregunta-entrevista",
+    label: "Pregunta Entrevista",
+    fields: [
+      {
+        name: "pregunta",
+        label: "Texto de la pregunta",
+        widget: "text"
+      }
+    ],
+    // Cómo lee el CMS el código si ya está escrito
+    pattern: /^{{< pregunta >}}\n([\s\S]*?)\n{{< \/pregunta >}}$/m,
+    
+    fromBlock: function(match) {
+      return {
+        pregunta: match[1] || ''
+      };
+    },
+    // Cómo lo inyecta en el archivo .md
+    toBlock: function(obj) {
+      return `{{< pregunta >}}\n${obj.pregunta}\n{{< /pregunta >}}`;
+    },
+    // Cómo te lo muestra en la previsualización del CMS
+    toPreview: function(obj) {
+      return `<p style="font-weight: bold; border-left: 3px solid #a8b8c8; padding-left: 1rem;">${obj.pregunta}</p>`;
     }
   });
 
