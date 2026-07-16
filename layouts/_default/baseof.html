@@ -62,6 +62,20 @@
 }
 </script>
 {{ end }}
+
+<script>
+    // Se ejecuta antes de que la página cargue para evitar el destello blanco
+    (function() {
+        const temaGuardado = localStorage.getItem('tema-m58');
+        const sistemaOscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (temaGuardado === 'dark' || (!temaGuardado && sistemaOscuro)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    })();
+</script>
 </head>
 <body>
     <header>
@@ -76,13 +90,23 @@
                 <li><a href="/sobre-nosotros/">Nosotros</a></li>
                 <li><a href="/autores/">Autores</a></li>
                 <li style="display: flex; align-items: center;">
-    <a href="/buscar/" title="Buscar en Meridiano 58" aria-label="Buscar" style="display: flex; align-items: center;">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-    </a>
-</li>
+                    <a href="/buscar/" title="Buscar en Meridiano 58" aria-label="Buscar" style="display: flex; align-items: center;">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </a>
+                </li>
+                
+                <!-- NUEVO BOTÓN DE TEMA OSCURO/CLARO -->
+                <li style="display: flex; align-items: center;">
+                    <button id="boton-tema" aria-label="Cambiar tema" style="background: none; border: none; cursor: pointer; color: currentColor; padding: 0; display: flex; align-items: center; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                        <!-- Icono de Luna -->
+                        <svg id="icono-luna" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                        <!-- Icono de Sol -->
+                        <svg id="icono-sol" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -708,6 +732,39 @@
             // Al frenar el link, el celular procesa el toque como un "hover" 
             // y la burbuja se va a abrir sola gracias al código original que ya tenés.
         }
+    });
+</script>
+
+<!-- SCRIPT PARA EL BOTÓN DE CAMBIO DE TEMA -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const botonTema = document.getElementById('boton-tema');
+        const docEl = document.documentElement;
+        const iconoSol = document.getElementById('icono-sol');
+        const iconoLuna = document.getElementById('icono-luna');
+
+        function actualizarIcono() {
+            if (docEl.getAttribute('data-theme') === 'dark') {
+                iconoSol.style.display = 'block';
+                iconoLuna.style.display = 'none';
+            } else {
+                iconoSol.style.display = 'none';
+                iconoLuna.style.display = 'block';
+            }
+        }
+
+        // Ejecutar al cargar para mostrar el ícono correcto
+        actualizarIcono();
+
+        // Lógica del clic
+        botonTema.addEventListener('click', () => {
+            const temaActual = docEl.getAttribute('data-theme');
+            const nuevoTema = temaActual === 'dark' ? 'light' : 'dark';
+            
+            docEl.setAttribute('data-theme', nuevoTema);
+            localStorage.setItem('tema-m58', nuevoTema);
+            actualizarIcono();
+        });
     });
 </script>
 </body>

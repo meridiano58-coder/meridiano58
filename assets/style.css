@@ -560,68 +560,69 @@ body {
 }
 
 /* --------------------------------------------------- */
-/* Modo Oscuro Automático                              */
+/* Modo Oscuro (Controlado por Botón y Sistema)        */
 /* --------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-fondo: #121212;          /* Fondo general bien oscuro */
-        --color-texto: #d1d9e0;          /* Texto principal en gris clarito legible */
-        --color-primario: #8ba7c4;       /* Celeste apastelado para los TÍTULOS */
-        --color-secundario: #6c88a8;     /* Gris azulado para los metadatos */
-        --color-blanco: #1e1e24;         /* Gris oscuro para el fondo de las TARJETAS */
-        --color-bordes: #2a343d;         /* Bordes sutiles que no corten la vista */
-    }
+[data-theme="dark"] {
+    --color-fondo: #121212;          
+    --color-texto: #d1d9e0;          
+    --color-primario: #8ba7c4;       
+    --color-secundario: #6c88a8;     
+    --color-blanco: #1e1e24;         
+    --color-bordes: #2a343d;         
+}
 
-    /* 1. CABECERA Y FOOTER: Forzamos fondo oscuro y letras obligatoriamente blancas */
-    header, footer {
-        background-color: #0a1118;
-        border-bottom: 2px solid var(--color-bordes);
-    }
-    header .logo, header .enlace-logo, nav a {
-        color: #ffffff !important;
-    }
+/* 1. CABECERA Y FOOTER */
+[data-theme="dark"] header, 
+[data-theme="dark"] footer {
+    background-color: #0a1118;
+    border-bottom: 2px solid var(--color-bordes);
+}
+[data-theme="dark"] header .logo, 
+[data-theme="dark"] header .enlace-logo, 
+[data-theme="dark"] nav a,
+[data-theme="dark"] nav button {
+    color: #ffffff !important;
+}
 
-    /* 2. TARJETAS Y CAJAS: Reemplazamos el "white" duro por el gris oscuro */
-    .tarjeta-noticia, .hero, .episodio-destacado, .caja-newsletter {
-        background-color: var(--color-blanco) !important;
-    }
-    
-    /* 3. TÍTULOS DE NOTICIAS: Letras claras para que resalten dentro de la tarjeta */
-    .tarjeta-noticia h3 a {
-        color: #ffffff;
-    }
-    .tarjeta-noticia h3 a:hover {
-        color: var(--color-primario);
-    }
+/* 2. TARJETAS Y CAJAS */
+[data-theme="dark"] .tarjeta-noticia, 
+[data-theme="dark"] .hero, 
+[data-theme="dark"] .episodio-destacado, 
+[data-theme="dark"] .caja-newsletter {
+    background-color: var(--color-blanco) !important;
+}
 
-    /* 4. IMÁGENES: Les bajamos un 15% el brillo para que no te quemen los ojos de noche */
-    .foto-miniatura, img {
-        filter: brightness(0.85) contrast(1.15);
-    }
+/* 3. TÍTULOS DE NOTICIAS */
+[data-theme="dark"] .tarjeta-noticia h3 a {
+    color: #ffffff;
+}
+[data-theme="dark"] .tarjeta-noticia h3 a:hover {
+    color: var(--color-primario);
+}
 
-/* 5. FOOTER Y NEWSLETTER: Forzamos el contraste desvinculándolo de las tarjetas */
-    .newsletter-footer h4 {
-        color: #ffffff !important;
-    }
-    
-    .newsletter-footer p {
-        color: #d1d9e0 !important;
-    }
-    
-    .formulario-newsletter button {
-        background-color: #d1d9e0 !important; /* Botón gris clarito */
-        color: #0a1118 !important; /* Texto del botón bien oscuro */
-    }
-    
-    .formulario-newsletter button:hover {
-        background-color: #ffffff !important; /* Se ilumina al pasar el mouse */
-    }
+/* 4. IMÁGENES */
+[data-theme="dark"] .foto-miniatura, 
+[data-theme="dark"] img {
+    filter: brightness(0.85) contrast(1.15);
+}
 
-    /* Corrección para que se lea el texto del email al escribir */
-    .formulario-newsletter input {
-        color: #ffffff !important;
-        background-color: rgba(255, 255, 255, 0.1) !important;
-    }
+/* 5. FOOTER Y NEWSLETTER */
+[data-theme="dark"] .newsletter-footer h4 {
+    color: #ffffff !important;
+}
+[data-theme="dark"] .newsletter-footer p {
+    color: #d1d9e0 !important;
+}
+[data-theme="dark"] .formulario-newsletter button {
+    background-color: #d1d9e0 !important; 
+    color: #0a1118 !important; 
+}
+[data-theme="dark"] .formulario-newsletter button:hover {
+    background-color: #ffffff !important; 
+}
+[data-theme="dark"] .formulario-newsletter input {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Prevención de trampas táctiles en elementos interactivos */
