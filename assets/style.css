@@ -748,3 +748,144 @@ a {
 a:hover {
     color: var(--color-primario);
 }
+
+/* --- TOAST DE SUSCRIPCIÓN (SUTIL Y NO INVASIVO) --- */
+#toast-suscripcion {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* En compu lo ponemos a la izquierda para no pelear con el botón de Volver Arriba */
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-bordes);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 1rem 2.5rem 1rem 1.2rem;
+    z-index: 998;
+    transform: translateY(100px); /* Escondido hacia abajo */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación con un rebote imperceptible */
+    max-width: 320px;
+}
+
+#toast-suscripcion.mostrar {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Adaptación automática al Modo Oscuro */
+[data-theme="dark"] #toast-suscripcion {
+    background-color: #2a343d; 
+    border-color: #4a5d73;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.toast-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.toast-titulo {
+    display: block;
+    font-family: var(--fuente-titulos);
+    font-size: 1.1rem;
+    color: var(--color-texto);
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+[data-theme="dark"] .toast-titulo { color: #a8b8c8; }
+
+.toast-texto {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-secundario);
+    line-height: 1.3;
+}
+
+[data-theme="dark"] .toast-texto { color: #8a9ba8; }
+
+.toast-btn {
+    background-color: var(--color-primario);
+    color: var(--color-blanco) !important;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-family: var(--fuente-principal);
+    font-weight: bold;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+[data-theme="dark"] .toast-btn {
+    background-color: var(--color-blanco);
+    color: var(--color-primario) !important;
+}
+
+.toast-btn:hover { background-color: var(--color-secundario); }
+[data-theme="dark"] .toast-btn:hover { background-color: #d1d9e0; }
+
+#cerrar-toast {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--color-secundario);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+#cerrar-toast:hover { color: var(--color-primario); }
+[data-theme="dark"] #cerrar-toast:hover { color: var(--color-blanco); }
+
+/* BLINDAJE PARA CELULARES (DISEÑO PASTILLA) */
+@media (max-width: 768px) {
+    #toast-suscripcion {
+        bottom: 15px;
+        left: 15px;
+        right: 15px; /* Se estira ocupando el ancho pero dejando margen */
+        max-width: none;
+        width: auto;
+        padding: 0.8rem;
+        border-radius: 12px;
+    }
+    
+    .toast-contenido {
+        flex-direction: row; /* Pone el texto y el botón uno al lado del otro */
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 1rem;
+        padding-right: 1rem; /* Para que no pise la cruz */
+    }
+    
+    .toast-titulo {
+        font-size: 0.95rem;
+        margin-bottom: 0;
+    }
+    
+    .toast-texto {
+        display: none; /* Destruimos el texto secundario para no ocupar espacio de lectura */
+    }
+    
+    .toast-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        white-space: nowrap; /* Evita que el botón se parta en dos renglones */
+    }
+    
+    #cerrar-toast {
+        top: 50%;
+        transform: translateY(-50%); /* Lo centra verticalmente a la derecha */
+        right: 5px;
+    }
+}
