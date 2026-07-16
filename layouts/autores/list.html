@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div style="max-width: 1000px; margin: 4rem auto; padding: 0 5%;">
+    <h1 style="font-family: var(--fuente-titulos); font-size: 2.5rem; color: var(--color-primario); text-align: center; margin-bottom: 3rem; border-bottom: 2px solid var(--color-bordes); padding-bottom: 1rem;">
+        Equipo Editorial
+    </h1>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem;">
+        {{ range .Pages }}
+        <a href="{{ .RelPermalink }}" style="text-decoration: none; background: var(--color-blanco); border: 1px solid var(--color-bordes); border-radius: 8px; padding: 2.5rem 1.5rem; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.05)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+            
+            {{ $urlFoto := or .Params.image .Params.imagen }}
+            {{ if $urlFoto }}
+            <img src="{{ $urlFoto }}" alt="{{ .Title }}" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.2rem auto; border: 3px solid var(--color-fondo); box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            {{ end }}
+            
+            <h2 style="font-family: var(--fuente-titulos); font-size: 1.4rem; color: var(--color-primario); margin: 0;">
+                {{ .Title }}
+            </h2>
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
