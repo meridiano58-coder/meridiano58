@@ -662,5 +662,49 @@
     line-height: 1.6;
 }
 </style>
+
+<!-- SCRIPT PARA CERRAR BURBUJAS EN CELULARES -->
+<script>
+    document.addEventListener('click', function(e) {
+        // Seleccionamos las dos burbujas
+        const wikiTooltip = document.querySelector('.wiki-tooltip');
+        const notaTooltip = document.querySelector('.tooltip-nota');
+        
+        // Cierra la de Wikipedia si tocaste afuera
+        if (wikiTooltip && wikiTooltip.classList.contains('visible')) {
+            // Verificamos que el toque no haya sido adentro de la burbuja ni en otro link de Wikipedia
+            if (!wikiTooltip.contains(e.target) && !e.target.closest('a[href*="wikipedia.org/wiki/"]')) {
+                wikiTooltip.classList.remove('visible');
+            }
+        }
+        
+        // Cierra la nota al pie si tocaste afuera
+        if (notaTooltip && notaTooltip.classList.contains('visible')) {
+            // Verificamos que el toque no haya sido adentro de la burbuja ni en otro número de nota
+            if (!notaTooltip.contains(e.target) && !e.target.closest('.footnote-ref')) {
+                notaTooltip.classList.remove('visible');
+            }
+        }
+    });
+</script>
+
+<!-- SCRIPT PARA FRENAR EL LINK EN TEXTO EN CELULARES -->
+<script>
+    document.addEventListener('click', function(e) {
+        // Verificamos si tocaste un link de Wikipedia
+        const wikiLink = e.target.closest('a[href*="wikipedia.org/wiki/"]');
+        
+        // Verificamos que el clic NO haya sido adentro de la burbuja misma
+        const tocasteAdentroDeBurbuja = e.target.closest('.wiki-tooltip');
+
+        // Si es un link del texto y estamos en celular (pantalla menor a 992px)
+        if (wikiLink && !tocasteAdentroDeBurbuja && window.innerWidth < 992) {
+            e.preventDefault(); // Frenamos la navegación
+            
+            // Al frenar el link, el celular procesa el toque como un "hover" 
+            // y la burbuja se va a abrir sola gracias al código original que ya tenés.
+        }
+    });
+</script>
 </body>
 </html>
