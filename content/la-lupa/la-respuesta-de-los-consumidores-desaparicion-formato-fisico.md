@@ -1,6 +1,6 @@
 ---
 tipo: articulo
-title: "**Piratería 2.0**. La respuesta de los consumidores a la inminente desaparición del formato físico"
+title: "**Piratería 2.0**. La respuesta de los consumidores a la eliminación del formato físico"
 description: "Semanas atrás, *Sony* anunció la **desaparición progresiva y definitva** del formato físico y *Blu-ray*. La competencia parece seguir sus pasos."
 date: 2026-07-11T12:51:00.000-03:00
 author: "Alejandro Silva"
