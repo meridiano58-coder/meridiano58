@@ -78,7 +78,7 @@
         
         {{ if .Params.epigrafe }}
         <em style="display: block; text-align: center; font-size: 0.9rem; color: var(--color-secundario);">
-            {{ .Params.epigrafe }}
+            {{ .Params.epigrafe | markdownify }}
         </em>
         {{ end }}
     </div>
@@ -87,7 +87,7 @@
     <!-- 2. BAJADA/COPETE (Usando el campo exclusivo del Panel Editorial) -->
     {{ if .Params.description }}
     <div class="bajada-copete" style="font-family: var(--fuente-principal); font-size: 1.35rem; color: #3a4a5a; line-height: 1.6; text-align: center; max-width: 800px; margin: 0 auto 2.5rem auto; font-style: italic; opacity: 0.95;">
-        {{ .Params.description }}
+        {{ .Params.description | markdownify }}
     </div>
     {{ else if and (ne .Type "page") .Summary }}
     <div class="bajada-copete" style="font-family: var(--fuente-principal); font-size: 1.35rem; color: #3a4a5a; line-height: 1.6; text-align: center; max-width: 800px; margin: 0 auto 2.5rem auto; font-style: italic; opacity: 0.95;">

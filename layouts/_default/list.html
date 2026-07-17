@@ -49,8 +49,8 @@
             
             <!-- ENLACE EN LA IMAGEN APLICADO AQUÍ -->
             <a href="{{ .Permalink }}" style="display: block;">
-                {{ if .Params.imagen }}
-                <img src="{{ .Params.imagen }}" alt="{{ .Title }}" class="foto-miniatura" loading="lazy" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                {{ if .Params.image }}
+                <img src="{{ .Params.image }}" alt="{{ .Title }}" class="foto-miniatura" loading="lazy" style="width: 100%; height: 180px; object-fit: cover; display: block;">
                 {{ else }}
                 <div class="foto-miniatura" style="width: 100%; height: 180px; background: #eee;"></div>
                 {{ end }}
