@@ -9,5 +9,5 @@ epigrafe: "*Foto de* <a href='https://unsplash.com/es/@chrjy?utm_source=unsplash
 mostrar_sponsor: true
 ---
 
-En un giro marcado por la **caída de ventas en el sector**, los usuarios han alzado su voz, **emitiendo duras críticas** hacia este inesperado comunicado del conglomerado japonés. En varios países, se están tomando **medidas legales para preservar el formato**, llegando el debate hasta el **Parlamento de la Unión Europea**.
+En un giro marcado por la **caída de ventas en el sector**, los usuarios han alzado su voz, **emitiendo duras críticas** hacia este inesperado comunicado del conglomerado japonés. En varios países, se están tomando **medidas legales para preservar el formato**, llegando el debate hasta el **Parlamento Europeo**.
 La complejidad de la situación, abre el espacio a nuevas formas de **emulación y piratería** como contraofensiva a la polémica decisión de las empresas.
