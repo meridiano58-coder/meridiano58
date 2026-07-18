@@ -66,6 +66,8 @@
         <button id="btn-copy" title="Copiar enlace">
             <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
         </button>
+        <button id="btn-texto-menos" aria-label="Achicar texto" title="Achicar texto" style="font-family: var(--fuente-titulos); font-weight: bold; font-size: 1rem;">A-</button>
+        <button id="btn-texto-mas" aria-label="Agrandar texto" title="Agrandar texto" style="font-family: var(--fuente-titulos); font-weight: bold; font-size: 1.1rem;">A+</button>
     </div>
 
 {{ end }}
@@ -292,6 +294,48 @@
         if (barra) {
             barra.style.width = scrolled + '%';
         }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnMas = document.getElementById('btn-texto-mas');
+        const btnMenos = document.getElementById('btn-texto-menos');
+        const contenido = document.querySelector('.post-content');
+        
+        // Si no encuentra los botones o el texto, frena acá para no dar error
+        if (!btnMas || !btnMenos || !contenido) return;
+
+        // Recupera el tamaño guardado por el usuario, o usa el 1.2rem de tu CSS por defecto
+        let tamanoActual = parseFloat(localStorage.getItem('m58-tamano-texto')) || 1.2;
+
+        const aplicarTamano = (tamano) => {
+            // Aplica el nuevo tamaño al contenedor del texto
+            contenido.style.fontSize = tamano + 'rem';
+            // Lo guarda en la memoria del navegador
+            localStorage.setItem('m58-tamano-texto', tamano);
+        };
+
+        // Si el lector ya había elegido un tamaño en otra nota, se lo aplicamos apenas entra
+        if (localStorage.getItem('m58-tamano-texto')) {
+            aplicarTamano(tamanoActual);
+        }
+
+        btnMas.addEventListener('click', () => {
+            // Le ponemos un límite de 1.8rem para que no rompa la lectura en celulares
+            if (tamanoActual < 1.8) { 
+                tamanoActual += 0.1;
+                aplicarTamano(tamanoActual);
+            }
+        });
+
+        btnMenos.addEventListener('click', () => {
+            // Le ponemos un límite mínimo de 0.9rem para que no quede microscópico
+            if (tamanoActual > 0.9) { 
+                tamanoActual -= 0.1;
+                aplicarTamano(tamanoActual);
+            }
+        });
     });
 </script>
 </article>
