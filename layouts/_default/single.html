@@ -297,51 +297,52 @@
     });
 </script>
 
+<!-- LA SOLUCIÓN DEFINITIVA: VARIABLES CSS -->
+<style>
+    /* Estas variables aplastan cualquier regla en línea o etiqueta fantasma de Hugo */
+    .post-content, .post-content * {
+        font-size: var(--tamano-texto-m58, 1.2rem) !important;
+    }
+    .bajada-copete, .bajada-copete * {
+        font-size: var(--tamano-bajada-m58, 1.35rem) !important;
+    }
+</style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const btnMas = document.getElementById('btn-texto-mas');
         const btnMenos = document.getElementById('btn-texto-menos');
-        const contenido = document.querySelector('.post-content');
-        const bajada = document.querySelector('.bajada'); // Agregamos el detector de la bajada
         
-        // Si no encuentra los botones o el texto principal, frena acá
-        if (!btnMas || !btnMenos || !contenido) return;
+        // Si no hay botones, frena acá
+        if (!btnMas || !btnMenos) return;
 
-        // Recupera el tamaño guardado, o usa el 1.2rem por defecto
+        // Lee la memoria del navegador o arranca en 1.2
         let tamanoActual = parseFloat(localStorage.getItem('m58-tamano-texto')) || 1.2;
+        const root = document.documentElement;
 
         const aplicarTamano = (tamano) => {
-            // Aplica al cuerpo de la nota
-            contenido.style.fontSize = tamano + 'rem';
+            // Inyecta las variables CSS directamente en la raíz de la web
+            root.style.setProperty('--tamano-texto-m58', tamano + 'rem');
+            root.style.setProperty('--tamano-bajada-m58', (tamano + 0.15).toFixed(2) + 'rem');
             
-            // Si existe la bajada, le suma 0.1rem extra para mantener la jerarquía de lectura
-            if (bajada) {
-                bajada.style.fontSize = (tamano + 0.1).toFixed(1) + 'rem';
-            }
-            
-            // Lo guarda en la memoria del navegador
+            // Guarda la preferencia
             localStorage.setItem('m58-tamano-texto', tamano);
         };
 
-        // Si el lector ya había elegido un tamaño, se lo aplicamos apenas entra
-        if (localStorage.getItem('m58-tamano-texto')) {
-            aplicarTamano(tamanoActual);
-        }
+        // Aplica el tamaño apenas carga la nota
+        aplicarTamano(tamanoActual);
 
         btnMas.addEventListener('click', () => {
             if (tamanoActual < 1.8) { 
                 tamanoActual += 0.1;
-                // El toFixed(1) evita el famoso error matemático de decimales de JavaScript
-                tamanoActual = parseFloat(tamanoActual.toFixed(1)); 
-                aplicarTamano(tamanoActual);
+                aplicarTamano(parseFloat(tamanoActual.toFixed(1)));
             }
         });
 
         btnMenos.addEventListener('click', () => {
             if (tamanoActual > 0.9) { 
                 tamanoActual -= 0.1;
-                tamanoActual = parseFloat(tamanoActual.toFixed(1));
-                aplicarTamano(tamanoActual);
+                aplicarTamano(parseFloat(tamanoActual.toFixed(1)));
             }
         });
     });
