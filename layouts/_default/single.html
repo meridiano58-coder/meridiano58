@@ -346,5 +346,73 @@
         });
     });
 </script>
+
+<!-- TOAST DE MEMORIA DE LECTURA -->
+<div id="toast-memoria" style="position: fixed; bottom: 25px; left: 50%; transform: translate(-50%, 100px); opacity: 0; visibility: hidden; background-color: var(--color-primario); color: var(--color-blanco); padding: 0.7rem 1.2rem; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 1rem; z-index: 1001; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--fuente-principal); font-size: 0.9rem; width: max-content; max-width: 90vw;">
+    <span style="line-height: 1.2;">¿Retomar lectura donde la dejaste?</span>
+    <div style="display: flex; gap: 0.4rem;">
+        <button id="btn-retomar-si" style="background-color: var(--color-blanco); color: var(--color-primario); border: none; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 0.85rem; font-family: var(--fuente-titulos);">Sí, ir</button>
+        <button id="btn-retomar-no" style="background: transparent; border: 1px solid rgba(255,255,255,0.4); color: var(--color-blanco); padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.85rem;">X</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toastMemoria = document.getElementById('toast-memoria');
+        const btnSi = document.getElementById('btn-retomar-si');
+        const btnNo = document.getElementById('btn-retomar-no');
+        
+        // Creamos una clave única para cada nota usando su URL
+        const claveAlmacenamiento = 'm58-scroll-' + window.location.pathname;
+        const scrollGuardado = localStorage.getItem(claveAlmacenamiento);
+
+        // 1. COMPROBACIÓN INICIAL: ¿Tenía guardado un scroll significativo?
+        // Solo molestamos al usuario si había scrolleado más de 600px (pasando la foto y la bajada)
+        if (scrollGuardado && parseInt(scrollGuardado) > 600) {
+            // Le damos 1 segundo de respiro antes de mostrar el cartel, para que no salte apenas carga
+            setTimeout(() => {
+                toastMemoria.style.transform = 'translate(-50%, 0)';
+                toastMemoria.style.opacity = '1';
+                toastMemoria.style.visibility = 'visible';
+            }, 1000);
+        }
+
+        // 2. ACCIÓN: El usuario elige retomar
+        btnSi.addEventListener('click', () => {
+            window.scrollTo({
+                top: parseInt(scrollGuardado),
+                behavior: 'smooth' // Hace un barrido fluido espectacular hacia abajo
+            });
+            // Ocultamos el toast
+            toastMemoria.style.transform = 'translate(-50%, 100px)';
+            toastMemoria.style.opacity = '0';
+        });
+
+        // 3. ACCIÓN: El usuario lo ignora/cierra
+        btnNo.addEventListener('click', () => {
+            toastMemoria.style.transform = 'translate(-50%, 100px)';
+            toastMemoria.style.opacity = '0';
+            // Borramos el dato para que no lo vuelva a molestar en esta nota
+            localStorage.removeItem(claveAlmacenamiento);
+        });
+
+        // 4. EL ESPÍA: Guarda la posición actual de manera eficiente
+        let temporizadorScroll;
+        window.addEventListener('scroll', function() {
+            // Evitamos que colapse el procesador guardando datos por cada milímetro que baja.
+            // Espera a que el usuario deje de mover el dedo/mouse por un cuarto de segundo (250ms).
+            window.clearTimeout(temporizadorScroll);
+            temporizadorScroll = setTimeout(function() {
+                localStorage.setItem(claveAlmacenamiento, window.scrollY);
+                
+                // Si el usuario empieza a hacer scroll por su cuenta, ocultamos el cartel
+                if(toastMemoria.style.opacity === '1') {
+                    toastMemoria.style.transform = 'translate(-50%, 100px)';
+                    toastMemoria.style.opacity = '0';
+                }
+            }, 250);
+        });
+    });
+</script>
 </article>
 {{ end }}
