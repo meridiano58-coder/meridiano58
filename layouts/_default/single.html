@@ -118,7 +118,7 @@
     {{ $autorPage := .Site.GetPage (printf "/autores/%s" ($nombreAutor | urlize)) }}
     
     {{ if $autorPage }}
-    <div style="margin-top: 3rem; margin-bottom: 1rem; padding: 2rem; background-color: var(--color-blanco); border: 1px solid var(--color-bordes); border-radius: 8px; display: flex; align-items: center; gap: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02); flex-wrap: wrap;">
+    <div class="no-print" style="margin-top: 3rem; margin-bottom: 1rem; padding: 2rem; background-color: var(--color-blanco); border: 1px solid var(--color-bordes); border-radius: 8px; display: flex; align-items: center; gap: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02); flex-wrap: wrap;">
         
         <!-- Foto del autor -->
         {{ $fotoAutor := or $autorPage.Params.image $autorPage.Params.imagen }}
@@ -127,7 +127,7 @@
         {{ end }}
         
         <!-- Info del autor -->
-        <div style="flex: 1; min-width: 250px;">
+        <div class="no-print" style="flex: 1; min-width: 250px;">
             <p style="font-family: var(--fuente-principal); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-secundario); margin: 0 0 0.3rem 0; font-weight: bold;">
                 Escrito por
             </p>
@@ -142,7 +142,7 @@
 {{ end }}
             
             <!-- Redes sociales del autor -->
-            <div style="display: flex; gap: 1rem;">
+            <div class="no-print" style="display: flex; gap: 1rem;">
                 {{ if $autorPage.Params.twitter }}
                 <a href="{{ $autorPage.Params.twitter }}" target="_blank" rel="noopener noreferrer" style="color: var(--color-secundario); transition: color 0.2s ease;" onmouseover="this.style.color='var(--color-primario)'" onmouseout="this.style.color='var(--color-secundario)'" title="X (Twitter)">
                     <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>
@@ -168,7 +168,7 @@
 
 <!-- CAJA DE TEMÁTICAS (ETIQUETAS CORREGIDAS) -->
     {{ with .Params.tematicas }}
-    <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-bordes); display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
+    <div class="no-print" style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-bordes); display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
         <span style="font-family: var(--fuente-titulos); font-style: italic; color: var(--color-secundario); margin-right: 0.5rem; font-size: 1.1rem;">Temáticas:</span>
         
         {{ range . }}
@@ -181,7 +181,7 @@
     {{ end }}
 
     {{ if ne .Type "page" }}
-    <div style="margin-top: 4rem; padding: 2.5rem 2rem; background-color: var(--color-fondo); border-top: 3px solid var(--color-secundario); border-bottom: 1px solid var(--color-bordes); border-left: 1px solid var(--color-bordes); border-right: 1px solid var(--color-bordes); border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+    <div class="no-print" style="margin-top: 4rem; padding: 2.5rem 2rem; background-color: var(--color-fondo); border-top: 3px solid var(--color-secundario); border-bottom: 1px solid var(--color-bordes); border-left: 1px solid var(--color-bordes); border-right: 1px solid var(--color-bordes); border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
         
         <h3 style="font-family: var(--fuente-titulos); color: var(--color-primario); margin-bottom: 0.8rem; font-size: 1.6rem;">¿Apoyás nuestra visión?</h3>
         
@@ -208,7 +208,7 @@
 <!-- LECTURAS RECOMENDADAS -->
 {{ $related := .Site.RegularPages.Related . | first 3 }}
 {{ with $related }}
-<div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--color-bordes);">
+<div class="no-print" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--color-bordes);">
     <h3 style="font-family: var(--fuente-titulos); font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--color-texto);">
         Análisis recomendados
     </h3>
