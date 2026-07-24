@@ -302,37 +302,45 @@
         const btnMas = document.getElementById('btn-texto-mas');
         const btnMenos = document.getElementById('btn-texto-menos');
         const contenido = document.querySelector('.post-content');
+        const bajada = document.querySelector('.bajada'); // Agregamos el detector de la bajada
         
-        // Si no encuentra los botones o el texto, frena acá para no dar error
+        // Si no encuentra los botones o el texto principal, frena acá
         if (!btnMas || !btnMenos || !contenido) return;
 
-        // Recupera el tamaño guardado por el usuario, o usa el 1.2rem de tu CSS por defecto
+        // Recupera el tamaño guardado, o usa el 1.2rem por defecto
         let tamanoActual = parseFloat(localStorage.getItem('m58-tamano-texto')) || 1.2;
 
         const aplicarTamano = (tamano) => {
-            // Aplica el nuevo tamaño al contenedor del texto
+            // Aplica al cuerpo de la nota
             contenido.style.fontSize = tamano + 'rem';
+            
+            // Si existe la bajada, le suma 0.1rem extra para mantener la jerarquía de lectura
+            if (bajada) {
+                bajada.style.fontSize = (tamano + 0.1).toFixed(1) + 'rem';
+            }
+            
             // Lo guarda en la memoria del navegador
             localStorage.setItem('m58-tamano-texto', tamano);
         };
 
-        // Si el lector ya había elegido un tamaño en otra nota, se lo aplicamos apenas entra
+        // Si el lector ya había elegido un tamaño, se lo aplicamos apenas entra
         if (localStorage.getItem('m58-tamano-texto')) {
             aplicarTamano(tamanoActual);
         }
 
         btnMas.addEventListener('click', () => {
-            // Le ponemos un límite de 1.8rem para que no rompa la lectura en celulares
             if (tamanoActual < 1.8) { 
                 tamanoActual += 0.1;
+                // El toFixed(1) evita el famoso error matemático de decimales de JavaScript
+                tamanoActual = parseFloat(tamanoActual.toFixed(1)); 
                 aplicarTamano(tamanoActual);
             }
         });
 
         btnMenos.addEventListener('click', () => {
-            // Le ponemos un límite mínimo de 0.9rem para que no quede microscópico
             if (tamanoActual > 0.9) { 
                 tamanoActual -= 0.1;
+                tamanoActual = parseFloat(tamanoActual.toFixed(1));
                 aplicarTamano(tamanoActual);
             }
         });
