@@ -942,7 +942,7 @@ a:hover {
     }
 
     /* Ocultar toda la interfaz web y mapas interactivos */
-    header, nav, footer, .toolbar-nota, #toast-suscripcion, #btn-volver-arriba, .no-print, button, svg, iframe {
+    header, nav, footer, .toolbar-nota, #toast-suscripcion, #btn-volver-arriba, .no-print, button, svg, .leaflet-container, .leaflet-control-container, [id^="map"], iframe {
         display: none !important;
     }
 
