@@ -952,7 +952,20 @@ a:hover {
         max-height: 400px !important; 
         object-fit: contain;
         display: block;
-        margin: 1cm auto !important;
+        /* Le sacamos el margen de abajo para que la foto quede bien pegada a su epígrafe */
+        margin: 1cm auto 0.2cm auto !important; 
+        
+        /* LA MAGIA: Le prohíbe al navegador cortar la página justo después de una foto */
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+
+    /* Refuerzo: le decimos al texto que está debajo de la foto que no se separe */
+    img + p, 
+    img + em, 
+    figure figcaption {
+        page-break-before: avoid !important;
+        break-before: avoid !important;
     }
 
     /* 8. Proteger la caja de DatosHoy */
