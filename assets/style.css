@@ -891,41 +891,51 @@ a:hover {
 }
 
 @media print {
-    /* 1. Ocultamos toda la interfaz interactiva y de navegación */
-    header, nav, footer, .toolbar-nota, #barra-progreso, #toast-memoria, .no-print {
+    /* 1. Limpiamos la basura del navegador (fecha, URL, número de página) */
+    @page {
+        margin: 2cm;
+        size: A4 portrait;
+    }
+
+    /* 2. Ocultamos toda la interfaz, banners, iframes y mapas interactivos */
+    header, nav, footer, .toolbar-nota, #barra-progreso, #toast-memoria, .no-print, iframe, .leaflet-container {
         display: none !important;
     }
 
-    /* 2. Forzamos fondo blanco y texto negro absoluto para ahorrar tinta */
+    /* 3. Forzamos fondo blanco y texto negro absoluto */
     body, article, .post-content, .bajada-copete {
         background: white !important;
         color: black !important;
     }
 
-    /* 3. Usamos 'pt' (puntos tipográficos) en vez de 'rem', es la medida real de impresión */
+    /* 4. Achicamos a tamaño estándar de libro (11pt) para no gastar tantas hojas */
     .post-content {
-        font-size: 12pt !important;
+        font-size: 11pt !important;
         line-height: 1.5 !important;
     }
     .bajada-copete {
-        font-size: 14pt !important;
+        font-size: 13pt !important;
         color: #333 !important;
+        margin-bottom: 1.5cm !important;
     }
 
-    /* 4. Evitamos cortes bruscos: que una foto o título no quede partido en dos páginas */
+    /* 5. Control de cortes e imágenes (evita fotos gigantes) */
     img, figure {
         page-break-inside: avoid;
         max-width: 100% !important;
+        max-height: 400px !important; 
+        object-fit: contain;
     }
     h1, h2, h3 {
         page-break-after: avoid;
+        page-break-inside: avoid;
     }
     p, blockquote {
         page-break-inside: avoid;
     }
 
-    /* 5. El toque de "Paper": Expone las URLs de los enlaces al lado del texto para que sirvan en papel */
-    .post-content a::after {
+    /* 6. URLs expuestas SOLO dentro de los párrafos de texto (evita ensuciar créditos de fotos) */
+    .post-content p a::after {
         content: " (" attr(href) ")";
         font-size: 0.85em;
         color: #555;
