@@ -891,35 +891,39 @@ a:hover {
 }
 
 @media print {
-    /* 1. Limpiamos la basura del navegador (fecha, URL, número de página) */
+    /* 1. Matamos la basura del navegador (URL, fecha, paginación) */
     @page {
-        margin: 2cm;
-        size: A4 portrait;
+        margin: 0 !important; /* Al poner el margen en 0, el navegador no tiene dónde imprimir su URL y fecha */
+    }
+    body {
+        padding: 2cm !important; /* Le devolvemos el margen físico al papel para que el texto no toque el borde */
     }
 
-    /* 2. Ocultamos toda la interfaz, banners, iframes y mapas interactivos */
-    header, nav, footer, .toolbar-nota, #barra-progreso, #toast-memoria, .no-print, iframe, .leaflet-container {
+    /* 2. Ocultamos la interfaz y flechitas sueltas (botones, svgs) */
+    header, nav, footer, .toolbar-nota, #barra-progreso, #toast-memoria, .no-print, iframe, .leaflet-container, button, svg {
         display: none !important;
     }
 
-    /* 3. Forzamos fondo blanco y texto negro absoluto */
+    /* 3. Forzamos fondo blanco y texto negro */
     body, article, .post-content, .bajada-copete {
         background: white !important;
         color: black !important;
     }
 
-    /* 4. Achicamos a tamaño estándar de libro (11pt) para no gastar tantas hojas */
-    .post-content {
+    /* 4. El arreglo de la tipografía: le ganamos a la regla de accesibilidad usando el asterisco (*) */
+    .post-content, .post-content * {
         font-size: 11pt !important;
-        line-height: 1.5 !important;
+        line-height: 1.4 !important;
     }
-    .bajada-copete {
+    .bajada-copete, .bajada-copete * {
         font-size: 13pt !important;
         color: #333 !important;
+    }
+    .bajada-copete {
         margin-bottom: 1.5cm !important;
     }
 
-    /* 5. Control de cortes e imágenes (evita fotos gigantes) */
+    /* 5. Control de cortes de página */
     img, figure {
         page-break-inside: avoid;
         max-width: 100% !important;
@@ -930,28 +934,28 @@ a:hover {
         page-break-after: avoid;
         page-break-inside: avoid;
     }
-    p, blockquote {
+    p, blockquote, .banner-sponsor {
         page-break-inside: avoid;
     }
 
-    /* 6. URLs expuestas SOLO dentro de los párrafos de texto (evita ensuciar créditos de fotos) */
-    .post-content p a::after {
-        content: " (" attr(href) ")";
-        font-size: 0.85em;
-        color: #555;
-        word-wrap: break-word;
-    }
-
-/* 7. Diseño del Sponsor para impresión */
+    /* 6. Diseño del Sponsor para impresión */
     .banner-sponsor {
         background-color: #f8f9fa !important;
         border: 1px solid #ddd !important;
         border-left: 4px solid #d32f2f !important;
         color: #000 !important;
-        page-break-inside: avoid; /* Evita que el banner quede partido en dos hojas */
+        margin: 1cm 0 !important;
     }
-    
-    .banner-sponsor p, .banner-sponsor a {
+    .banner-sponsor p, .banner-sponsor a, .banner-sponsor strong {
         color: #000 !important;
+        font-size: 10pt !important;
+    }
+
+    /* 7. URLs expuestas SOLO dentro de los párrafos de texto */
+    .post-content p a::after {
+        content: " (" attr(href) ")";
+        font-size: 0.85em;
+        color: #555;
+        word-wrap: break-word;
     }
 }
