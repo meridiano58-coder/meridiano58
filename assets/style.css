@@ -891,49 +891,54 @@ a:hover {
 }
 
 @media print {
-    /* 1. Matamos la basura del navegador (URL, fecha) y configuramos la hoja real */
-    @page {
-        margin: 1.5cm !important; /* Forza el margen en iOS/Android y elimina el texto automático */
-        size: auto;
-    }
-
-    /* 2. CURA PARA EL IPHONE: Forzamos ancho total y matamos márgenes virtuales */
-    html, body, main, article, .post-content, .bajada-copete {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        min-height: auto !important;
+    /* 1. LA CURA PARA EL IPHONE: Engañarlo con tamaño de monitor */
+    html, body {
+        width: 1024px !important;
+        min-width: 1024px !important;
         margin: 0 !important;
         padding: 0 !important;
-        box-sizing: border-box !important;
-        float: none !important;
+        background: white !important; /* Fuerza fondo blanco de raíz */
     }
 
-    /* 3. CURA PARA EL MODO OSCURO: Blanqueo total y forzado de texto negro para todo */
-    html, body, * {
-        background: transparent !important; /* Destruye cualquier fondo de [data-theme="dark"] */
-        color: black !important; /* Fuerza todo el texto a negro puro */
+    /* 2. MATAR EL ENCABEZADO Y PIE DE PÁGINA DE IOS */
+    @page {
+        margin: 0 !important; /* Al estar en 0 estricto, Safari no tiene dónde escribir la URL */
+    }
+
+    /* 3. CREAR EL MARGEN FÍSICO POR DENTRO DEL TEXTO */
+    main, article, .post-content, .bajada-copete {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 2cm !important; /* Como matamos el margen de la hoja, se lo damos al contenedor */
+        box-sizing: border-box !important;
+    }
+
+    /* 4. Destruir el Modo Oscuro y forzar negro puro */
+    * {
+        background-color: transparent !important;
+        color: black !important;
         text-shadow: none !important;
     }
 
-    /* 4. Ocultamos la interfaz */
-    header, nav, footer, .toolbar-nota, #barra-progreso, #toast-memoria, .no-print, iframe, .leaflet-container, button, svg, #toast-suscripcion, #btn-volver-arriba {
+    /* 5. Ocultar toda la interfaz web */
+    header, nav, footer, .toolbar-nota, #toast-suscripcion, #btn-volver-arriba, .no-print, button, svg {
         display: none !important;
     }
 
-    /* 5. Tipografía de estudio */
+    /* 6. Tipografía ajustada (Un pelín más grande para compensar la reducción del iPhone) */
     .post-content, .post-content * {
-        font-size: 11pt !important;
-        line-height: 1.4 !important;
+        font-size: 13pt !important; 
+        line-height: 1.5 !important;
     }
     .bajada-copete, .bajada-copete * {
-        font-size: 13pt !important;
+        font-size: 15pt !important;
     }
     .bajada-copete {
-        margin-bottom: 1.5cm !important;
+        margin-bottom: 1cm !important;
     }
 
-    /* 6. Control de cortes de página (evita que títulos o recuadros se partan a la mitad) */
+    /* 7. Proteger fotos y recuadros para que no se corten por la mitad */
     img, figure, blockquote, .banner-sponsor, .errata-box, .update-box {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
@@ -950,19 +955,18 @@ a:hover {
         margin: 1cm auto !important;
     }
 
-    /* 7. Diseño del Sponsor blindado (le devolvemos sus colores específicos) */
+    /* 8. Proteger la caja de DatosHoy */
     div.banner-sponsor {
-        background-color: #f8f9fa !important; /* Fondo gris clarito */
+        background-color: #f8f9fa !important;
         border: 1px solid #ddd !important;
-        border-left: 4px solid #d32f2f !important; /* Raya roja */
+        border-left: 4px solid #d32f2f !important;
         margin: 1cm 0 !important;
         padding: 1rem !important;
-        /* Estas dos líneas fuerzan a los celulares a imprimir el color de fondo gris */
         -webkit-print-color-adjust: exact !important; 
         print-color-adjust: exact !important;
     }
 
-    /* 8. URLs expuestas SOLO dentro de los párrafos de texto */
+    /* 9. Mostrar a dónde llevan los links en papel */
     .post-content p a::after {
         content: " (" attr(href) ")";
         font-size: 0.85em;
