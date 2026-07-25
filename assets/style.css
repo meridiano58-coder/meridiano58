@@ -900,6 +900,26 @@ a:hover {
         background: white !important; /* Fuerza fondo blanco de raíz */
     }
 
+    /* --- LIMPIEZA DE ELEMENTOS DUPLICADOS EN IMPRESIÓN --- */
+    
+    /* 1. Oculta cualquier contenedor que tenga clases de visibilidad responsive */
+    .hidden, .hidden-sm, .hidden-md, .hidden-lg, .mobile-only, .desktop-only, [aria-hidden="true"] {
+        display: none !important;
+    }
+
+    /* 2. Si tenés etiquetas <picture>, forzamos a que imprima solo la imagen interna */
+    picture {
+        display: block !important;
+    }
+    picture source {
+        display: none !important;
+    }
+
+    /* 3. Evita que el contenedor de la nota se duplique si tiene clases extra */
+    .post-content > div:not(.post-content) {
+        display: block !important; /* Asegura que el contenido sea plano */
+    }
+
     /* 2. MATAR EL ENCABEZADO Y PIE DE PÁGINA DE IOS */
     @page {
         margin: 0; /* Al estar en 0 estricto, Safari no tiene dónde escribir la URL */
@@ -922,7 +942,12 @@ a:hover {
     }
 
     /* Ocultar toda la interfaz web y mapas interactivos */
-    header, nav, footer, .toolbar-nota, #toast-suscripcion, #btn-volver-arriba, .no-print, button, svg, .leaflet-container, .leaflet-control-container, [id^="map"], iframe {
+    header, nav, footer, .toolbar-nota, #toast-suscripcion, #btn-volver-arriba, .no-print, button, svg, iframe {
+        display: none !important;
+    }
+
+    /* Matar mapas interactivos en papel */
+    .leaflet-container, .leaflet-control-container, #map, .map-container {
         display: none !important;
     }
 
