@@ -959,3 +959,40 @@ a:hover {
         word-wrap: break-word;
     }
 }
+
+/* Estilos para el botón circular de Modo Apunte */
+.btn-apunte-circular {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px; /* Mantiene la proporción redonda */
+    height: 42px; /* Mantiene la proporción redonda */
+    background: transparent;
+    color: var(--color-texto);
+    border: 1px solid var(--color-bordes);
+    border-radius: 50%; /* Hace que sea un círculo perfecto */
+    cursor: pointer;
+    padding: 0; /* Fundamental sacar el padding para que el ícono no se desborde */
+    transition: all 0.2s ease;
+}
+
+.btn-apunte-circular:hover {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border-color: var(--color-primario);
+    transform: translateY(-2px); /* Pequeño saltito al pasar el mouse */
+}
+
+.btn-apunte svg {
+    transition: stroke 0.2s ease;
+}
+
+/* En celulares achicamos el botón para que entre bien en la barra */
+@media (max-width: 768px) {
+    .btn-apunte .texto-btn-apunte {
+        display: none; /* Oculta la palabra "Apunte" y deja solo el ícono */
+    }
+    .btn-apunte {
+        padding: 0.5rem;
+    }
+}
