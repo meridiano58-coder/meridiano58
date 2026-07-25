@@ -891,71 +891,82 @@ a:hover {
 }
 
 @media print {
-    /* 1. Matamos la basura del navegador (URL, fecha, paginación) */
+    /* 1. Matamos la basura del navegador (URL, fecha) y configuramos la hoja real */
     @page {
-        margin: 0 !important; /* Al poner el margen en 0, el navegador no tiene dónde imprimir su URL y fecha */
-    }
-    body {
-        padding: 2cm !important; /* Le devolvemos el margen físico al papel para que el texto no toque el borde */
+        margin: 1.5cm !important; /* Forza el margen en iOS/Android y elimina el texto automático */
+        size: auto;
     }
 
-    /* 2. Ocultamos la interfaz y flechitas sueltas (botones, svgs) */
-    header, nav, footer, .toolbar-nota, #barra-progreso, #toast-memoria, .no-print, iframe, .leaflet-container, button, svg {
+    /* 2. CURA PARA EL IPHONE: Forzamos ancho total y matamos márgenes virtuales */
+    html, body, main, article, .post-content, .bajada-copete {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        float: none !important;
+    }
+
+    /* 3. CURA PARA EL MODO OSCURO: Blanqueo total y forzado de texto negro para todo */
+    html, body, * {
+        background: transparent !important; /* Destruye cualquier fondo de [data-theme="dark"] */
+        color: black !important; /* Fuerza todo el texto a negro puro */
+        text-shadow: none !important;
+    }
+
+    /* 4. Ocultamos la interfaz */
+    header, nav, footer, .toolbar-nota, #barra-progreso, #toast-memoria, .no-print, iframe, .leaflet-container, button, svg, #toast-suscripcion, #btn-volver-arriba {
         display: none !important;
     }
 
-    /* 3. Forzamos fondo blanco y texto negro */
-    body, article, .post-content, .bajada-copete {
-        background: white !important;
-        color: black !important;
-    }
-
-    /* 4. El arreglo de la tipografía: le ganamos a la regla de accesibilidad usando el asterisco (*) */
+    /* 5. Tipografía de estudio */
     .post-content, .post-content * {
         font-size: 11pt !important;
         line-height: 1.4 !important;
     }
     .bajada-copete, .bajada-copete * {
         font-size: 13pt !important;
-        color: #333 !important;
     }
     .bajada-copete {
         margin-bottom: 1.5cm !important;
     }
 
-    /* 5. Control de cortes de página */
-    img, figure {
-        page-break-inside: avoid;
+    /* 6. Control de cortes de página (evita que títulos o recuadros se partan a la mitad) */
+    img, figure, blockquote, .banner-sponsor, .errata-box, .update-box {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    h1, h2, h3 {
+        page-break-after: avoid !important;
+        page-break-inside: avoid !important;
+    }
+    img {
         max-width: 100% !important;
         max-height: 400px !important; 
         object-fit: contain;
-    }
-    h1, h2, h3 {
-        page-break-after: avoid;
-        page-break-inside: avoid;
-    }
-    p, blockquote, .banner-sponsor {
-        page-break-inside: avoid;
+        display: block;
+        margin: 1cm auto !important;
     }
 
-    /* 6. Diseño del Sponsor para impresión */
-    .banner-sponsor {
-        background-color: #f8f9fa !important;
+    /* 7. Diseño del Sponsor blindado (le devolvemos sus colores específicos) */
+    div.banner-sponsor {
+        background-color: #f8f9fa !important; /* Fondo gris clarito */
         border: 1px solid #ddd !important;
-        border-left: 4px solid #d32f2f !important;
-        color: #000 !important;
+        border-left: 4px solid #d32f2f !important; /* Raya roja */
         margin: 1cm 0 !important;
-    }
-    .banner-sponsor p, .banner-sponsor a, .banner-sponsor strong {
-        color: #000 !important;
-        font-size: 10pt !important;
+        padding: 1rem !important;
+        /* Estas dos líneas fuerzan a los celulares a imprimir el color de fondo gris */
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important;
     }
 
-    /* 7. URLs expuestas SOLO dentro de los párrafos de texto */
+    /* 8. URLs expuestas SOLO dentro de los párrafos de texto */
     .post-content p a::after {
         content: " (" attr(href) ")";
         font-size: 0.85em;
-        color: #555;
+        color: #555 !important;
         word-wrap: break-word;
     }
 }
