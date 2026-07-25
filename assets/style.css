@@ -902,7 +902,7 @@ a:hover {
 
     /* 2. MATAR EL ENCABEZADO Y PIE DE PÁGINA DE IOS */
     @page {
-        margin: 0 !important; /* Al estar en 0 estricto, Safari no tiene dónde escribir la URL */
+        margin: 0; /* Al estar en 0 estricto, Safari no tiene dónde escribir la URL */
     }
 
     /* 3. CREAR EL MARGEN FÍSICO POR DENTRO DEL TEXTO */
@@ -921,8 +921,8 @@ a:hover {
         text-shadow: none !important;
     }
 
-    /* 5. Ocultar toda la interfaz web */
-    header, nav, footer, .toolbar-nota, #toast-suscripcion, #btn-volver-arriba, .no-print, button, svg {
+    /* Ocultar toda la interfaz web y mapas interactivos */
+    header, nav, footer, .toolbar-nota, #toast-suscripcion, #btn-volver-arriba, .no-print, button, svg, .leaflet-container, .leaflet-control-container, [id^="map"], iframe {
         display: none !important;
     }
 

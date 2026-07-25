@@ -905,5 +905,23 @@
         });
     });
 </script>
+
+<script>
+    // Obliga a iOS Safari a descargar todas las imágenes justo antes de imprimir
+    window.addEventListener('beforeprint', function() {
+        const imagenes = document.querySelectorAll('img');
+        imagenes.forEach(img => {
+            // Si la imagen está en modo perezoso, la forzamos a cargar
+            if (img.getAttribute('loading') === 'lazy' || !img.complete) {
+                img.setAttribute('loading', 'eager');
+                
+                // Hack extra para iOS: forzar un redibujado de la imagen
+                const srcActual = img.src;
+                img.src = '';
+                img.src = srcActual;
+            }
+        });
+    });
+</script>
 </body>
 </html>
