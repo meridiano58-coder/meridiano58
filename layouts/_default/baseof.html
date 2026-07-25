@@ -51,14 +51,29 @@
 {
   "@context": "https://schema.org",
   "@type": "{{ if eq .Section "archivo-58" }}PodcastEpisode{{ else }}NewsArticle{{ end }}",
-  "headline": "{{ .Title }}",
-  "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+  "headline": "{{ .Title | markdownify | plainify }}",
+  "image": [
+    "{{ if or .Params.image .Params.imagen }}{{ or .Params.image .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}"
+  ],
   "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ if .Lastmod }}{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}{{ else }}{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}{{ end }}",
   "author": {
+    "@type": "Person",
+    "name": "{{ if .Params.author }}{{ .Params.author }}{{ else }}Lorenzo Castelli{{ end }}"
+  },
+  "publisher": {
     "@type": "Organization",
     "name": "Meridiano 58",
-    "url": "{{ .Site.BaseURL }}"
-  }
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ "/icono-app.png" | absURL }}"
+    }
+  },
+  "description": "{{ with .Description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}"
 }
 </script>
 {{ end }}

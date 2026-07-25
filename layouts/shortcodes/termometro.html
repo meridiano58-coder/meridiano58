@@ -1,0 +1,147 @@
+<div class="termometro-contenedor no-print" id="termometro-{{ .Get "id" }}">
+    <h4 class="termometro-titulo">{{ .Get "pregunta" | default "¿Qué opinás de este análisis?" }}</h4>
+    
+    <!-- Botones de votación con SVG minimalistas -->
+    <div class="termometro-opciones" id="opciones-{{ .Get "id" }}">
+        <button class="btn-voto positivo" data-voto="positivo" data-id="{{ .Get "id" }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+            A favor
+        </button>
+        <button class="btn-voto neutro" data-voto="neutro" data-id="{{ .Get "id" }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Neutro
+        </button>
+        <button class="btn-voto negativo" data-voto="negativo" data-id="{{ .Get "id" }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            En contra
+        </button>
+    </div>
+
+    <!-- Resultados -->
+    <div class="termometro-resultados" id="resultados-{{ .Get "id" }}" style="display: none;">
+        <p class="gracias-texto">Gracias por aportar al debate. Así opina la audiencia:</p>
+        
+        <div class="barra-resultado">
+            <span class="etiqueta-barra">A favor</span>
+            <div class="barra-fondo"><div class="barra-relleno bg-positivo" id="fill-pos-{{ .Get "id" }}"></div></div>
+            <span class="porcentaje-barra" id="pct-pos-{{ .Get "id" }}">0%</span>
+        </div>
+        
+        <div class="barra-resultado">
+            <span class="etiqueta-barra">Neutro</span>
+            <div class="barra-fondo"><div class="barra-relleno bg-neutro" id="fill-neu-{{ .Get "id" }}"></div></div>
+            <span class="porcentaje-barra" id="pct-neu-{{ .Get "id" }}">0%</span>
+        </div>
+        
+        <div class="barra-resultado">
+            <span class="etiqueta-barra">En contra</span>
+            <div class="barra-fondo"><div class="barra-relleno bg-negativo" id="fill-neg-{{ .Get "id" }}"></div></div>
+            <span class="porcentaje-barra" id="pct-neg-{{ .Get "id" }}">0%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .termometro-contenedor {
+        background-color: var(--color-fondo, #1a1a1a);
+        border: 1px solid var(--color-bordes, #333);
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin: 2.5rem 0;
+        text-align: center;
+    }
+    .termometro-titulo {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        color: var(--color-texto, #f5f5f5);
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+    .termometro-opciones {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .btn-voto {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        border: 1px solid var(--color-bordes, #555);
+        color: var(--color-texto, #f5f5f5);
+        padding: 0.5rem 1.2rem;
+        border-radius: 4px; /* Bordes más rectos, menos redondos para más formalidad */
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+    }
+    /* Estilo estricto para los íconos SVG */
+    .btn-voto svg {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.2s ease;
+    }
+    .btn-voto:hover {
+        background-color: var(--color-bordes, #333);
+    }
+    .btn-voto.positivo:hover svg { stroke: #4caf50; transform: translateY(-2px); }
+    .btn-voto.neutro:hover svg { stroke: #ff9800; }
+    .btn-voto.negativo:hover svg { stroke: #f44336; transform: translateY(2px); }
+    
+    .termometro-resultados { text-align: left; margin-top: 1rem; }
+    .gracias-texto { text-align: center; font-size: 0.85rem; color: #888; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .barra-resultado { display: flex; align-items: center; margin-bottom: 0.8rem; gap: 10px; }
+    .etiqueta-barra { width: 75px; font-size: 0.85rem; color: var(--color-texto, #f5f5f5); font-weight: 500; }
+    .barra-fondo { flex-grow: 1; background-color: var(--color-bordes, #333); height: 8px; border-radius: 4px; overflow: hidden; }
+    .barra-relleno { height: 100%; width: 0%; transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .bg-positivo { background-color: #4caf50; }
+    .bg-neutro { background-color: #ff9800; }
+    .bg-negativo { background-color: #f44336; }
+    .porcentaje-barra { width: 45px; text-align: right; font-size: 0.85rem; font-weight: 600; color: var(--color-texto, #f5f5f5); }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const idNota = "{{ .Get "id" }}";
+        const opcionesDiv = document.getElementById('opciones-' + idNota);
+        const resultadosDiv = document.getElementById('resultados-' + idNota);
+        const votoGuardado = localStorage.getItem('m58_voto_' + idNota);
+
+        const mostrarResultados = (votoUsuario) => {
+            opcionesDiv.style.display = 'none';
+            resultadosDiv.style.display = 'block';
+
+            let pPos = 25, pNeu = 35, pNeg = 40; 
+            
+            if (votoUsuario === 'positivo') { pPos += 30; pNeu -= 15; pNeg -= 15; }
+            if (votoUsuario === 'neutro') { pNeu += 30; pPos -= 15; pNeg -= 15; }
+            if (votoUsuario === 'negativo') { pNeg += 30; pPos -= 15; pNeu -= 15; }
+
+            setTimeout(() => {
+                document.getElementById('fill-pos-' + idNota).style.width = pPos + '%';
+                document.getElementById('pct-pos-' + idNota).innerText = pPos + '%';
+                
+                document.getElementById('fill-neu-' + idNota).style.width = pNeu + '%';
+                document.getElementById('pct-neu-' + idNota).innerText = pNeu + '%';
+                
+                document.getElementById('fill-neg-' + idNota).style.width = pNeg + '%';
+                document.getElementById('pct-neg-' + idNota).innerText = pNeg + '%';
+            }, 50);
+        };
+
+        if (votoGuardado) {
+            mostrarResultados(votoGuardado);
+        } else {
+            const botones = document.querySelectorAll('#opciones-' + idNota + ' .btn-voto');
+            botones.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const voto = this.getAttribute('data-voto');
+                    localStorage.setItem('m58_voto_' + idNota, voto);
+                    mostrarResultados(voto);
+                });
+            });
+        }
+    });
+</script>

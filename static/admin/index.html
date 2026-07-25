@@ -241,6 +241,48 @@
       return `<div style="padding: 1rem; border-left: 4px solid #d32f2f; background: #f9f9f9; text-align: center;">🤝 Apoyo Independiente: ${obj.marca}</div>`;
     }
   });
+
+  // 6. Registra el botón del Termómetro en el editor
+    CMS.registerEditorComponent({
+      id: "termometro",
+      label: "Termómetro (Votación)",
+      // Ícono que aparece en la botonera de Decap (un gráfico de barras)
+      icon: "bar-chart", 
+      // Los campos que te va a pedir cuando hagas clic
+      fields: [
+        {
+            name: "id", 
+            label: "ID Único (ej: geopolitica-01, sin espacios)", 
+            widget: "string"
+        },
+        {
+            name: "pregunta", 
+            label: "Pregunta para el lector", 
+            widget: "string", 
+            default: "¿Qué impacto creés que tendrá esta medida?"
+        }
+      ],
+      // Cómo lee el CMS el código si ya está escrito en el texto
+      pattern: /^{{< termometro id="([^"]+)" pregunta="([^"]+)" >}}$/,
+      fromBlock: function(match) {
+        return {
+          id: match[1],
+          pregunta: match[2]
+        };
+      },
+      // Cómo inserta el código en el Markdown cuando llenás los campos
+      toBlock: function(obj) {
+        const idNota = obj.id ? obj.id.replace(/\s+/g, '-') : 'id-generico';
+        const pregunta = obj.pregunta || '¿Qué opinás?';
+        return `{{< termometro id="${idNota}" pregunta="${pregunta}" >}}`;
+      },
+      // Cómo se previsualiza dentro del panel de Decap
+      toPreview: function(obj) {
+        return `<div style="padding: 15px; border: 2px dashed #ccc; text-align: center; border-radius: 5px; color: #666;">
+            📊 <strong>Termómetro interactivo:</strong> ${obj.pregunta}
+        </div>`;
+      }
+    });
 </script>
   </body>
 </html>
