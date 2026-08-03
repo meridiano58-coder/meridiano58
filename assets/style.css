@@ -366,6 +366,38 @@ footer {
     text-align: left; 
 }
 
+/* --- RITMO DE LECTURA PARA LAS NOTAS --- */
+
+/* Aire natural entre párrafos */
+.post-content p {
+    margin-bottom: 1.5rem; 
+}
+
+/* Espaciado inteligente para subtítulos */
+.post-content h2, 
+.post-content h3, 
+.post-content h4 {
+    margin-top: 2.5rem; /* Mucho aire arriba para separarlo del párrafo anterior */
+    margin-bottom: 1rem; /* Poco aire abajo para que quede anclado a su texto */
+    line-height: 1.3;
+}
+
+/* Sangría y aire para las listas (bullet points) */
+.post-content ul, 
+.post-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem; 
+}
+
+.post-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* Evita que el último elemento de la nota deje un margen sobrante */
+.post-content > *:last-child {
+    margin-bottom: 0;
+}
+
 /* Imágenes dentro de la nota */
 .post-content img {
     width: 100%;
@@ -1048,4 +1080,12 @@ a:hover {
     .btn-apunte {
         padding: 0.5rem;
     }
+}
+
+/* --- ESCUDO PARA LEAFLET (Evita la mini-Argentina) --- */
+.leaflet-container svg,
+.leaflet-container canvas {
+    max-width: none !important;
+    max-height: none !important;
+    /* Bajo ningún punto de vista forzar el width/height acá, Leaflet lo necesita calcular solo */
 }

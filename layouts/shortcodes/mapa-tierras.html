@@ -1,0 +1,138 @@
+<!-- Importar el motor y los estilos de Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<div id="mapa-extranjerizacion" style="height: 600px; width: 100%; border-radius: 8px; margin: 2rem 0; z-index: 1; border: 1px solid var(--color-bordes);"></div>
+
+<!-- Leyenda explicativa -->
+<div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; font-size: 0.85rem; font-family: var(--fuente-principal); color: var(--color-secundario);">
+    <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 12px; height: 12px; background: #67000d; border-radius: 2px;"></span> > 30% (Crítico)</span>
+    <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 12px; height: 12px; background: #cb181d; border-radius: 2px;"></span> 15% a 30%</span>
+    <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 12px; height: 12px; background: #fb6a4a; border-radius: 2px;"></span> 5% a 15%</span>
+    <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 12px; height: 12px; background: #fcae91; border-radius: 2px;"></span> < 5%</span>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var map = L.map('mapa-extranjerizacion', {
+        scrollWheelZoom: false
+    }).setView([-38.0, -65.0], 4);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+    }).addTo(map);
+
+    const datosRNTR = {
+      "buenos aires": {"campana": 50.27, "zarate": 24.8, "almirante brown": 11.81, "exaltacion de la cruz": 12.11, "ezeiza": 11.04, "la plata": 9.94, "florencio varela": 9.93, "esteban echeverria": 9.79, "moreno": 9.57, "pilar": 9.2, "monte": 8.05, "marcos paz": 7.72, "ramallo": 7.59, "general pueyrredon": 7.5, "merlo": 7.38, "general rodriguez": 6.98, "balcarce": 6.68, "villa gesell": 6.17, "arrecifes": 5.99, "avellaneda": 5.97, "general lavalle": 5.95, "general alvarado": 5.77, "general villegas": 5.6, "guamini": 5.6, "loberia": 5.29, "pellegrini": 5.21, "san pedro": 5.17, "san cayetano": 5.13, "lobos": 5.04},
+      "catamarca": {"tinogasta": 26.61, "paclin": 20.66, "la paz": 11.72, "santa maria": 9.3, "andalgala": 5.34, "valle viejo": 4.92, "el alto": 3.64},
+      "chaco": {"libertador general san martin": 7.22, "tapenaga": 6.35, "general guemes": 6.28, "sargento cabral": 5.87, "2 de abril": 3.74, "general donovan": 3.58},
+      "chubut": {"cushamen": 22.9, "biedma": 4.94, "paso de indios": 4.2, "futaleufu": 4.14, "telsen": 3.29, "escalante": 3.22, "gastre": 2.64, "languiñeo": 2.63},
+      "cordoba": {"minas": 4.14, "punilla": 3.16, "rio cuarto": 2.32, "tercero arriba": 2.23, "presidente roque saenz peña": 2.17},
+      "corrientes": {"ituzaingo": 33.9, "beron de astrada": 32.72, "santo tome": 14.07, "concepcion": 13.49, "san miguel": 11.43, "curuzu cuatia": 10.36, "mercedes": 9.75, "esquina": 7.69, "san cosme": 7.19, "san roque": 6.98, "general alvear": 5.45},
+      "entre rios": {"la paz": 8.76, "gualeguay": 8.57, "concordia": 5.68, "federal": 3.78},
+      "formosa": {"formosa": 10.94, "pilcomayo": 4.04},
+      "jujuy": {"humahuaca": 26.06, "san pedro": 20.68, "el carmen": 14.8, "manuel belgrano": 6.03, "palpala": 5.1},
+      "la pampa": {"caleu caleu": 7.44, "loventue": 5.77, "quemu quemu": 3.59, "lihuel calel": 3.49, "utracan": 3.34, "curaco": 3.26, "toay": 3.08},
+      "la rioja": {"general lamadrid": 56.7, "chilecito": 14.86, "vinchina": 3.59},
+      "mendoza": {"malargue": 14.74, "san martin": 13.84, "la paz": 12.58, "las heras": 12.44, "general alvear": 11.82, "capital": 10.64, "lavalle": 9.72, "san carlos": 7.13, "maipu": 6.5},
+      "misiones": {"iguazu": 39.95, "montecarlo": 18.36, "general san martin": 16.78, "concepcion": 16.4, "eldorado": 16.24, "general belgrano": 11.12, "san pedro": 9.0, "san ignacio": 9.0, "capital": 6.4},
+      "neuquen": {"lacar": 54.17, "catan lil": 11.14, "collon cura": 8.12, "los lagos": 6.67, "confluencia": 5.59, "huiliches": 4.63, "norquin": 3.39, "picunches": 3.29},
+      "rio negro": {"bariloche": 13.61, "pilcaniyeu": 10.48, "norquinco": 5.46, "avellaneda": 3.9},
+      "salta": {"san carlos": 59.82, "molinos": 57.79, "guachipas": 33.84, "general guemes": 28.82, "la viña": 28.22, "cerrillos": 24.63, "oran": 23.28, "cafayate": 23.11, "chicoana": 16.04, "anta": 14.69, "general jose de san martin": 12.41, "la candelaria": 11.07, "cachi": 10.68, "la caldera": 8.81, "rosario de la frontera": 8.43},
+      "san juan": {"iglesia": 24.95, "san martin": 20.25, "pocito": 13.0, "calingasta": 12.1, "jachal": 9.24, "rivadavia": 4.53},
+      "santa cruz": {"magallanes": 25.77, "guer aike": 12.86, "lago argentino": 10.69, "lago buenos aires": 6.38, "corpen aike": 5.1},
+      "santa fe": {"garay": 15.73, "general lopez": 3.5, "san javier": 3.1},
+      "santiago del estero": {"jimenez": 15.97, "aguirre": 14.89, "belgrano": 14.87, "san martin": 9.3, "alberdi": 9.09, "loreto": 7.51, "avellaneda": 6.29, "moreno": 5.68, "pellegrini": 5.6, "quebrachos": 5.5, "rio hondo": 5.47, "capital": 4.56, "figueroa": 4.5},
+      "tierra del fuego": {"tolhuin": 12.44, "rio grande": 2.64},
+      "tucuman": {"cruz alta": 16.42, "burruyacu": 9.06, "rio chico": 7.52, "famailla": 5.32, "la cocha": 4.79, "juan b. alberdi": 4.62}
+    };
+
+    function normalizar(texto) {
+        if(!texto) return "";
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+    }
+
+    fetch('/datos/departamentos.geojson')
+        .then(response => response.json())
+        .then(data => {
+            
+            function estiloPoligono(feature) {
+                let nombreProvincia = typeof feature.properties.provincia === 'object' ? feature.properties.provincia.nombre : feature.properties.provincia;
+                let nombreDepto = feature.properties.nombre;
+
+                let provNorm = normalizar(nombreProvincia);
+                let depNorm = normalizar(nombreDepto);
+                
+                let ext = 0;
+                if (datosRNTR[provNorm] && datosRNTR[provNorm][depNorm]) {
+                    ext = datosRNTR[provNorm][depNorm];
+                }
+
+                if (ext === 0) {
+                    return { weight: 0, fillOpacity: 0, opacity: 0 };
+                }
+
+                let fillColor = ext >= 30 ? '#67000d' :
+                                ext >= 15 ? '#cb181d' :
+                                ext >= 5  ? '#fb6a4a' : '#fcae91';
+
+                return {
+                    fillColor: fillColor,
+                    weight: 1.5,
+                    opacity: 1,
+                    color: '#ffffff',
+                    fillOpacity: 0.85
+                };
+            }
+
+            function onEachFeature(feature, layer) {
+                let nombreProvincia = typeof feature.properties.provincia === 'object' ? feature.properties.provincia.nombre : feature.properties.provincia;
+                let nombreDepto = feature.properties.nombre;
+
+                let provNorm = normalizar(nombreProvincia);
+                let depNorm = normalizar(nombreDepto);
+                
+                let ext = 0;
+                if (datosRNTR[provNorm] && datosRNTR[provNorm][depNorm]) {
+                    ext = datosRNTR[provNorm][depNorm];
+                }
+
+                if (ext > 0) {
+                    let colorTexto = ext >= 30 ? '#67000d' : '#cb181d';
+                    layer.bindPopup(`
+                        <div style="font-family: var(--fuente-principal); color: var(--color-texto);">
+                            <strong style="font-family: var(--fuente-titulos); font-size: 1.1rem; display: block; border-bottom: 1px solid #ccc; padding-bottom: 4px; margin-bottom: 6px;">
+                                ${nombreDepto}, ${nombreProvincia}
+                            </strong>
+                            Extranjerización: <b style="color: ${colorTexto}; font-size: 1.2rem;">${ext}%</b>
+                        </div>
+                    `);
+                    
+                    layer.on({
+                        mouseover: function (e) {
+                            var layer = e.target;
+                            layer.setStyle({
+                                weight: 3,
+                                color: '#666',
+                                fillOpacity: 0.9
+                            });
+                            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                                layer.bringToFront();
+                            }
+                        },
+                        mouseout: function (e) {
+                            geojsonLayer.resetStyle(e.target);
+                        }
+                    });
+                }
+            }
+
+            var geojsonLayer = L.geoJSON(data, {
+                style: estiloPoligono,
+                onEachFeature: onEachFeature
+            }).addTo(map);
+
+        })
+        .catch(error => console.error("Error cargando el GeoJSON:", error));
+});
+</script>

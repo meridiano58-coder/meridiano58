@@ -419,9 +419,13 @@
                 if(urlParts.length < 2) return;
                 const titulo = urlParts[1];
 
-                // Consultamos a la API de Wikipedia
+                // NUEVO: Sacamos el idioma dinámicamente de la URL (es, en, fr, etc.)
+                const urlObj = new URL(this.href);
+                const idioma = urlObj.hostname.split('.')[0]; 
+
+                // Consultamos a la API de Wikipedia con el idioma correcto
                 try {
-                    const response = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${titulo}`);
+                    const response = await fetch(`https://${idioma}.wikipedia.org/api/rest_v1/page/summary/${titulo}`);
                     const data = await response.json();
 
                     if(data.title) {
@@ -485,56 +489,81 @@
         document.addEventListener("DOMContentLoaded", function() {
             const chartCanvases = document.querySelectorAll('canvas.data-chart');
 
+            // Función para leer tus variables CSS en tiempo real
+            const getColor = (varName) => getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+
             chartCanvases.forEach(canvas => {
                 const ctx = canvas.getContext('2d');
                 const chartType = canvas.getAttribute('data-chart-type');
                 const chartTitle = canvas.getAttribute('data-chart-title');
                 const chartData = JSON.parse(canvas.getAttribute('data-chart-data'));
 
-                new Chart(ctx, {
-                    type: chartType,
-                    data: chartData,
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: chartTitle,
-                                color: 'var(--color-texto)',
-                                font: {
-                                    family: 'var(--fuente-titulos)',
-                                    size: 18,
-                                    weight: 'normal'
-                                }
-                            },
-                            legend: {
-                                labels: {
-                                    color: 'var(--color-secundario)',
-                                    font: { family: 'var(--fuente-principal)' }
-                                }
-                            }
+                // Opciones comunes para todos
+                let chartOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: chartTitle,
+                            color: getColor('--color-texto'),
+                            font: { family: 'var(--fuente-titulos)', size: 16, weight: 'normal' }
                         },
-                        scales: {
-                            x: {
-                                ticks: {
-                                    color: 'var(--color-secundario)',
-                                    font: { family: 'var(--fuente-principal)' }
-                                },
-                                grid: { color: 'rgba(255, 255, 255, 0.05)' }
-                            },
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    color: 'var(--color-secundario)',
-                                    font: { family: 'var(--fuente-principal)' }
-                                },
-                                grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        legend: {
+                            labels: {
+                                color: getColor('--color-secundario'),
+                                font: { family: 'var(--fuente-principal)' }
                             }
                         }
                     }
+                };
+
+                // MAGIA 1: Solo le ponemos grilla de fondo si NO es un gráfico de torta o dona
+                if (chartType !== 'pie' && chartType !== 'doughnut') {
+                    chartOptions.scales = {
+                        x: {
+                            ticks: { color: getColor('--color-secundario') },
+                            grid: { color: 'rgba(150, 150, 150, 0.1)' }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: getColor('--color-secundario') },
+                            grid: { color: 'rgba(150, 150, 150, 0.1)' }
+                        }
+                    };
+                }
+
+                // Guardamos el gráfico en la memoria del canvas para poder actualizarlo
+                canvas.chartInstance = new Chart(ctx, {
+                    type: chartType,
+                    data: chartData,
+                    options: chartOptions
                 });
             });
+
+            // MAGIA 2: Escuchamos el botón de la lunita/sol para repintar el gráfico
+            const botonTema = document.getElementById('boton-tema');
+            if (botonTema) {
+                botonTema.addEventListener('click', () => {
+                    // Le damos 50 milisegundos al CSS para que cambie antes de repintar
+                    setTimeout(() => { 
+                        chartCanvases.forEach(canvas => {
+                            if (canvas.chartInstance) {
+                                // Actualizamos los colores de los textos
+                                canvas.chartInstance.options.plugins.title.color = getColor('--color-texto');
+                                canvas.chartInstance.options.plugins.legend.labels.color = getColor('--color-secundario');
+                                
+                                // Si tuviera ejes, también se los actualizamos
+                                if (canvas.chartInstance.config.type !== 'pie' && canvas.chartInstance.config.type !== 'doughnut') {
+                                    canvas.chartInstance.options.scales.x.ticks.color = getColor('--color-secundario');
+                                    canvas.chartInstance.options.scales.y.ticks.color = getColor('--color-secundario');
+                                }
+                                canvas.chartInstance.update(); // Dispara el repintado
+                            }
+                        });
+                    }, 50);
+                });
+            }
         });
     </script>
 {{ end }}
