@@ -2,7 +2,7 @@
 tipo: articulo
 title: "**Soberanía en jaque**. El punto ciego de la nueva Ley de Tierras"
 description: "El oficialismo busca sepultar la vieja **Ley 26.737**, pero puede cometer un error geopolítico al dar vía libre a las corporaciones extranjeras para adquirir territorio sin límites."
-date: 2026-08-03T18:30:00.000-03:00
+date: 2026-08-03T17:30:00.000-03:00
 author: "Lorenzo Castelli"
 image: /ley-de-tierras.jpg
 epigrafe: <a href="https://www.flickr.com/photos/151621904@N05/35148807842" title="Piedra Del Fraile Chalten">Piedra Del Fraile, El Chaltén</a> por <a href="https://www.flickr.com/photos/151621904@N05/">Claudio Barrientos</a>, <a href="https://creativecommons.org/licenses/by-nd/2.0/deed.es" rel="license noopener noreferrer">CC BY-ND 2.0</a>.
