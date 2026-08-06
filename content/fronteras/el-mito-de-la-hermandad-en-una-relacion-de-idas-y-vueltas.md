@@ -62,7 +62,7 @@ Importando el mismo formato de la ["campaña del miedo"](https://noticias.perfil
 
 Detrás de esa maquinaria propagandística se escondía el verdadero interés de [Itamaraty](https://es.wikipedia.org/wiki/Palacio_Itamaraty): **mantener a una Argentina predecible, con inflación endémica y comercialmente cautiva**. Para el establishment brasileño, un vecino ahogado en sus propias crisis y populismo es el escenario ideal, **ya que lo vuelve incapaz de atraer inversiones, abrirse al libre mercado y, mucho menos, disputar el liderazgo regional**.
 
-## El coste del Mercosur: La contención económica
+## El coste del Mercosur: La contención económica.
 
 Si en el pasado Brasil necesitaba diseñar estrategias militares para asfixiar a una Argentina competitiva, **hoy cuenta con una herramienta mucho más sutil pero altamente eficaz y aplaudida por la diplomacia idealista de la región**: el [Mercosur](https://www.mercosur.int/acerca-del-mercosur/que-es-el-mercosur). Lejos de funcionar como la plataforma de despegue conjunta que prometía ser en los años 90, **el bloque se ha transformado en una trampa institucional diseñada a medida de los intereses industriales brasileños**.
 
