@@ -29,7 +29,7 @@ Parte de este alineamiento con Estados Unidos **contribuyó a que se llegara a b
   {{< /timeline-item >}}
   
   {{< timeline-item year="1944" title="El Eje Washington-Río" >}}
-  En el pico de tensión por la neutralidad argentina, Estados Unidos barajó un bloqueo al Río de la Plata. Brasil, alineado con los Aliados, ya había cedido bases militares a EE.UU. en su territorio, rompiendo el equilibrio militar regional.
+  En el pico de tensión por la neutralidad argentina, Estados Unidos consideró la posibilidad de un bloqueo al Río de la Plata. Brasil, alineado con los Aliados, ya había cedido bases militares a EE.UU. en su territorio, rompiendo el equilibrio militar regional.
   {{< /timeline-item >}}
 
   {{< timeline-item year="1978" title="Guerra Delta" >}}
@@ -43,7 +43,7 @@ En los años 70, Brasil decide construir [Itaipú](https://es.wikipedia.org/wiki
 
 Durante la misma década y los 80, [la carrera nuclear sudamericana](https://undef.edu.ar/wp-content/uploads/2025/07/03_Art-8_REVISTA-DEFENSA-NACIONAL.pdf) expuso aún más la competencia por la hegemonía regional, especialmente cuando **la Comisión Nacional de Energía Atómica** [(CNEA)](https://es.wikipedia.org/wiki/Comisi%C3%B3n_Nacional_de_Energ%C3%ADa_At%C3%B3mica) **logró que Argentina obtuviera una ventaja tecnológica de 5 años por sobre el país vecino**. Preocupado por quedar atrasado, **Brasil activó un programa nuclear secreto** que incluyó la base de pruebas de Serra do Cachimbo, mientras **Argentina enriquecía uranio fuera del radar internacional en Pilcaniyeu**.
 
-La creación posterior de la agencia bilateral de control [ABACC](https://es.wikipedia.org/wiki/Agencia_Brasile%C3%B1o-Argentina_de_Contabilidad_y_Control_de_Materiales_Nucleares) en la década de 1990 no responde a una hermandad pacifista, sino a evitar sanciones de Estados Unidos y blindar sus autonomías del [Tratado de No Proliferación](https://es.wikipedia.org/wiki/Tratado_de_No_Proliferaci%C3%B3n_Nuclear).
+La creación posterior de la agencia bilateral de control [ABACC](https://es.wikipedia.org/wiki/Agencia_Brasile%C3%B1o-Argentina_de_Contabilidad_y_Control_de_Materiales_Nucleares) en la década de 1990 no respondió a una hermandad pacifista, sino a evitar sanciones de Estados Unidos y blindar sus autonomías del [Tratado de No Proliferación](https://es.wikipedia.org/wiki/Tratado_de_No_Proliferaci%C3%B3n_Nuclear).
 
 ### La "Guerra Delta".
 
@@ -58,7 +58,7 @@ En 1978, ante el temor de una posible guerra, **Brasil**, **a pesar de no tener 
 
 En el siglo XXI, **la hegemonía regional ya no se disputa solo con tanques o proyectos nucleares**, **sino con injerencia política directa**. El involucramiento de estrategas y publicistas vinculados al Partido de los Trabajadores [(PT)](https://es.wikipedia.org/wiki/Partido_de_los_Trabajadores_(Brasil)) en [la campaña presidencial de Sergio Massa en 2023](https://www.bloomberglinea.com/2023/10/19/massa-recluta-a-gurus-politicos-de-lula-para-vencer-a-milei/) **no fue un simple acto de *solidaridad progresista* entre aliados ideológicos**, **sino una operación geopolítica para garantizar la continuidad de un modelo argentino que a Brasilia le resulta funcional**.
 
-Importando el mismo formato de la ["campaña del miedo"](https://noticias.perfil.com/noticias/opinion/campana-del-miedo-cual-fue-la-inversion-en-redes.phtml) que llevó a Lula da Silva a vencer a Jair Bolsonaro, **los asesores brasileños inundaron las redes sociales con mensajes apocalípticos en un intento de influir en la opinión pública argentina**, advirtiendo de las medidas que según ellos -de ganar Javier Milei- sumirían a Argentina en la anarquía.
+Importando el mismo formato de la ["campaña del miedo"](https://noticias.perfil.com/noticias/opinion/campana-del-miedo-cual-fue-la-inversion-en-redes.phtml) que llevó a Lula da Silva a vencer a Jair Bolsonaro, **los asesores brasileños inundaron las redes sociales con mensajes apocalípticos en un intento de influir en la opinión pública argentina**, advirtiendo de las medidas que según ellos -de ganar Javier Milei- sumirían el país en la anarquía.
 
 Detrás de esa maquinaria propagandística se escondía el verdadero interés de [Itamaraty](https://es.wikipedia.org/wiki/Palacio_Itamaraty): **mantener a una Argentina predecible, con inflación endémica y comercialmente cautiva**. Para el establishment brasileño, un vecino ahogado en sus propias crisis y populismo es el escenario ideal, **ya que lo vuelve incapaz de atraer inversiones, abrirse al libre mercado y, mucho menos, disputar el liderazgo regional**.
 
