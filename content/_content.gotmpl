@@ -12,7 +12,6 @@
   {{ if .cuerpo_nota }}
     {{ range .cuerpo_nota }}
       {{ if eq .collection "bloque_texto" }}
-        {{/* Verificamos que exista el item y que el contenido no sea nulo */}}
         {{ if .item }}
           {{ if .item.contenido }}
             {{ $textoParaContar = printf "%s %s" $textoParaContar .item.contenido }}
@@ -28,7 +27,7 @@
     "path" $path
     "title" .titulo
     "draft" (ne .status "published")
-    "content" $textoParaContar
+    "content" (dict "mediaType" "text/markdown" "value" $textoParaContar)
     "dates" (dict 
       "date" $fechaHugo
     )
