@@ -7,12 +7,17 @@
   {{ $imagenUrl := printf "https://redaccion.meridiano58.com.ar/assets/%s" .imagen_portada }}
   {{ $fechaHugo := time.AsTime .fecha_publicacion }}
 
-  {{/* RECOLECTAMOS EL TEXTO (CON PROTECCIÓN PARA NOTAS VIEJAS Y CAMPO CORREGIDO) */}}
+  {{/* RECOLECTAMOS EL TEXTO CON TRIPLE VALIDACIÓN ANTI-CRASH */}}
   {{ $textoParaContar := "" }}
   {{ if .cuerpo_nota }}
     {{ range .cuerpo_nota }}
       {{ if eq .collection "bloque_texto" }}
-        {{ $textoParaContar = printf "%s %s" $textoParaContar .item.contenido }}
+        {{/* Verificamos que exista el item y que el contenido no sea nulo */}}
+        {{ if .item }}
+          {{ if .item.contenido }}
+            {{ $textoParaContar = printf "%s %s" $textoParaContar .item.contenido }}
+          {{ end }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
