@@ -137,12 +137,22 @@
     <h4>Suscribite a Meridiano 58</h4>
     <p>Recibí nuestros análisis de política y sociedad directamente en tu correo.</p>
     
-    <form action="https://assets.mailerlite.com/jsonp/2429846/forms/190119993889785730/subscribe" method="POST" onsubmit="enviarNewsletter(event, this)" class="formulario-newsletter">
-        
-        <input type="email" name="fields[email]" placeholder="Tu correo electrónico..." required>
-        
-        <button type="submit">Suscribirme</button>
-    </form>
+    <form action="https://boletin.meridiano58.com.ar/subscription/form" method="POST" onsubmit="enviarNewsletter(event, this)" class="formulario-newsletter">
+    
+    <!-- Token de seguridad que exige Listmonk -->
+    <input type="hidden" name="nonce" />
+    
+    <!-- ID de tu lista "Lectores Meridiano 58" de forma oculta para no mostrar checkboxes molestos -->
+    <input type="hidden" name="l" value="fdb4157f-4482-450c-b2e6-35b2db4884d9" />
+
+    <!-- Campo de correo -->
+    <input type="email" name="email" placeholder="Tu correo electrónico..." required>
+
+    <!-- Opcional: si querés pedir el nombre también, descomentá la siguiente línea -->
+    <input type="text" name="name" placeholder="Tu nombre (opcional)...">
+
+    <button type="submit">Suscribirme</button>
+</form>
 </div>
 
     <div class="redes">
@@ -242,8 +252,7 @@
     }
 </script>
 
-<script data-goatcounter="https://meridiano58.goatcounter.com/count"
-        async src="https://gc.zgo.at/count.js"></script>
+<script defer src="https://metricas.meridiano58.com.ar/script.js" data-website-id="6fb5d5b5-dfa9-43a4-aee5-49ebf6301a8e"></script>
 
 <!-- ESTILOS DE LA BURBUJA FLOTANTE -->
 <style>
