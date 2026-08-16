@@ -7,12 +7,13 @@
   {{ $imagenUrl := printf "https://redaccion.meridiano58.com.ar/assets/%s" .imagen_portada }}
   {{ $fechaHugo := time.AsTime .fecha_publicacion }}
 
-  {{/* 1. RECOLECTAMOS EL TEXTO DE LOS BLOQUES PARA ALIMENTAR EL CONTADOR DE HUGO */}}
+  {{/* RECOLECTAMOS EL TEXTO (CON PROTECCIÓN PARA NOTAS VIEJAS Y CAMPO CORREGIDO) */}}
   {{ $textoParaContar := "" }}
-  {{ range .cuerpo_nota }}
-    {{ if eq .collection "bloque_texto" }}
-      {{/* ATENCIÓN ACÁ: Cambiá '.item.texto' por el nombre exacto que tenga tu campo de texto en Directus */}}
-      {{ $textoParaContar = printf "%s %s" $textoParaContar .item.texto }}
+  {{ if .cuerpo_nota }}
+    {{ range .cuerpo_nota }}
+      {{ if eq .collection "bloque_texto" }}
+        {{ $textoParaContar = printf "%s %s" $textoParaContar .item.contenido }}
+      {{ end }}
     {{ end }}
   {{ end }}
 
@@ -22,7 +23,7 @@
     "path" $path
     "title" .titulo
     "draft" (ne .status "published")
-    "content" $textoParaContar {{/* 2. LE PASAMOS EL TEXTO A LA VARIABLE NATIVA */}}
+    "content" $textoParaContar
     "dates" (dict 
       "date" $fechaHugo
     )
