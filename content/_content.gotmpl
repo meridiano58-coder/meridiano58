@@ -1,4 +1,4 @@
-{{ $url := "https://redaccion.meridiano58.com.ar/items/articulos?filter[status][_eq]=published&fields=*,cuerpo_nota.*,cuerpo_nota.item:bloque_texto.*,cuerpo_nota.item:bloque_spotify.*,cuerpo_nota.item:bloque_cita.*,cuerpo_nota.item:bloque_sponsor.*,cuerpo_nota.item:bloque_mapa.*,cuerpo_nota.item:bloque_grafico.*,cuerpo_nota.item:bloque_termometro.*,cuerpo_nota.item:bloque_imagen.*,cuerpo_nota.item:bloque_embed.*,cuerpo_nota.item:bloque_video.*" }}
+{{ $url := "https://redaccion.meridiano58.com.ar/items/articulos?fields=*,cuerpo_nota.*,cuerpo_nota.item:bloque_texto.*,cuerpo_nota.item:bloque_spotify.*,cuerpo_nota.item:bloque_cita.*,cuerpo_nota.item:bloque_sponsor.*,cuerpo_nota.item:bloque_mapa.*,cuerpo_nota.item:bloque_grafico.*,cuerpo_nota.item:bloque_termometro.*,cuerpo_nota.item:bloque_imagen.*,cuerpo_nota.item:bloque_embed.*,cuerpo_nota.item:bloque_video.*" }}
 {{ $data := getJSON $url }}
 
 {{ range $data.data }}
@@ -12,6 +12,7 @@
     "type" .seccion
     "path" $path
     "title" .titulo
+    "draft" (ne .status "published")
     "dates" (dict 
       "date" $fechaHugo
     )
