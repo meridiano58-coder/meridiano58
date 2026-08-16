@@ -95,7 +95,7 @@
     </div>
     {{ end }}
 
-    <!-- 2. BAJADA/COPETE (Usando el campo exclusivo del Panel Editorial) -->
+    <!-- 2. BAJADA/COPETE -->
     {{ if .Params.description }}
     <div class="bajada-copete" style="font-family: var(--fuente-principal); font-size: 1.35rem; color: #3a4a5a; line-height: 1.6; text-align: center; max-width: 800px; margin: 0 auto 2.5rem auto; font-style: italic; opacity: 0.95;">
         {{ .Params.description | markdownify }}
@@ -106,12 +106,148 @@
     </div>
     {{ end }}
 
-    <!-- 3. CUERPO DE LA NOTA LÍMPIO -->
+    <!-- 3. CUERPO DE LA NOTA (Bloques de Directus + Fallback para notas viejas) -->
     <div class="post-content">
-        {{ .Content }}
+        {{ if .Params.cuerpo_nota }}
+            {{ range .Params.cuerpo_nota }}
+                
+                {{/* 1. TEXTO */}}
+                {{ if eq .collection "bloque_texto" }}
+                  <div class="bloque-texto" style="margin-bottom: 1.5rem;">
+                    {{ .item.contenido | markdownify }}
+                  </div>
+
+                {{/* 2. SPOTIFY */}}
+                {{ else if eq .collection "bloque_spotify" }}
+                  <div class="bloque-spotify" style="margin: 2rem 0;">
+                    <iframe style="border-radius:12px" src="{{ .item.url_spotify }}" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                  </div>
+
+                {{/* 3. CITA O DESTACADO */}}
+                {{ else if eq .collection "bloque_cita" }}
+                  <div style="margin: 3rem auto; padding: 1.5rem 2rem; border-left: 4px solid var(--color-secundario); background-color: rgba(26, 43, 60, 0.03); max-width: 85%;">
+                      <p style="font-family: var(--fuente-titulos); font-size: 1.5rem; color: var(--color-primario); font-style: italic; line-height: 1.4; margin: 0;">
+                          "{{ .item.texto | markdownify }}"
+                      </p>
+                      {{ if .item.autor }}
+                      <p style="font-family: var(--fuente-principal); font-size: 0.9rem; font-weight: bold; color: var(--color-secundario); text-transform: uppercase; letter-spacing: 1px; margin: 1rem 0 0 0;">
+                          — {{ .item.autor }}
+                      </p>
+                      {{ end }}
+                  </div>
+
+                {{/* 4. SPONSOR */}}
+                {{ else if eq .collection "bloque_sponsor" }}
+                  <div style="background-color: var(--color-fondo); border: 1px solid var(--color-bordes); border-left: 4px solid #d32f2f; padding: 20px; margin: 2.5rem 0; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                      <p style="color: var(--color-texto); font-family: inherit; margin: 0; font-size: 0.95rem;">
+                          <strong style="color: #d32f2f;">Apoyo Independiente |</strong> El análisis de Meridiano 58 es posible gracias al acompañamiento de <strong style="color: var(--color-primario);">{{ .item.marca }}</strong>. Conocé más <a href="{{ .item.link }}" target="_blank" rel="noopener noreferrer" style="color: var(--color-texto); text-decoration: underline; font-weight: 500;">haciendo clic acá</a>.
+                      </p>
+                  </div>
+
+                {{/* 5. MAPA */}}
+                {{ else if eq .collection "bloque_mapa" }}
+                  {{ $lon := index .item.coordenadas.coordinates 0 }}
+                  {{ $lat := index .item.coordenadas.coordinates 1 }}
+                  {{ $idMapa := delimit (shuffle (seq 1 9)) "" }}
+
+                  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+                  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+                  <div id="mapa-{{ $idMapa }}" style="height: 400px; width: 100%; border-radius: 8px; border: 1px solid var(--color-bordes); margin: 2rem 0; z-index: 1;"></div>
+                  <script>
+                      document.addEventListener("DOMContentLoaded", function() {
+                          var map = L.map('mapa-{{ $idMapa }}', { scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: !L.Browser.mobile }).setView([{{ $lat }}, {{ $lon }}], {{ default "13" .item.zoom }});
+                          L.tileLayer('https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png', { 
+                              attribution: '&copy; <a href="https://www.ign.gob.ar/" target="_blank">Instituto Geográfico Nacional (IGN)</a>',
+                              maxZoom: 18 
+                          }).addTo(map);
+                          {{ if .item.texto }}
+                          L.marker([{{ $lat }}, {{ $lon }}]).addTo(map).bindPopup("<b style='font-family: var(--fuente-principal); font-size: 0.9rem;'>{{ .item.texto }}</b>").openPopup();
+                          {{ end }}
+                      });
+                  </script>
+
+                {{/* 6. GRÁFICO INTERACTIVO */}}
+                {{ else if eq .collection "bloque_grafico" }}
+                  {{ $idChart := delimit (shuffle (seq 1 9)) "" }}
+                  <div class="chart-container" style="position: relative; height: 40vh; width: 100%; max-width: 800px; margin: 2rem auto; border: 1px solid var(--color-bordes); border-radius: 8px; padding: 1rem; background-color: rgba(255, 255, 255, 0.05); z-index: 1;">
+                    <canvas id="chart-{{ $idChart }}" class="data-chart" data-chart-type="{{ default "line" .item.type }}" data-chart-title="{{ .item.title }}" data-chart-data='{{ .item.data_json }}'></canvas>
+                  </div>
+
+                {{/* 7. TERMÓMETRO (Dinámico) */}}
+                {{ else if eq .collection "bloque_termometro" }}
+                  {{ $op1 := default "A favor" .item.opcion_1 }}
+                  {{ $op2 := default "Neutro" .item.opcion_2 }}
+                  {{ $op3 := default "En contra" .item.opcion_3 }}
+
+                  <div class="termometro-contenedor no-print" id="termometro-{{ .item.id }}" data-api-url="https://redaccion.meridiano58.com.ar/items/votos_termometro" data-op1="{{ $op1 }}" data-op2="{{ $op2 }}" data-op3="{{ $op3 }}">
+                      <h4 class="termometro-titulo">{{ .item.pregunta | default "¿Qué opinás de este análisis?" }}</h4>
+                      
+                      <div class="termometro-opciones" id="opciones-{{ .item.id }}">
+                          <button class="btn-voto positivo" data-voto="{{ $op1 }}" data-id="{{ .item.id }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg> {{ $op1 }}</button>
+                          <button class="btn-voto neutro" data-voto="{{ $op2 }}" data-id="{{ .item.id }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg> {{ $op2 }}</button>
+                          <button class="btn-voto negativo" data-voto="{{ $op3 }}" data-id="{{ .item.id }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg> {{ $op3 }}</button>
+                      </div>
+
+                      <div class="termometro-resultados" id="resultados-{{ .item.id }}" style="display: none;">
+                          <p class="gracias-texto">Resultados en tiempo real:</p>
+                          <div class="barra-resultado"><span class="etiqueta-barra">{{ $op1 }}</span><div class="barra-fondo"><div class="barra-relleno bg-positivo" id="fill-pos-{{ .item.id }}"></div></div><span class="porcentaje-barra" id="pct-pos-{{ .item.id }}">0%</span></div>
+                          <div class="barra-resultado"><span class="etiqueta-barra">{{ $op2 }}</span><div class="barra-fondo"><div class="barra-relleno bg-neutro" id="fill-neu-{{ .item.id }}"></div></div><span class="porcentaje-barra" id="pct-neu-{{ .item.id }}">0%</span></div>
+                          <div class="barra-resultado"><span class="etiqueta-barra">{{ $op3 }}</span><div class="barra-fondo"><div class="barra-relleno bg-negativo" id="fill-neg-{{ .item.id }}"></div></div><span class="porcentaje-barra" id="pct-neg-{{ .item.id }}">0%</span></div>
+                      </div>
+                  </div>
+
+                {{/* 8. IMAGEN DENTRO DE LA NOTA */}}
+                {{ else if eq .collection "bloque_imagen" }}
+                  <div class="bloque-imagen" style="margin: 3rem 0; text-align: center;">
+                    <img src="https://redaccion.meridiano58.com.ar/assets/{{ .item.imagen }}" alt="{{ .item.epigrafe | plainify | default "Imagen de la nota" }}" style="width: 100%; max-height: 600px; object-fit: contain; border-radius: 8px; border: 1px solid var(--color-bordes); background-color: rgba(0,0,0,0.02);" loading="lazy">
+                    
+                    {{ if .item.epigrafe }}
+                    <em style="display: block; margin-top: 0.8rem; font-family: var(--fuente-principal); font-size: 0.95rem; color: var(--color-secundario);">
+                        {{ .item.epigrafe | markdownify }}
+                    </em>
+                    {{ end }}
+                  </div>
+
+                {{/* 9. EMBED UNIVERSAL (YouTube, Twitter, Instagram, TikTok) */}}
+                {{ else if eq .collection "bloque_embed" }}
+                  <div class="bloque-embed" style="margin: 3rem auto; width: 100%; max-width: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
+                    
+                    {{ .item.codigo_html | safeHTML }}
+                    
+                    {{ if .item.epigrafe }}
+                    <em style="display: block; margin-top: 1.2rem; text-align: center; font-family: var(--fuente-principal); font-size: 0.95rem; color: var(--color-secundario);">
+                        {{ .item.epigrafe | markdownify }}
+                    </em>
+                    {{ end }}
+                  </div>
+
+                {{/* 10. VIDEO NATIVO (MP4 subido a Directus) */}}
+                {{ else if eq .collection "bloque_video" }}
+                  <div class="bloque-video" style="margin: 3rem 0; text-align: center;">
+                    
+                    <video controls style="width: 100%; max-height: 600px; border-radius: 8px; border: 1px solid var(--color-bordes); background-color: rgba(0,0,0,0.02);">
+                        <source src="https://redaccion.meridiano58.com.ar/assets/{{ .item.video }}" type="video/mp4">
+                        Tu navegador no soporta la reproducción de videos.
+                    </video>
+                    
+                    {{ if .item.epigrafe }}
+                    <em style="display: block; margin-top: 0.8rem; font-family: var(--fuente-principal); font-size: 0.95rem; color: var(--color-secundario);">
+                        {{ .item.epigrafe | markdownify }}
+                    </em>
+                    {{ end }}
+                  </div>
+                  
+                {{ end }} <!-- ¡ESTE ES EL QUE TE FALTABA! Cierra la validación de qué tipo de bloque es -->
+                
+            {{ end }} <!-- Este cierra el bucle "range" que recorre los bloques -->
+            
+        {{ else }} <!-- Este ataja los artículos viejos (sin bloques) -->
+            {{ .Content }}
+        {{ end }} <!-- Cierra la validación de si existe cuerpo_nota -->
     </div>
 
-    <!-- 3. ACÁ VA EL BANNER DEL SPONSOR (Solo se muestra si lo activás en el panel) -->
+    <!-- 4. BANNER DEL SPONSOR -->
     {{ if eq .Params.mostrar_sponsor true }}
     <div class="banner-sponsor" style="background-color: var(--color-fondo); border: 1px solid var(--color-bordes); border-left: 4px solid #d32f2f; padding: 20px; margin: 3rem 0 1rem 0; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
         <p style="color: var(--color-texto); font-family: inherit; margin: 0; font-size: 0.95rem;">
@@ -123,19 +259,16 @@
 <!-- CAJA DE AUTOR AL PIE DE LA NOTA -->
 {{ if .Params.author }}
     {{ $nombreAutor := .Params.author }}
-    <!-- Hugo busca la página del autor para extraer sus datos -->
     {{ $autorPage := .Site.GetPage (printf "/autores/%s" ($nombreAutor | urlize)) }}
     
     {{ if $autorPage }}
     <div class="no-print" style="margin-top: 3rem; margin-bottom: 1rem; padding: 2rem; background-color: var(--color-blanco); border: 1px solid var(--color-bordes); border-radius: 8px; display: flex; align-items: center; gap: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02); flex-wrap: wrap;">
         
-        <!-- Foto del autor -->
         {{ $fotoAutor := or $autorPage.Params.image $autorPage.Params.imagen }}
         {{ if $fotoAutor }}
         <img src="{{ $fotoAutor }}" alt="Foto de {{ $nombreAutor }}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--color-fondo); box-shadow: 0 2px 8px rgba(0,0,0,0.1); flex-shrink: 0;">
         {{ end }}
         
-        <!-- Info del autor -->
         <div class="no-print" style="flex: 1; min-width: 250px;">
             <p style="font-family: var(--fuente-principal); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-secundario); margin: 0 0 0.3rem 0; font-weight: bold;">
                 Escrito por
@@ -150,7 +283,6 @@
 </p>
 {{ end }}
             
-            <!-- Redes sociales del autor -->
             <div class="no-print" style="display: flex; gap: 1rem;">
                 {{ if $autorPage.Params.twitter }}
                 <a href="{{ $autorPage.Params.twitter }}" target="_blank" rel="noopener noreferrer" style="color: var(--color-secundario); transition: color 0.2s ease;" onmouseover="this.style.color='var(--color-primario)'" onmouseout="this.style.color='var(--color-secundario)'" title="X (Twitter)">
@@ -175,13 +307,12 @@
     {{ end }}
 {{ end }}
 
-<!-- CAJA DE TEMÁTICAS (ETIQUETAS CORREGIDAS) -->
+<!-- CAJA DE TEMÁTICAS -->
     {{ with .Params.tematicas }}
     <div class="no-print" style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-bordes); display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
         <span style="font-family: var(--fuente-titulos); font-style: italic; color: var(--color-secundario); margin-right: 0.5rem; font-size: 1.1rem;">Temáticas:</span>
         
         {{ range . }}
-        <!-- Fijate que acá cambiamos "/tags/" por "/tematicas/" -->
         <a href="/tematicas/{{ . | urlize }}/" style="background-color: rgba(26, 43, 60, 0.05); color: var(--color-primario); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; border: 1px solid var(--color-bordes); transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='var(--color-primario)'; this.style.color='var(--color-blanco)'" onmouseout="this.style.backgroundColor='rgba(26, 43, 60, 0.05)'; this.style.color='var(--color-primario)'">
             {{ . }}
         </a>
@@ -242,22 +373,18 @@
     const btnZen = document.getElementById('btn-zen');
     const btnCopy = document.getElementById('btn-copy');
 
-    // Códigos de los íconos SVG
     const iconBook = `<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>`;
     const iconClose = `<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
     const iconCopy = `<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
     const iconCheck = `<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 
-    // Activar/Desactivar modo lectura
     if(btnZen) {
         btnZen.addEventListener('click', () => {
             document.body.classList.toggle('zen-mode');
-            // Cambia el HTML interno en vez del texto
             btnZen.innerHTML = document.body.classList.contains('zen-mode') ? iconClose : iconBook;
         });
     }
 
-    // Copiar enlace al portapapeles con fallback
     if(btnCopy) {
         btnCopy.addEventListener('click', async () => {
             try {
@@ -277,11 +404,11 @@
 
     function mostrarExito(boton) {
         boton.innerHTML = iconCheck;
-        boton.style.color = "#4CAF50"; // Lo pinta de verde sutilmente
+        boton.style.color = "#4CAF50";
         boton.style.borderColor = "#4CAF50";
         setTimeout(() => {
             boton.innerHTML = iconCopy;
-            boton.style.color = ""; // Vuelve al color original
+            boton.style.color = "";
             boton.style.borderColor = "";
         }, 2000);
     }
@@ -290,15 +417,9 @@
 <!-- SCRIPT DE LA BARRA DE PROGRESO -->
 <script>
     window.addEventListener('scroll', function() {
-        // Calcula cuánto scrolleó el usuario
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        // Calcula el alto total de la página menos lo que ya se ve en pantalla
         const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        
-        // Saca el porcentaje
         const scrolled = (scrollTop / docHeight) * 100;
-        
-        // Se lo aplica al ancho de la barra
         const barra = document.getElementById('barra-progreso');
         if (barra) {
             barra.style.width = scrolled + '%';
@@ -306,9 +427,7 @@
     });
 </script>
 
-<!-- LA SOLUCIÓN DEFINITIVA: VARIABLES CSS -->
 <style>
-    /* Estas variables aplastan cualquier regla en línea o etiqueta fantasma de Hugo */
     .post-content, .post-content * {
         font-size: var(--tamano-texto-m58, 1.2rem) !important;
     }
@@ -322,23 +441,17 @@
         const btnMas = document.getElementById('btn-texto-mas');
         const btnMenos = document.getElementById('btn-texto-menos');
         
-        // Si no hay botones, frena acá
         if (!btnMas || !btnMenos) return;
 
-        // Lee la memoria del navegador o arranca en 1.2
         let tamanoActual = parseFloat(localStorage.getItem('m58-tamano-texto')) || 1.2;
         const root = document.documentElement;
 
         const aplicarTamano = (tamano) => {
-            // Inyecta las variables CSS directamente en la raíz de la web
             root.style.setProperty('--tamano-texto-m58', tamano + 'rem');
             root.style.setProperty('--tamano-bajada-m58', (tamano + 0.15).toFixed(2) + 'rem');
-            
-            // Guarda la preferencia
             localStorage.setItem('m58-tamano-texto', tamano);
         };
 
-        // Aplica el tamaño apenas carga la nota
         aplicarTamano(tamanoActual);
 
         btnMas.addEventListener('click', () => {
@@ -372,14 +485,10 @@
         const btnSi = document.getElementById('btn-retomar-si');
         const btnNo = document.getElementById('btn-retomar-no');
         
-        // Creamos una clave única para cada nota usando su URL
         const claveAlmacenamiento = 'm58-scroll-' + window.location.pathname;
         const scrollGuardado = localStorage.getItem(claveAlmacenamiento);
 
-        // 1. COMPROBACIÓN INICIAL: ¿Tenía guardado un scroll significativo?
-        // Solo molestamos al usuario si había scrolleado más de 600px (pasando la foto y la bajada)
         if (scrollGuardado && parseInt(scrollGuardado) > 600) {
-            // Le damos 1 segundo de respiro antes de mostrar el cartel, para que no salte apenas carga
             setTimeout(() => {
                 toastMemoria.style.transform = 'translate(-50%, 0)';
                 toastMemoria.style.opacity = '1';
@@ -387,35 +496,26 @@
             }, 1000);
         }
 
-        // 2. ACCIÓN: El usuario elige retomar
         btnSi.addEventListener('click', () => {
             window.scrollTo({
                 top: parseInt(scrollGuardado),
-                behavior: 'smooth' // Hace un barrido fluido espectacular hacia abajo
+                behavior: 'smooth'
             });
-            // Ocultamos el toast
             toastMemoria.style.transform = 'translate(-50%, 100px)';
             toastMemoria.style.opacity = '0';
         });
 
-        // 3. ACCIÓN: El usuario lo ignora/cierra
         btnNo.addEventListener('click', () => {
             toastMemoria.style.transform = 'translate(-50%, 100px)';
             toastMemoria.style.opacity = '0';
-            // Borramos el dato para que no lo vuelva a molestar en esta nota
             localStorage.removeItem(claveAlmacenamiento);
         });
 
-        // 4. EL ESPÍA: Guarda la posición actual de manera eficiente
         let temporizadorScroll;
         window.addEventListener('scroll', function() {
-            // Evitamos que colapse el procesador guardando datos por cada milímetro que baja.
-            // Espera a que el usuario deje de mover el dedo/mouse por un cuarto de segundo (250ms).
             window.clearTimeout(temporizadorScroll);
             temporizadorScroll = setTimeout(function() {
                 localStorage.setItem(claveAlmacenamiento, window.scrollY);
-                
-                // Si el usuario empieza a hacer scroll por su cuenta, ocultamos el cartel
                 if(toastMemoria.style.opacity === '1') {
                     toastMemoria.style.transform = 'translate(-50%, 100px)';
                     toastMemoria.style.opacity = '0';
@@ -423,6 +523,221 @@
             }, 250);
         });
     });
+</script>
+
+<style>
+    .termometro-contenedor {
+        background-color: var(--color-fondo, #1a1a1a);
+        border: 1px solid var(--color-bordes, #333);
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin: 2.5rem 0;
+        text-align: center;
+    }
+    .termometro-titulo {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        color: var(--color-texto, #f5f5f5);
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+    .termometro-opciones {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .btn-voto {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        border: 1px solid var(--color-bordes, #555);
+        color: var(--color-texto, #f5f5f5);
+        padding: 0.5rem 1.2rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+    }
+    .btn-voto svg {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.2s ease;
+    }
+    .btn-voto:hover {
+        background-color: var(--color-bordes, #333);
+    }
+    .btn-voto.positivo:hover svg { stroke: #4caf50; transform: translateY(-2px); }
+    .btn-voto.neutro:hover svg { stroke: #ff9800; }
+    .btn-voto.negativo:hover svg { stroke: #f44336; transform: translateY(2px); }
+    
+    .termometro-resultados { text-align: left; margin-top: 1rem; }
+    .gracias-texto { text-align: center; font-size: 0.85rem; color: #888; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .barra-resultado { display: flex; align-items: center; margin-bottom: 0.8rem; gap: 10px; }
+    .etiqueta-barra { width: 75px; font-size: 0.85rem; color: var(--color-texto, #f5f5f5); font-weight: 500; }
+    .barra-fondo { flex-grow: 1; background-color: var(--color-bordes, #333); height: 8px; border-radius: 4px; overflow: hidden; }
+    .barra-relleno { height: 100%; width: 0%; transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .bg-positivo { background-color: #4caf50; }
+    .bg-neutro { background-color: #ff9800; }
+    .bg-negativo { background-color: #f44336; }
+    .porcentaje-barra { width: 45px; text-align: right; font-size: 0.85rem; font-weight: 600; color: var(--color-texto, #f5f5f5); }
+</style>
+```[cite: 5]
+
+Con esto pegado, los botones van a reaccionar cuando les pasás el mouse por encima y las barras se van a pintar con sus respectivos colores.
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const termometros = document.querySelectorAll('.termometro-contenedor');
+    
+    termometros.forEach(termometro => {
+        const idBloque = termometro.id.replace('termometro-', '');
+        const apiUrl = termometro.getAttribute('data-api-url');
+        const opcionesDiv = document.getElementById('opciones-' + idBloque);
+        const resultadosDiv = document.getElementById('resultados-' + idBloque);
+        const votoGuardado = localStorage.getItem('m58_voto_' + idBloque);
+
+        // 1. Función para descargar y calcular los votos reales desde Directus
+        const cargarResultadosReales = async (mostrarOpciones = true) => {
+            try {
+                // Le pedimos a Directus que agrupe y cuente los votos de este bloque específico
+                const res = await fetch(`${apiUrl}?aggregate[count]=*&groupBy[]=tipo_voto&filter[id_bloque][_eq]=${idBloque}`);
+                const data = await res.json();
+                
+                let vPos = 0, vNeu = 0, vNeg = 0;
+                
+                if(data.data) {
+                    data.data.forEach(voto => {
+                        if(voto.tipo_voto === 'positivo') vPos = parseInt(voto.count);
+                        if(voto.tipo_voto === 'neutro') vNeu = parseInt(voto.count);
+                        if(voto.tipo_voto === 'negativo') vNeg = parseInt(voto.count);
+                    });
+                }
+                
+                const total = vPos + vNeu + vNeg;
+                const pPos = total > 0 ? Math.round((vPos / total) * 100) : 0;
+                const pNeu = total > 0 ? Math.round((vNeu / total) * 100) : 0;
+                const pNeg = total > 0 ? Math.round((vNeg / total) * 100) : 0;
+
+                if (!mostrarOpciones) {
+                    opcionesDiv.style.display = 'none';
+                    resultadosDiv.style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById(`fill-pos-${idBloque}`).style.width = pPos + '%';
+                        document.getElementById(`pct-pos-${idBloque}`).innerText = pPos + '%';
+                        document.getElementById(`fill-neu-${idBloque}`).style.width = pNeu + '%';
+                        document.getElementById(`pct-neu-${idBloque}`).innerText = pNeu + '%';
+                        document.getElementById(`fill-neg-${idBloque}`).style.width = pNeg + '%';
+                        document.getElementById(`pct-neg-${idBloque}`).innerText = pNeg + '%';
+                    }, 50);
+                }
+            } catch (error) {
+                console.error("Error conectando con la redacción:", error);
+            }
+        };
+
+        // 2. Comportamiento al iniciar
+        if (votoGuardado) {
+            cargarResultadosReales(false); // Ya votó, muestra los resultados directo
+        } else {
+            cargarResultadosReales(true); // Descarga en segundo plano por las dudas
+            
+            // 3. El usuario emite el voto
+            const botones = termometro.querySelectorAll('.btn-voto');
+            botones.forEach(btn => {
+                btn.addEventListener('click', async function() {
+                    const voto = this.getAttribute('data-voto');
+                    
+                    // Ocultar botones instantáneamente para dar sensación de rapidez
+                    opcionesDiv.style.display = 'none';
+                    resultadosDiv.style.display = 'block';
+                    
+                    try {
+                        // Enviamos el voto a la base de datos
+                        await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ id_bloque: idBloque, tipo_voto: voto })
+                        });
+                        
+                        localStorage.setItem('m58_voto_' + idBloque, voto);
+                        cargarResultadosReales(false); // Recargamos para incluir su propio voto en la barra
+                        
+                    } catch(err) {
+                        alert("Hubo un error de conexión.");
+                        opcionesDiv.style.display = 'flex';
+                        resultadosDiv.style.display = 'none';
+                    }
+                });
+            });
+        }
+    });
+});
+</script>
+
+<!-- MOTOR DE GRÁFICOS (Chart.js) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const charts = document.querySelectorAll('.data-chart');
+    
+    // Colores universales que quedan elegantes en modo oscuro y claro
+    const colorTexto = '#85929E'; // Gris azulado neutro para máxima legibilidad
+    const colorGrilla = 'rgba(133, 146, 158, 0.15)'; // 15% de opacidad para que no impacte
+    
+    charts.forEach(canvas => {
+        const ctx = canvas.getContext('2d');
+        const tipo = canvas.getAttribute('data-chart-type') || 'line';
+        const titulo = canvas.getAttribute('data-chart-title');
+        const rawData = canvas.getAttribute('data-chart-data');
+        
+        if (rawData) {
+            try {
+                const chartData = JSON.parse(rawData);
+                
+                new Chart(ctx, {
+                    type: tipo,
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: !!titulo,
+                                text: titulo,
+                                color: colorTexto,
+                                font: { size: 15, family: 'sans-serif', weight: 'normal' }
+                            },
+                            legend: {
+                                labels: { color: colorTexto }
+                            }
+                        },
+                        scales: {
+                            x: { 
+                                ticks: { color: colorTexto }, 
+                                grid: { 
+                                    color: colorGrilla,
+                                    drawBorder: false // Saca la línea dura del eje
+                                } 
+                            },
+                            y: { 
+                                ticks: { color: colorTexto }, 
+                                grid: { 
+                                    color: colorGrilla,
+                                    drawBorder: false // Saca la línea dura del eje
+                                } 
+                            }
+                        }
+                    }
+                });
+            } catch (err) {
+                console.error("Error armando el gráfico. Revisá el JSON en Directus:", err);
+            }
+        }
+    });
+});
 </script>
 </article>
 {{ end }}

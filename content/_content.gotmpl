@@ -1,0 +1,30 @@
+{{ $url := "https://redaccion.meridiano58.com.ar/items/articulos?filter[status][_eq]=published&fields=*,cuerpo_nota.*,cuerpo_nota.item:bloque_texto.*,cuerpo_nota.item:bloque_spotify.*,cuerpo_nota.item:bloque_cita.*,cuerpo_nota.item:bloque_sponsor.*,cuerpo_nota.item:bloque_mapa.*,cuerpo_nota.item:bloque_grafico.*,cuerpo_nota.item:bloque_termometro.*,cuerpo_nota.item:bloque_imagen.*,cuerpo_nota.item:bloque_embed.*,cuerpo_nota.item:bloque_video.*" }}
+{{ $data := getJSON $url }}
+
+{{ range $data.data }}
+
+  {{ $path := printf "%s/%s" .seccion .slug }}
+  {{ $imagenUrl := printf "https://redaccion.meridiano58.com.ar/assets/%s" .imagen_portada }}
+  {{ $fechaHugo := time.AsTime .fecha_publicacion }}
+
+  {{ $page := dict
+    "kind" "page"
+    "type" .seccion
+    "path" $path
+    "title" .titulo
+    "dates" (dict 
+      "date" $fechaHugo
+    )
+    "params" (dict
+      "description" .description
+      "epigrafe" .epigrafe
+      "mostrar_sponsor" .mostrar_sponsor
+      "image" $imagenUrl
+      "author" .autor
+      "cuerpo_nota" .cuerpo_nota
+    )
+  }}
+  
+  {{ $.AddPage $page }}
+
+{{ end }}
