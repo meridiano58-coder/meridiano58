@@ -96,35 +96,71 @@
     <header>
         <a href="/" class="logo enlace-logo">Meridiano 58</a>
         <nav>
-            <ul>
-                <ul>
-    <li><a href="/" class="{{ if .IsHome }}activo{{ end }}">Inicio</a></li>
-    <li><a href="/fronteras/" class="{{ if in .RelPermalink "/fronteras/" }}activo{{ end }}">Fronteras</a></li>
-    <li><a href="/la-lupa/" class="{{ if in .RelPermalink "/la-lupa/" }}activo{{ end }}">La Lupa</a></li>
-    <li><a href="/archivo-58/" class="{{ if in .RelPermalink "/archivo-58/" }}activo{{ end }}">Archivo 58</a></li>
-    <li><a href="/el-reporte/" class="{{ if in .RelPermalink "/el-reporte/" }}activo{{ end }}">El Reporte</a></li>
-    <li><a href="/autores/" class="{{ if in .RelPermalink "/autores/" }}activo{{ end }}">Autores</a></li>
-    <li><a href="/sobre-nosotros/" class="{{ if in .RelPermalink "/sobre-nosotros/" }}activo{{ end }}">Nosotros</a></li>
-                <li style="display: flex; align-items: center;">
-                    <a href="/buscar/" title="Buscar en Meridiano 58" aria-label="Buscar" style="display: flex; align-items: center;">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                    </a>
-                </li>
-                
-                <!-- NUEVO BOTÓN DE TEMA OSCURO/CLARO -->
-                <li style="display: flex; align-items: center;">
-                    <button id="boton-tema" aria-label="Cambiar tema" style="background: none; border: none; cursor: pointer; color: currentColor; padding: 0; display: flex; align-items: center; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-                        <!-- Icono de Luna -->
-                        <svg id="icono-luna" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                        <!-- Icono de Sol -->
-                        <svg id="icono-sol" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                    </button>
-                </li>
-            </ul>
-        </nav>
+    <ul style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+        <li><a href="/politica/" class="{{ if in .RelPermalink "/politica/" }}activo{{ end }}">Política</a></li>
+        <li><a href="/sociedad/" class="{{ if in .RelPermalink "/sociedad/" }}activo{{ end }}">Sociedad</a></li>
+        <li><a href="/mundo/" class="{{ if in .RelPermalink "/mundo/" }}activo{{ end }}">Mundo</a></li>
+        <li><a href="/economia/" class="{{ if in .RelPermalink "/economia/" }}activo{{ end }}">Economía</a></li>
+        <li><a href="/cultura/" class="{{ if in .RelPermalink "/cultura/" }}activo{{ end }}">Cultura</a></li>
+        <li><a href="/newsletters/" class="{{ if in .RelPermalink "/newsletters/" }}activo{{ end }}">Newsletters</a></li>
+        <li><a href="/multimedia/" class="{{ if in .RelPermalink "/multimedia/" }}activo{{ end }}">Multimedia</a></li>
+        
+        <!-- Búsqueda (La lupa que ya tenías) -->
+        <li style="display: flex; align-items: center;">
+            <a href="/buscar/" title="Buscar en Meridiano 58" aria-label="Buscar" style="display: flex; align-items: center;">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </a>
+        </li>
+        
+        <!-- Botón de Tema Oscuro/Claro -->
+        <li style="display: flex; align-items: center;">
+            <button id="boton-tema" aria-label="Cambiar tema" style="background: none; border: none; cursor: pointer; color: currentColor; padding: 0; display: flex; align-items: center; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                <svg id="icono-luna" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg id="icono-sol" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+        </li>
+
+        <!-- Menú Hamburguesa (Tres rayas) -->
+        <li class="contenedor-menu-desplegable" style="position: relative; display: flex; align-items: center;">
+            <button id="btn-hamburguesa" aria-label="Abrir más opciones" style="background: none; border: none; cursor: pointer; color: currentColor; padding: 0; display: flex; align-items: center; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            
+            <!-- La cajita que se despliega -->
+            <div id="caja-desplegable" class="dropdown-oculto">
+                <a href="/autores/">Autores</a>
+                <a href="/sobre-nosotros/">Nosotros</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<!-- Lógica del Menú Desplegable (podés pegarlo justo antes del cierre de </header> o abajo de nav) -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnHam = document.getElementById('btn-hamburguesa');
+        const caja = document.getElementById('caja-desplegable');
+
+        btnHam.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que se cierre al instante
+            caja.classList.toggle('mostrar-dropdown');
+        });
+
+        // Si tocás afuera, se cierra solo
+        document.addEventListener('click', (e) => {
+            if (!caja.contains(e.target) && e.target !== btnHam) {
+                caja.classList.remove('mostrar-dropdown');
+            }
+        });
+    });
+</script>
     </header>
 
     <main style="min-height: 70vh;">

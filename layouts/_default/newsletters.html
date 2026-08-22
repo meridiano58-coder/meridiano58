@@ -1,0 +1,97 @@
+{{ define "main" }}
+<div style="max-width: 1000px; margin: 4rem auto; padding: 0 2rem; min-height: 70vh;">
+    
+    <!-- Encabezado de la página -->
+    <div style="text-align: center; margin-bottom: 4rem;">
+        <h1 style="font-family: var(--fuente-titulos); font-size: 2.8rem; color: var(--color-primario); margin-bottom: 1rem;">Nuestros Newsletters</h1>
+        <p style="font-family: var(--fuente-principal); font-size: 1.2rem; color: var(--color-secundario); max-width: 600px; margin: 0 auto; line-height: 1.6;">
+            Elegí qué tipo de análisis querés recibir en tu bandeja de entrada. Suscribite a uno, a varios, o a todos.
+        </p>
+    </div>
+
+    <!-- Grilla de Newsletters -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        
+        <!-- 1. FRONTERAS -->
+        <div style="background-color: var(--color-blanco); border: 1px solid var(--color-bordes); border-radius: 8px; padding: 2.5rem 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column;">
+            <div style="margin-bottom: 1.5rem; text-align: center;">
+                <span style="display: inline-block; background-color: rgba(26, 43, 60, 0.05); color: var(--color-primario); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 1rem;">Geopolítica</span>
+                <h2 style="font-family: var(--fuente-titulos); font-size: 1.8rem; color: var(--color-primario); margin: 0; border: none; padding: 0;">Fronteras</h2>
+            </div>
+            <p style="font-size: 0.95rem; color: var(--color-texto); line-height: 1.6; margin-bottom: 2rem; text-align: center; flex-grow: 1;">
+                El tablero internacional desde la perspectiva argentina. Análisis de política exterior, conflictos globales y los movimientos del poder mundial.
+            </p>
+            <form action="https://boletin.meridiano58.com.ar/subscription/form" method="POST" onsubmit="enviarNewsletter(event, this)" style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="hidden" name="nonce" />
+                <!-- ACÁ VA EL ID DE LA LISTA "FRONTERAS" DE LISTMONK -->
+                <input type="hidden" name="l" value="f1902a85-a461-4796-8aed-e9efd9d00953" />
+                <input type="email" name="email" placeholder="Tu correo electrónico" required style="padding: 0.8rem; border: 1px solid var(--color-bordes); border-radius: 4px; font-family: var(--fuente-principal); font-size: 0.95rem; outline: none; background: transparent; color: var(--color-texto);">
+                <button type="submit" style="background-color: var(--color-primario); color: var(--color-blanco); border: none; padding: 0.8rem; border-radius: 4px; font-family: var(--fuente-titulos); font-weight: bold; font-size: 1.05rem; cursor: pointer; transition: background-color 0.2s ease;">Suscribirme</button>
+            </form>
+        </div>
+
+        <!-- 2. LA LUPA -->
+        <div style="background-color: var(--color-blanco); border: 1px solid var(--color-bordes); border-radius: 8px; padding: 2.5rem 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; position: relative; overflow: hidden;">
+            <!-- Etiqueta de Destacado
+            <div style="position: absolute; top: 15px; right: -30px; background-color: #8b1c24; color: white; padding: 4px 30px; transform: rotate(45deg); font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Destacado</div> -->
+            
+            <div style="margin-bottom: 1.5rem; text-align: center;">
+                <span style="display: inline-block; background-color: rgba(26, 43, 60, 0.05); color: var(--color-primario); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 1rem;">Análisis Nacional</span>
+                <h2 style="font-family: var(--fuente-titulos); font-size: 1.8rem; color: var(--color-primario); margin: 0; border: none; padding: 0;">La Lupa</h2>
+            </div>
+            <p style="font-size: 0.95rem; color: var(--color-texto); line-height: 1.6; margin-bottom: 2rem; text-align: center; flex-grow: 1;">
+                Un desglose profundo de la coyuntura política y social argentina.
+            </p>
+            <form action="https://boletin.meridiano58.com.ar/subscription/form" method="POST" onsubmit="enviarNewsletter(event, this)" style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="hidden" name="nonce" />
+                <!-- ACÁ VA EL ID DE LA LISTA "LA LUPA" DE LISTMONK -->
+                <input type="hidden" name="l" value="709a3799-de7b-4f2b-9dc8-4271d771a706" />
+                <input type="email" name="email" placeholder="Tu correo electrónico" required style="padding: 0.8rem; border: 1px solid var(--color-bordes); border-radius: 4px; font-family: var(--fuente-principal); font-size: 0.95rem; outline: none; background: transparent; color: var(--color-texto);">
+                <button type="submit" style="background-color: var(--color-primario); color: var(--color-blanco); border: none; padding: 0.8rem; border-radius: 4px; font-family: var(--fuente-titulos); font-weight: bold; font-size: 1.05rem; cursor: pointer; transition: background-color 0.2s ease;">Suscribirme</button>
+            </form>
+        </div>
+
+        <!-- 3. EL REPORTE -->
+        <div style="background-color: var(--color-blanco); border: 1px solid var(--color-bordes); border-radius: 8px; padding: 2.5rem 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column;">
+            <div style="margin-bottom: 1.5rem; text-align: center;">
+                <span style="display: inline-block; background-color: rgba(26, 43, 60, 0.05); color: var(--color-primario); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 1rem;">Crónicas & Entrevistas</span>
+                <h2 style="font-family: var(--fuente-titulos); font-size: 1.8rem; color: var(--color-primario); margin: 0; border: none; padding: 0;">El Reporte</h2>
+            </div>
+            <p style="font-size: 0.95rem; color: var(--color-texto); line-height: 1.6; margin-bottom: 2rem; text-align: center; flex-grow: 1;">
+                Historias en primera persona, entrevistas exclusivas y el detrás de escena de las investigaciones de nuestra redacción.
+            </p>
+            <form action="https://boletin.meridiano58.com.ar/subscription/form" method="POST" onsubmit="enviarNewsletter(event, this)" style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="hidden" name="nonce" />
+                <!-- ACÁ VA EL ID DE LA LISTA "EL REPORTE" DE LISTMONK -->
+                <input type="hidden" name="l" value="abad88a0-0bfd-4016-9b22-054821079814" />
+                <input type="email" name="email" placeholder="Tu correo electrónico" required style="padding: 0.8rem; border: 1px solid var(--color-bordes); border-radius: 4px; font-family: var(--fuente-principal); font-size: 0.95rem; outline: none; background: transparent; color: var(--color-texto);">
+                <button type="submit" style="background-color: var(--color-primario); color: var(--color-blanco); border: none; padding: 0.8rem; border-radius: 4px; font-family: var(--fuente-titulos); font-weight: bold; font-size: 1.05rem; cursor: pointer; transition: background-color 0.2s ease;">Suscribirme</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- Lógica visual de los inputs (Modo oscuro y foco) -->
+<style>
+    form input[type="email"]:focus {
+        border-color: var(--color-secundario) !important;
+        box-shadow: 0 0 0 2px rgba(74, 93, 115, 0.1);
+    }
+    form button[type="submit"]:hover {
+        background-color: var(--color-secundario) !important;
+        transform: translateY(-2px);
+    }
+    /* Soporte Modo Oscuro */
+    [data-theme="dark"] form input[type="email"] {
+        border-color: #4a5d73 !important;
+    }
+    [data-theme="dark"] form button[type="submit"] {
+        background-color: var(--color-blanco) !important;
+        color: var(--color-primario) !important;
+    }
+    [data-theme="dark"] form button[type="submit"]:hover {
+        background-color: #d1d9e0 !important;
+    }
+</style>
+{{ end }}

@@ -1,4 +1,4 @@
 ---
 title: "El Reporte"
-description: "Entrevistas y crónicas."
+description: "Newsletter de entrevistas y crónicas."
 ---
