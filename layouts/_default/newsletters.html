@@ -15,7 +15,7 @@
         <!-- 1. FRONTERAS -->
         <div style="background-color: var(--color-blanco); border: 1px solid var(--color-bordes); border-radius: 8px; padding: 2.5rem 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column;">
             <div style="margin-bottom: 1.5rem; text-align: center;">
-                <span style="display: inline-block; background-color: rgba(26, 43, 60, 0.05); color: var(--color-primario); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 1rem;">Geopolítica</span>
+                <span class="etiqueta-newsletter">Geopolítica</span>
                 <h2 style="font-family: var(--fuente-titulos); font-size: 1.8rem; color: var(--color-primario); margin: 0; border: none; padding: 0;">Fronteras</h2>
             </div>
             <p style="font-size: 0.95rem; color: var(--color-texto); line-height: 1.6; margin-bottom: 2rem; text-align: center; flex-grow: 1;">
@@ -36,7 +36,7 @@
             <div style="position: absolute; top: 15px; right: -30px; background-color: #8b1c24; color: white; padding: 4px 30px; transform: rotate(45deg); font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Destacado</div> -->
             
             <div style="margin-bottom: 1.5rem; text-align: center;">
-                <span style="display: inline-block; background-color: rgba(26, 43, 60, 0.05); color: var(--color-primario); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 1rem;">Análisis Nacional</span>
+                <span class="etiqueta-newsletter">Análisis Nacional</span>
                 <h2 style="font-family: var(--fuente-titulos); font-size: 1.8rem; color: var(--color-primario); margin: 0; border: none; padding: 0;">La Lupa</h2>
             </div>
             <p style="font-size: 0.95rem; color: var(--color-texto); line-height: 1.6; margin-bottom: 2rem; text-align: center; flex-grow: 1;">
@@ -54,7 +54,7 @@
         <!-- 3. EL REPORTE -->
         <div style="background-color: var(--color-blanco); border: 1px solid var(--color-bordes); border-radius: 8px; padding: 2.5rem 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column;">
             <div style="margin-bottom: 1.5rem; text-align: center;">
-                <span style="display: inline-block; background-color: rgba(26, 43, 60, 0.05); color: var(--color-primario); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 1rem;">Crónicas & Entrevistas</span>
+                <span class="etiqueta-newsletter">Crónicas & Entrevistas</span>
                 <h2 style="font-family: var(--fuente-titulos); font-size: 1.8rem; color: var(--color-primario); margin: 0; border: none; padding: 0;">El Reporte</h2>
             </div>
             <p style="font-size: 0.95rem; color: var(--color-texto); line-height: 1.6; margin-bottom: 2rem; text-align: center; flex-grow: 1;">
@@ -92,6 +92,26 @@
     }
     [data-theme="dark"] form button[type="submit"]:hover {
         background-color: #ffffff !important; /* Brilla a blanco puro al tocarlo */
+    }
+
+/* Estilos del globito de categoría */
+    .etiqueta-newsletter {
+        display: inline-block;
+        background-color: rgba(26, 43, 60, 0.05);
+        color: var(--color-primario);
+        padding: 0.3rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+    }
+    
+    /* Globito en Modo Oscuro */
+    [data-theme="dark"] .etiqueta-newsletter {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--color-texto);
     }
 </style>
 {{ end }}
