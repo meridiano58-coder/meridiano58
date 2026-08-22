@@ -82,16 +82,16 @@
         background-color: var(--color-secundario) !important;
         transform: translateY(-2px);
     }
-    /* Soporte Modo Oscuro */
+    /* Soporte Modo Oscuro - CORREGIDO */
     [data-theme="dark"] form input[type="email"] {
         border-color: #4a5d73 !important;
     }
     [data-theme="dark"] form button[type="submit"] {
-        background-color: var(--color-blanco) !important;
-        color: var(--color-primario) !important;
+        background-color: var(--color-texto) !important; /* Usa el gris clarito de los textos */
+        color: var(--color-fondo) !important; /* Texto en negro/gris muy oscuro */
     }
     [data-theme="dark"] form button[type="submit"]:hover {
-        background-color: #d1d9e0 !important;
+        background-color: #ffffff !important; /* Brilla a blanco puro al tocarlo */
     }
 </style>
 {{ end }}

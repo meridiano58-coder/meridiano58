@@ -1092,7 +1092,7 @@ a:hover {
 
 /* --- ESTILOS MENÚ HAMBURGUESA --- */
 #caja-desplegable {
-    position: absolute;
+    position: fixed;
     top: 150%;
     right: 0;
     background-color: var(--color-blanco);
@@ -1145,12 +1145,4 @@ a:hover {
 [data-theme="dark"] #caja-desplegable a:hover {
     background-color: rgba(255,255,255,0.05);
     color: #ffffff !important;
-}
-
-@media (max-width: 768px) {
-    #caja-desplegable {
-        position: fixed;
-        top: 130px; /* Queda flotando justo abajo de la cabecera en celu */
-        right: 5%;
-    }
 }

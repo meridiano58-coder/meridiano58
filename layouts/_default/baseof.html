@@ -132,33 +132,41 @@
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
             </button>
-            
-            <!-- La cajita que se despliega -->
-            <div id="caja-desplegable" class="dropdown-oculto">
-                <a href="/autores/">Autores</a>
-                <a href="/sobre-nosotros/">Nosotros</a>
-            </div>
         </li>
     </ul>
 </nav>
 
-<!-- Lógica del Menú Desplegable (podés pegarlo justo antes del cierre de </header> o abajo de nav) -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const btnHam = document.getElementById('btn-hamburguesa');
         const caja = document.getElementById('caja-desplegable');
 
-        btnHam.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita que se cierre al instante
-            caja.classList.toggle('mostrar-dropdown');
-        });
+        if(btnHam && caja) {
+            btnHam.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Calculamos dónde está el botón físicamente en la pantalla
+                const rect = btnHam.getBoundingClientRect();
+                
+                // Lo posicionamos flotando fijo abajo del botón
+                caja.style.top = (rect.bottom + 15) + 'px';
+                caja.style.right = (window.innerWidth - rect.right) + 'px';
+                
+                caja.classList.toggle('mostrar-dropdown');
+            });
 
-        // Si tocás afuera, se cierra solo
-        document.addEventListener('click', (e) => {
-            if (!caja.contains(e.target) && e.target !== btnHam) {
+            // Si tocás afuera, se cierra
+            document.addEventListener('click', (e) => {
+                if (!caja.contains(e.target) && e.target !== btnHam) {
+                    caja.classList.remove('mostrar-dropdown');
+                }
+            });
+            
+            // Si scrolleás la página, lo escondemos para que no quede flotando
+            window.addEventListener('scroll', () => {
                 caja.classList.remove('mostrar-dropdown');
-            }
-        });
+            }, { passive: true });
+        }
     });
 </script>
     </header>
@@ -997,5 +1005,11 @@
         });
     });
 </script>
+
+<!-- La cajita que se despliega -->
+            <div id="caja-desplegable" class="dropdown-oculto">
+                <a href="/autores/">Autores</a>
+                <a href="/sobre-nosotros/">Nosotros</a>
+            </div>
 </body>
 </html>
