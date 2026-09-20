@@ -8,20 +8,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- METADATOS SEO Y OPEN GRAPH -->
     <meta property="og:title" content="{{ .Title | markdownify | plainify }} | Meridiano 58">
     <meta property="og:site_name" content="Meridiano 58">
-    <meta property="og:description" content="Análisis de Política y Sociedad.">
-    <meta name="twitter:card" content="summary_large_image">
-
+    <meta property="og:description" content="{{ with .Description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="{{ .Permalink | replaceRE "^http://" "https://" }}">
-    <meta property="og:image" content="{{ $urlFoto := or .Params.image .Params.imagen }}{{ if $urlFoto }}{{ $urlFoto | absURL | replaceRE "^http://" "https://" }}{{ else }}{{ "/icono-app.png" | absURL | replaceRE "^http://" "https://" }}{{ end }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    
+    {{ $fotoMeta := or .Params.image .Params.imagen | default "/icono-app.png" }}
+    <meta property="og:image" content="{{ $fotoMeta | absURL }}">
 
+    <!-- METADATOS TWITTER / X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{ .Permalink | replaceRE "^http://" "https://" }}">
+    <meta name="twitter:site" content="@meridiano58arg">
+    <meta name="twitter:url" content="{{ .Permalink }}">
     <meta name="twitter:title" content="{{ .Title | markdownify | plainify }}">
-    <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
-    <meta name="twitter:image" content="{{ $urlFoto := or .Params.image .Params.imagen }}{{ if $urlFoto }}{{ $urlFoto | absURL | replaceRE "^http://" "https://" }}{{ else }}{{ "/icono-app.png" | absURL | replaceRE "^http://" "https://" }}
+    <meta name="twitter:description" content="{{ with .Description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}">
+    <meta name="twitter:image" content="{{ $fotoMeta | absURL }}">
 {{ end }}">
 
     <meta name="format-detection" content="telephone=no">
