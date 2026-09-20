@@ -5,10 +5,10 @@
     <h2 style="font-family: var(--fuente-titulos); font-size: 2rem; color: var(--color-primario); text-align: center; border-bottom: 2px solid var(--color-bordes); padding-bottom: 0.5rem; margin: 0 auto 2rem auto; max-width: 600px;">Últimas Publicaciones</h2>
     
     <div class="grilla-noticias">
-        {{ $articulos := where .Site.RegularPages "Section" "in" (slice "politica" "sociedad" "mundo" "economia" "cultura") }}
+        {{ $articulos := where .Site.RegularPages "Section" "in" (slice "politica" "sociedad" "mundo" "economia" "cultura" "multimedia") }}
         {{ range first 3 $articulos }}
         <article class="tarjeta-noticia" style="max-width: 350px; width: 100%; margin-bottom: 1.5rem; background: white; border: 1px solid var(--color-bordes); border-radius: 4px; overflow: hidden;">
-            <a href="{{ .Permalink }}" style="display: block;">
+            <a href="{{ .RelPermalink }}" style="display: block;">
                 {{ if .Params.image }}
                 <img src="{{ .Params.image }}" alt="{{ .Title }}" class="foto-miniatura" loading="lazy" style="width: 100%; height: 180px; object-fit: cover; display: block;">
                 {{ else }}
@@ -31,7 +31,7 @@
 </section>
 
 <!-- SECCIONES ESPECÍFICAS (Bucle para generar los bloques dinámicamente) -->
-{{ $seccionesHome := slice "politica" "sociedad" "mundo" "economia" "cultura" }}
+{{ $seccionesHome := slice "politica" "sociedad" "mundo" "economia" "cultura" "multimedia"}}
 
 {{ range $seccion := $seccionesHome }}
     <!-- Verificamos si hay artículos en esta sección antes de dibujarla -->
@@ -45,7 +45,7 @@
         <div class="grilla-noticias">
             {{ range first 3 $posts }}
             <article class="tarjeta-noticia" style="max-width: 350px; width: 100%; margin-bottom: 1.5rem; background: white; border: 1px solid var(--color-bordes); border-radius: 4px; overflow: hidden;">
-                <a href="{{ .Permalink }}" style="display: block;">
+                <a href="{{ .RelPermalink }}" style="display: block;">
                     {{ if .Params.image }}
                     <img src="{{ .Params.image }}" alt="{{ .Title }}" class="foto-miniatura" loading="lazy" style="width: 100%; height: 180px; object-fit: cover; display: block;">
                     {{ else }}

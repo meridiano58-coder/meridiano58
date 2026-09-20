@@ -15,13 +15,15 @@
 
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:image" content="{{ if or .Params.image .Params.imagen }}{{ or .Params.image .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}">
+    <meta property="og:image" content="{{ if or .Params.image .Params.imagen }}{{ or .Params.image .Params.imagen | absURL }}?format=jpg&width=1200&height=630&ext=.jpg{{ else }}{{ "/icono-app.png" | absURL }}
+{{ end }}">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ .Permalink }}">
     <meta name="twitter:title" content="{{ .Title | markdownify | plainify }}">
     <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
-    <meta name="twitter:image" content="{{ if or .Params.image .Params.imagen }}{{ or .Params.image .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}">
+    <meta name="twitter:image" content="{{ if or .Params.image .Params.imagen }}{{ or .Params.image .Params.imagen | absURL }}?format=jpg&width=1200&height=630&ext=.jpg{{ else }}{{ "/icono-app.png" | absURL }}
+{{ end }}">
 
     <meta name="format-detection" content="telephone=no">
     
@@ -50,14 +52,14 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "{{ if eq .Section "archivo-58" }}PodcastEpisode{{ else }}NewsArticle{{ end }}",
+  "@type": "{{ if eq .Section "multimedia" }}PodcastEpisode{{ else }}NewsArticle{{ end }}",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "{{ .Permalink }}"
   },
   "headline": "{{ .Title | markdownify | plainify }}",
   "image": [
-    "{{ if or .Params.image .Params.imagen }}{{ or .Params.image .Params.imagen | absURL }}{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}"
+    "{{ if or .Params.image .Params.imagen }}{{ or .Params.image .Params.imagen | absURL }}?format=jpg&width=1200&height=630&ext=.jpg{{ else }}{{ "/icono-app.png" | absURL }}{{ end }}"
   ],
   "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
   "dateModified": "{{ if .Lastmod }}{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}{{ else }}{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}{{ end }}",
@@ -833,7 +835,7 @@
     });
 </script>
 
-{{ if and .IsPage (in (slice "fronteras" "la-lupa" "archivo-58" "el-reporte") .Section) }}
+{{ if and .IsPage (in (slice "politica" "sociedad" "mundo" "economia" "cultura") .Section) }}
     <!-- TOAST DE SUSCRIPCIÓN (Aparece al 60%) -->
     <div id="toast-suscripcion" aria-hidden="true">
         <div class="toast-contenido">
@@ -891,7 +893,7 @@
     </script>
 {{ end }}
 
-{{ if and .IsPage (in (slice "fronteras" "la-lupa" "archivo-58" "el-reporte") .Section) }}
+{{ if and .IsPage (in (slice "politica" "sociedad" "mundo" "economia" "cultura") .Section) }}
 <!-- ESTILOS DEL BOTÓN VOLVER ARRIBA -->
 <style>
     #btn-volver-arriba {

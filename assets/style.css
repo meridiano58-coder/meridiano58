@@ -441,6 +441,20 @@ body {
 
 /* --- ESTILOS PARA EL ENCABEZADO DE LAS NOTAS --- */
 
+/* Título de la nota fluido (se achica solo en el celular) */
+.titulo-nota, h1:not(.hero h1) {
+    font-size: clamp(1.65rem, 5vw, 2.35rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: var(--color-primario);
+}
+
+[data-theme="dark"] .titulo-nota, 
+[data-theme="dark"] h1:not(.hero h1) {
+    color: var(--color-texto);
+}
+
 .volanta {
     text-transform: uppercase;
     font-size: 0.85rem;
@@ -459,6 +473,11 @@ body {
     font-style: italic;
 }
 
+/* Mejora de contraste de la bajada en Modo Oscuro */
+[data-theme="dark"] .bajada {
+    color: #cbd5e1 !important; 
+    opacity: 0.95;
+}
 /* --- PIE DE PÁGINA DEFINITIVO (Iconos minimalistas y Correo limpio) --- */
 
 /* --- NEWSLETTER FOOTER --- */

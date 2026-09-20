@@ -4,7 +4,7 @@
 
 <article style="max-width: 1000px; margin: 0 auto; padding: 3rem 5%;">
     
-    <h1 style="font-family: var(--fuente-titulos); font-size: 2.8rem; color: var(--color-primario); text-align: center; margin-bottom: 1.5rem; line-height: 1.2; font-weight: normal;">
+    <h1 class="titulo-nota" style="font-family: var(--fuente-titulos); text-align: center; font-weight: normal;">
         {{ .Title | markdownify }}
     </h1>
 
@@ -81,7 +81,18 @@
 
 {{ end }}
 
-    <!-- 1. IMAGEN DE PORTADA CON EPÍGRAFE -->
+    <!-- 1. BAJADA/COPETE -->
+    {{ if .Params.description }}
+    <div class="bajada-copete bajada" style="text-align: left; max-width: 900px; margin: 0 auto 2.5rem auto;">
+        {{ .Params.description | markdownify }}
+    </div>
+    {{ else if and (ne .Type "page") .Summary }}
+    <div class="bajada-copete bajada" style="text-align: left; max-width: 900px; margin: 0 auto 2.5rem auto;">
+        {{ .Summary }}
+    </div>
+    {{ end }}
+
+    <!-- 2. IMAGEN DE PORTADA CON EPÍGRAFE -->
     {{ $urlFoto := or .Params.image .Params.imagen }}
     {{ if $urlFoto }}
     <div style="margin-bottom: 2.5rem;">
@@ -92,17 +103,6 @@
             {{ .Params.epigrafe | markdownify }}
         </em>
         {{ end }}
-    </div>
-    {{ end }}
-
-    <!-- 2. BAJADA/COPETE -->
-    {{ if .Params.description }}
-    <div class="bajada-copete" style="font-family: var(--fuente-principal); font-size: 1.35rem; color: #3a4a5a; line-height: 1.6; text-align: center; max-width: 800px; margin: 0 auto 2.5rem auto; font-style: italic; opacity: 0.95;">
-        {{ .Params.description | markdownify }}
-    </div>
-    {{ else if and (ne .Type "page") .Summary }}
-    <div class="bajada-copete" style="font-family: var(--fuente-principal); font-size: 1.35rem; color: #3a4a5a; line-height: 1.6; text-align: center; max-width: 800px; margin: 0 auto 2.5rem auto; font-style: italic; opacity: 0.95;">
-        {{ .Summary }}
     </div>
     {{ end }}
 
