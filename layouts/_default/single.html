@@ -157,10 +157,10 @@
                   <script>
                       document.addEventListener("DOMContentLoaded", function() {
                           var map = L.map('mapa-{{ $idMapa }}', { scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: !L.Browser.mobile }).setView([{{ $lat }}, {{ $lon }}], {{ default "13" .item.zoom }});
-                          L.tileLayer('https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png', { 
-                              attribution: '&copy; <a href="https://www.ign.gob.ar/" target="_blank">Instituto Geográfico Nacional (IGN)</a>',
-                              maxZoom: 18 
-                          }).addTo(map);
+                          L.tileLayer('https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_ign@EPSG%3A3857@png/{z}/{x}/{-y}.png', { 
+    attribution: '&copy; <a href="https://www.ign.gob.ar/" target="_blank">Instituto Geográfico Nacional (IGN)</a>',
+    maxZoom: 18 
+}).addTo(map);
                           {{ if .item.texto }}
                           L.marker([{{ $lat }}, {{ $lon }}]).addTo(map).bindPopup("<b style='font-family: var(--fuente-principal); font-size: 0.9rem;'>{{ .item.texto }}</b>").openPopup();
                           {{ end }}
