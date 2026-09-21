@@ -8,8 +8,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Definimos la foto una sola vez para TODO el head -->
+    <!-- CALCULADORA DE IMÁGENES A PRUEBA DE TWITTER -->
+    {{ $fotoMeta := "" }}
     {{ $urlFoto := or .Params.image .Params.imagen }}
+    
+    {{ if $urlFoto }}
+        {{ if in $urlFoto "redaccion.meridiano58.com.ar/assets" }}
+            <!-- Si es de Directus, le inyectamos /portada.jpg para engañar a los robots -->
+            {{ $fotoMeta = printf "%s/portada.jpg?width=1200&height=630&format=jpg" $urlFoto }}
+        {{ else }}
+            {{ $fotoMeta = $urlFoto }}
+        {{ end }}
+    {{ else }}
+        {{ $fotoMeta = "/icono-app.png" }}
+    {{ end }}
     
     <!-- METADATOS SEO Y OPEN GRAPH -->
     <meta property="og:title" content="{{ .Title | markdownify | plainify }} | Meridiano 58">
@@ -17,16 +29,7 @@
     <meta property="og:description" content="{{ with .Description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ .Permalink | replaceRE "^http://" "https://" }}">
-    
-    {{ if $urlFoto }}
-    <!-- Foto de la nota con el truco para que Twitter la lea -->
-    <meta property="og:image" content="{{ $urlFoto | absURL | replaceRE "^http://" "https://" }}?format=jpg&width=1200&height=630&ext=.jpg">
-    <meta name="twitter:image" content="{{ $urlFoto | absURL | replaceRE "^http://" "https://" }}?format=jpg&width=1200&height=630&ext=.jpg">
-    {{ else }}
-    <!-- Foto por defecto (Logo) -->
-    <meta property="og:image" content="{{ "/icono-app.png" | absURL | replaceRE "^http://" "https://" }}">
-    <meta name="twitter:image" content="{{ "/icono-app.png" | absURL | replaceRE "^http://" "https://" }}">
-    {{ end }}
+    <meta property="og:image" content="{{ $fotoMeta | absURL | replaceRE "^http://" "https://" }}">
 
     <!-- METADATOS TWITTER / X -->
     <meta name="twitter:card" content="summary_large_image">
@@ -34,6 +37,7 @@
     <meta name="twitter:url" content="{{ .Permalink | replaceRE "^http://" "https://" }}">
     <meta name="twitter:title" content="{{ .Title | markdownify | plainify }}">
     <meta name="twitter:description" content="{{ with .Description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}">
+    <meta name="twitter:image" content="{{ $fotoMeta | absURL | replaceRE "^http://" "https://" }}">
 
     <meta name="format-detection" content="telephone=no">
     <meta name="description" content="{{ with .Description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}">
@@ -69,13 +73,13 @@
       },
       "headline": "{{ .Title | markdownify | plainify }}",
       "image": [
-        "{{ if $urlFoto }}{{ $urlFoto | absURL | replaceRE "^http://" "https://" }}?format=jpg&width=1200&height=630&ext=.jpg{{ else }}{{ "/icono-app.png" | absURL | replaceRE "^http://" "https://" }}{{ end }}"
+        "{{ $fotoMeta | absURL | replaceRE "^http://" "https://" }}"
       ],
       "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
       "dateModified": "{{ if .Lastmod }}{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}{{ else }}{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}{{ end }}",
       "author": {
         "@type": "Person",
-        "name": "{{ if .Params.author }}{{ .Params.author }}{{ else }}Meridiano 58{{ end }}"
+        "name": "{{ if .Params.author }}{{ .Params.author }}{{ else }}Lorenzo Castelli{{ end }}"
       },
       "publisher": {
         "@type": "Organization",
