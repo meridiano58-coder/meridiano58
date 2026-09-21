@@ -15,8 +15,16 @@
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ .Permalink | replaceRE "^http://" "https://" }}">
     
-    {{ $fotoMeta := or .Params.image .Params.imagen | default "/icono-app.png" }}
-    <meta property="og:image" content="{{ $fotoMeta | absURL | replaceRE "^http://" "https://" }}">
+    {{ $urlFoto := or .Params.image .Params.imagen }}
+    {{ if $urlFoto }}
+    <!-- Foto de la nota con el truco para que Twitter la lea -->
+    <meta property="og:image" content="{{ $urlFoto | absURL | replaceRE "^http://" "https://" }}?format=jpg&width=1200&height=630&ext=.jpg">
+    <meta name="twitter:image" content="{{ $urlFoto | absURL | replaceRE "^http://" "https://" }}?format=jpg&width=1200&height=630&ext=.jpg">
+    {{ else }}
+    <!-- Foto por defecto (Logo) -->
+    <meta property="og:image" content="{{ "/icono-app.png" | absURL | replaceRE "^http://" "https://" }}">
+    <meta name="twitter:image" content="{{ "/icono-app.png" | absURL | replaceRE "^http://" "https://" }}">
+    {{ end }}
 
     <!-- METADATOS TWITTER / X -->
     <meta name="twitter:card" content="summary_large_image">
@@ -24,9 +32,6 @@
     <meta name="twitter:url" content="{{ .Permalink | replaceRE "^http://" "https://" }}">
     <meta name="twitter:title" content="{{ .Title | markdownify | plainify }}">
     <meta name="twitter:description" content="{{ with .Description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}">
-    <meta name="twitter:image" content="{{ $fotoMeta | absURL | replaceRE "^http://" "https://" }}">
-
-    <meta name="format-detection" content="telephone=no">
     <meta name="description" content="{{ with .Description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}">
     
     {{ if .IsPage }}
